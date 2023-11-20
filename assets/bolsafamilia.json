@@ -1,0 +1,24 @@
+{
+    "Name":"s3-output", 
+    "StorageDescriptor":{ 
+        "Columns":[ 
+            {"Name":"MES_COMPETENCIA", "Type":"string"}, 
+            {"Name":"MES_REFERENCIA", "Type":"string"}, 
+            {"Name":"UF", "Type":"string"}, 
+            {"Name":"CODIGO_MUNICIPIO_SIAFI", "Type":"string"}, 
+            {"Name":"MUNICIPIO", "Type":"string"}, 
+            {"Name":"CPF", "Type":"string"}, 
+            {"Name":"NIS", "Type":"string"}, 
+            {"Name":"FAVORECIDO", "Type":"string"}, 
+            {"Name":"VALOR", "Type":"float"}
+        ], 
+        "Location":"s3://bucket-path/", 
+        "SerdeInfo":{ 
+            "SerializationLibrary":"org.apache.hadoop.hive.serde2.OpenCSVSerde"
+        },
+        "Compressed": true 
+    }, 
+    "Parameters":{ 
+        "classification":"json"
+    } 
+}
