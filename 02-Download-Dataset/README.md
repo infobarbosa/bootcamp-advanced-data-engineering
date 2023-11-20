@@ -1,3 +1,7 @@
+Author: Prof. Barbosa<br>
+Contact: infobarbosa@gmail.com<br>
+Github: [infobarbosa](https://github.com/infobarbosa)
+
 # 02 - Bases de dados
 
 O objetivo desta sessão é obter os datasets (bases de dados) necessários à execução do laboratório.

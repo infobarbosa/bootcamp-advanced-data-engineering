@@ -1,3 +1,7 @@
+Author: Prof. Barbosa<br>
+Contact: infobarbosa@gmail.com<br>
+Github: [infobarbosa](https://github.com/infobarbosa)
+
 # 01 - Ambiente Cloud9
 
 Neste laboratório faremos uso recorrente do serviço Cloud9.
