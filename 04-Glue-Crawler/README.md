@@ -50,20 +50,25 @@ Agora você pode revisar os metadados criados pelo crawler.
 
 
 ## Via terminal Cloud9
+
+#### Variáveis de ambiente
 ```
 export bucket_name=[NOME DO SEU BUCKET AQUI]
 export role_name=LabRole
 export database_name=labdb
 ```
 
+#### Crie o database
 ```
 aws glue create-database --database-input "{\"Name\":\"labdb\"}"
 ```
 
-
+#### Crie o crawler
+```
 aws glue create-crawler \
 --name ${bucket_name} \
 --role ${role_name} \
 --database-name ${database_name} \
 --table-prefix bolsafamilia_ \
 --targets "{\"S3Targets\": [{\"Path\": \"s3://${BUCKET_NAME}/raw/lab1/csv\"} ]}"
+```
