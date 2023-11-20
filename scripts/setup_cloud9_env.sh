@@ -9,19 +9,19 @@ sudo apt install -y jq
 
 echo "### Redimensionando o disco ###"
 echo "### O tamanho desejado em GiB ###"
-SIZE=150
+export CLOUD9_DISK_NEW_SIZE=150
 
 echo "### O ID da instância EC2 do ambiente Cloud9 ###"
-INSTANCEID=$(curl http://169.254.169.254/latest/meta-data//instance-id)
+export CLOUD9_EC2_INSTANCE_ID=$(curl http://169.254.169.254/latest/meta-data//instance-id)
 
 echo "### O ID do disco EBS associado a essa instância ###"
-VOLUMEID=$(aws ec2 describe-instances --instance-id $INSTANCEID | jq -r .Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.VolumeId)
+export CLOUD9_EC2_VOLUME_ID=$(aws ec2 describe-instances --instance-id $CLOUD9_EC2_INSTANCE_ID | jq -r .Reservations[0].Instances[0].BlockDeviceMappings[0].Ebs.VolumeId)
 
 echo "### Redimensionamento do volume EBS ###"
-aws ec2 modify-volume --volume-id $VOLUMEID --size $SIZE
+aws ec2 modify-volume --volume-id $CLOUD9_EC2_VOLUME_ID --size $CLOUD9_DISK_NEW_SIZE
 
 echo "### Aguardando a finalização do redimensionamento. ###"
-while [ "$(aws ec2 describe-volumes-modifications --volume-id $VOLUMEID --filters Name=modification-state,Values="optimizing","completed" | jq '.VolumesModifications | length')" != "1" ]; do
+while [ "$(aws ec2 describe-volumes-modifications --volume-id $CLOUD9_EC2_VOLUME_ID --filters Name=modification-state,Values="optimizing","completed" | jq '.VolumesModifications | length')" != "1" ]; do
 	echo "waiting volume..."
 	sleep 1
 done
