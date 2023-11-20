@@ -175,3 +175,53 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
 ```
 
 Parabéns! Seu ambiente Cloud9 está pronto pra uso!
+
+
+## Bônus - Via terminal Cloud9
+
+#### Variável de ambiente `bucket_name`
+```
+export bucket_name=lab-data-eng-202312-p4004
+```
+#### Criando o bucket
+```
+aws s3api create-bucket --bucket ${bucket_name}
+```
+
+Output:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api create-bucket --bucket ${bucket_name}
+{
+    "Location": "/lab-data-eng-202312-p4004"
+}
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
+```
+
+#### Criando a estrutura de pastas
+```
+aws s3api put-object --bucket ${bucket_name} --key raw/
+```
+
+Output:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api put-object --bucket ${bucket_name} --key raw/
+{
+    "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+    "ServerSideEncryption": "AES256"
+}
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
+```
+
+Crie a mesma estrutura para as demais pastas:
+
+```
+aws s3api put-object --bucket ${bucket_name} --key stage/
+```
+
+```
+aws s3api put-object --bucket ${bucket_name} --key analytics/
+```
+
+```
+aws s3api put-object --bucket ${bucket_name} --key scripts/
+```
