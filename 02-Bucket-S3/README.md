@@ -86,7 +86,7 @@ Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AW
 
 ![img/020_bucket_s3_pagina_criar_pasta.png](img/020_bucket_s3_pagina_criar_pasta.png)
 
-Faça o mesmo para as outras duas pastas: `stage` e `analytics`
+Faça o mesmo para as outras duas pastas: `stage`, `analytics` e `results`
 
 Ao final a estrutura de pastas deverá estar assim:
 
@@ -142,4 +142,8 @@ aws s3api put-object --bucket ${bucket_name} --key analytics/
 
 ```
 aws s3api put-object --bucket ${bucket_name} --key scripts/
+```
+
+```
+aws s3api put-object --bucket ${bucket_name} --key results/
 ```
