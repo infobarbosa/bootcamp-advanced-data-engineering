@@ -6,6 +6,49 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 O objetivo desta sessão é criar a estrutura de dados no Glue Catalog e executar a ingestão de dados.
 
+## Via console AWS
+
+### Crie o crawler `bolsafamilia_crawler1`
+1. No console AWS, acesse a barra de pesquisa e busque por Glue
+2. No painel lateral (esquerda), abaixo de `Databases`, clique em `Tables`
+3. Na tela que se abrir clique em `Add tables using crawler`
+4. Em `name`, digite `bolsafamilia_crawler1`
+5. Clique no botão `Next` ao final da página
+6. Clique em `Add a data source` 
+    - Em `Data source` escolha S3
+    - Em `Location of S3 data` mantenha `In this account`
+    - Em `S3 path` informe `s3://[SEU BUCKET AQUI]/raw` ajustando para o nome do seu bucket.
+    - Mantenha as demais configurações inalteradas
+7. Clique no botão `Add an S3 data source` ao final da página
+8. De volta à tela `Choose data sources and classifiers` clique no botão `Next` ao final da página
+9. Na tela `Configure security settings`, em `IAM Role` escolha `LabRole`
+10. Clique no botão `Next` ao final da página
+11. Na tela `Set output and scheduling`, em `Target database` escolha `labdb`
+12. No campo `Table name prefix`, digite `bolsafamilia_`
+13. Em `Crawler schedule`, mantenha `On demand` no campo `Frequency`
+14. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
+
+Você então receberá a mensagem a seguir no topo da tela
+```
+One crawler successfully created
+The following crawler is now created: "bolsafamilia_crawler1"
+```
+
+### Execute do crawler `bolsafamilia_crawler1`
+1. Na página de crawlers, selecione o crawler `bolsafamilia_crawler1` e clique em `Run` no topo à direita da página
+
+> Atenção! O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
+
+### Inspecione a tabela `bolsafamilia_raw`
+Se tudo ocorreu como esperado, o crawler criará uma tabela `bolsafamilia_raw`.
+1. No painel lateral (esquerdo), clique em Databases
+2. Clique no link do database `labdb`
+3. Na sessão `Tables`, clique em `bolsafamilia_raw`
+
+Agora você pode revisar os metadados criados pelo crawler.
+
+
+## Via terminal Cloud9
 ```
 export bucket_name=[NOME DO SEU BUCKET AQUI]
 export role_name=LabRole
