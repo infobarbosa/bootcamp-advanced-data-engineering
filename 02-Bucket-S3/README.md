@@ -76,7 +76,7 @@ Mantenha inalterado
 
 ## A estrutura de diretórios
 
-Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AWS ![https://docs.aws.amazon.com/prescriptive-guidance/latest/defining-bucket-names-data-lakes/naming-structure-data-layers.html](aqui)
+Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AWS [aqui](https://docs.aws.amazon.com/prescriptive-guidance/latest/defining-bucket-names-data-lakes/naming-structure-data-layers.html)
 
 1. Clique em **Criar pasta**<br>
 
