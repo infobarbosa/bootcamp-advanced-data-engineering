@@ -95,33 +95,79 @@ Ao ser criado, seu ambiente aparece no console do Cloud9
 16. Clone do git deste laboratório:
 
 ```
-git clone https://github.com/infobarbosa/bootcamp_advanced_data_engineering.git
+git clone https://github.com/infobarbosa/bootcamp-advanced-data-engineering.git
 ```
-![img/019_cloud9_clone_git.png](img/019_cloud9_clone_git.png)
+
+Output:
+```
+voclabs:~/environment $ git clone https://github.com/infobarbosa/bootcamp-advanced-data-engineering.git
+Cloning into 'bootcamp-advanced-data-engineering'...
+remote: Enumerating objects: 63, done.
+remote: Counting objects: 100% (63/63), done.
+remote: Compressing objects: 100% (59/59), done.
+remote: Total 63 (delta 3), reused 61 (delta 1), pack-reused 0
+Receiving objects: 100% (63/63), 1.49 MiB | 8.43 MiB/s, done.
+Resolving deltas: 100% (3/3), done.
+```
 
 
 17. Navegue para o diretório ` bootcamp_advanced_data_engineering/scripts/`:
 
 ```
 cd bootcamp_advanced_data_engineering/scripts/
+```
 
+Output:
 ```
-![img/020_cloud9_cd_scripts.png](img/020_cloud9_cd_scripts.png)
+voclabs:~/environment $ cd bootcamp-advanced-data-engineering/
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
+```
 
-18. Execute o script `lab_setup.sh` conforme a seguir:
+18. Execute o script `setup_cloud9_env.sh` conforme a seguir:
 ```
-sh lab_setup.sh
+sh scripts/setup_cloud9_env.sh
 ```
-![img/021_cloud9_sh_lab_setup.png](img/021_cloud9_sh_lab_setup.png)
+
+Output:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ sh scripts/setup_cloud9_env.sh
+### Atualizando o sistema ###
+Get:1 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://us-east-1.ec2.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]                                                             
+...
+### Reescrevendo a tabela de partição para uso full do espaço solicitado. ###
+CHANGED: partition=1 start=227328 old: size=20744159 end=20971487 new: size=314345439 end=314572767
+### Expandindo o tamanho do sistema de arquivos. ###
+resize2fs 1.46.5 (30-Dec-2021)
+Filesystem at /dev/nvme0n1p1 is mounted on /; on-line resizing required
+old_desc_blocks = 2, new_desc_blocks = 19
+The filesystem on /dev/nvme0n1p1 is now 39293179 (4k) blocks long.
+```
 
 Esse script executa algumas tarefas administrativas importantes para esse laboratório.
 - atualização de pacotes
 - instalação do jq
 - instalação do boto3
-- redimensionamento de disco
+- redimensiona o disco para 150G
 
 19. Ao término da execução, é possível conferir o tamanho do disco através do comando `df -h`:
 
-![img/022_cloud9_df_h.png](img/022_cloud9_df_h.png)
+```
+df -h
+```
+
+Output:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ df -h
+Filesystem       Size  Used Avail Use% Mounted on
+/dev/root        146G  6.6G  139G   5% /
+tmpfs            961M     0  961M   0% /dev/shm
+tmpfs            385M  876K  384M   1% /run
+tmpfs            5.0M     0  5.0M   0% /run/lock
+/dev/nvme0n1p15  105M  6.1M   99M   6% /boot/efi
+tmpfs            193M  4.0K  193M   1% /run/user/1000
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
+```
 
 Parabéns! Seu ambiente Cloud9 está pronto pra uso!
