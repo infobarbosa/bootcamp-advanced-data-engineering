@@ -26,7 +26,8 @@ Neste método você deve fazer o download das bases de dados via navegador para 
 
 ![img/007_dataset_pasta_raw.png](img/007_dataset_pasta_raw.png)
 
-5. Clique no botão Upload
+5. Clique no botão Upload<br>
+Será apresentada a tela a seguir:
 
 ![img/008_dataset_tela_upload.png](img/008_dataset_tela_upload.png)
 
