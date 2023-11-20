@@ -6,6 +6,8 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 O objetivo desta sessão é criar o bucket S3 e estrutura de diretórios necessários à execução do laboratório.
 
+### O bucket
+
 1. Digite `s3` na barra de buscas do console AWS 
 
 ![img/007_bucket_s3_barra_de_busca.png](img/007_bucket_s3_barra_de_busca.png)
@@ -72,11 +74,17 @@ Mantenha inalterado
 
 ![img/018_bucket_s3_bucket_criado.png](img/018_bucket_s3_bucket_criado.png)
 
-13. Clique em **Criar pasta**<br>
+## A estrutura de diretórios
+
+Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AWS ![aqui](https://docs.aws.amazon.com/prescriptive-guidance/latest/defining-bucket-names-data-lakes/naming-structure-data-layers.html)
+
+1. Clique em **Criar pasta**<br>
 
 ![img/019_bucket_s3_botao_criar_pasta.png](img/019_bucket_s3_botao_criar_pasta.png)
 
-14. Informe `raw` como nome da pasta e deixe os demais campos inalterados. <br>
+2. Informe `raw` como nome da pasta e deixe os demais campos inalterados. <br>
 
 ![img/020_bucket_s3_pagina_criar_pasta.png](img/020_bucket_s3_pagina_criar_pasta.png)
+
+Faça o mesmo para as outras duas pastas: `stage` e `analytics`
 
