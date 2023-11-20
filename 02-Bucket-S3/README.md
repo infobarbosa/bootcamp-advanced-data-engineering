@@ -88,3 +88,6 @@ Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AW
 
 Faça o mesmo para as outras duas pastas: `stage` e `analytics`
 
+Ao final a estrutura de pastas deverá estar assim:
+
+![img/021_bucket_s3_estrutura_pastas.png](img/021_bucket_s3_estrutura_pastas.png)
