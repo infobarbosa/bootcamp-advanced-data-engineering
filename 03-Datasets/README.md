@@ -106,3 +106,7 @@ curl -o "202303_NovoBolsaFamilia_utf-8.zip" ${PRESIGNED_URL_2}
 ![img/006_dataset_listando_arquivos_baixados.png](img/006_dataset_listando_arquivos_baixados.png)
 
 
+## Conferindo
+
+Ao final do upload sua pasta `raw` no S3 deverá estar assim:
+![img/015_dataset_uploads_finalizados.png](img/015_dataset_uploads_finalizados.png)
