@@ -51,6 +51,26 @@ Agora você pode revisar os metadados criados pelo crawler.
 
 ## Via terminal Cloud9
 
+> ### Atenção! 
+> Nesta etapa você precisará editar o arquivo `gluecrawler.cf.yml`
+
+Abra o arquivo `assets/gluecrawler.cf.yml`. 
+- Altere o valor do parâmetro `BucketURI` para a URI do bucket S3 criado no laboratório. Ex.: s3://data-science-bucket--6082f1d0/raw/
+- Altere o valor do parâmetro `RoleARN` para a ARN da Role utilizada no laboratório. Ex.: arn:aws:iam::9876543210:role/LabRole
+
+Validando o script cloudformation:
+```
+aws cloudformation validate-template --template-body file://assets/gluecrawler.cf.yml
+```
+
+Execute o script cloudformation:
+```
+aws cloudformation create-stack --stack-name gluecrawler --template-body file://gluecrawler.cf.yml --capabilities CAPABILITY_NAMED_IAM
+```
+
+
+
+
 #### Variáveis de ambiente
 ```
 export bucket_name=[NOME DO SEU BUCKET AQUI]
@@ -59,6 +79,8 @@ export database_name=labdb
 ```
 
 #### Crie o database
+
+
 ```
 aws glue create-database --database-input "{\"Name\":\"labdb\"}"
 ```
