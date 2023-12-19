@@ -8,25 +8,33 @@ O objetivo desta sessão é criar a estrutura de dados no Glue Catalog e executa
 
 ## Via console AWS
 
+### Crie o database
+1. No console AWS, acesse a barra de pesquisa e busque por Glue;
+2. No painel lateral (esquerda), no menu **Data Catalog** clique em **Databases**;
+3. Na tela que abrir clique em **Add database**;
+4. No campo **Name** informe `bolsafamilia`;
+5. No campo **Description** informe `Banco de dados do programa Bolsa Família`.
+
 ### Crie o crawler `bolsafamilia_crawler1`
-1. No console AWS, acesse a barra de pesquisa e busque por Glue
-2. No painel lateral (esquerda), abaixo de `Databases`, clique em `Tables`
-3. Na tela que se abrir clique em `Add tables using crawler`
-4. Em `name`, digite `bolsafamilia_crawler1`
-5. Clique no botão `Next` ao final da página
-6. Clique em `Add a data source` 
-    - Em `Data source` escolha S3
-    - Em `Location of S3 data` mantenha `In this account`
-    - Em `S3 path` informe `s3://[SEU BUCKET AQUI]/raw` ajustando para o nome do seu bucket.
+1. No console AWS, acesse a barra de pesquisa e busque por Glue;
+2. No painel lateral (esquerda), abaixo de **Databases**, clique em **Tables**;
+3. Na tela que se abrir clique no botão **Add tables using crawler**;
+4. Em **name**, digite `bolsafamilia_crawler1`;
+5. Clique no botão **Next** ao final da página;
+6. Clique em **Add a data source**
+    - Em **Data source** escolha S3
+    - Em **Location of S3 data** mantenha `In this account`
+    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw` ajustando para o nome do seu bucket.
     - Mantenha as demais configurações inalteradas
-7. Clique no botão `Add an S3 data source` ao final da página
-8. De volta à tela `Choose data sources and classifiers` clique no botão `Next` ao final da página
-9. Na tela `Configure security settings`, em `IAM Role` escolha `LabRole`
-10. Clique no botão `Next` ao final da página
-11. Na tela `Set output and scheduling`, em `Target database` escolha `labdb`
-12. No campo `Table name prefix`, digite `bolsafamilia_`
-13. Em `Crawler schedule`, mantenha `On demand` no campo `Frequency`
-14. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
+    - Clique no botão **Add an S3 data source** ao final da página
+7. De volta à tela **Choose data sources and classifiers** clique no botão `Next` ao final da página;
+8. Na tela **Configure security settings**, em **IAM Role** escolha `LabRole`;
+9. Clique no botão **Next** ao final da página;
+10. Na tela **Set output and scheduling**, em **Target database** escolha `bolsafamilia`;
+11. No campo **Table name prefix**, digite `pagamentos_`;
+12. Em **Crawler schedule**, no campo **Frequency** mantenha `On demand` ;
+13. Clique no botão **Next** ao final da página;
+13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
 
 Você então receberá a mensagem a seguir no topo da tela
 ```
