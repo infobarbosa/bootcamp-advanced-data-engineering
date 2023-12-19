@@ -5,54 +5,55 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 ## 05 - Athena
 
-O objetivo desta sessão é executar queries na tabela `bolsafamilia_raw`
+O objetivo desta sessão é executar queries na tabela `pagamentos_raw`
 
 ### Primeira consulta
-1. Na barra de pesquisa, busque por `Athena`.
-2. No painel lateral (esquerdo), clique em `Query editor`.
+1. Na barra de pesquisa, busque por **Athena**.
+2. No painel lateral (esquerdo), clique em **Query editor** (Editor de consultas).
 
     > ### Atenção!
     > Na primeira vez que você acessa o Athena é exibida a seguinte mensagem:
     > `Before you run your first query, you need to set up a query result location in Amazon S3.`
-    > - Clique em `Edit settings`
-    > - Na tela `Manage settings`, para o campo `Query result location and encryption` clique no botão `Browse S3`
-    > - Na tela `Choose S3 data set` clique no link do bucket criado neste laboratório.
-    > - Clique no radio button correspondente à pasta `results` e então clique no botão `Choose`
-    > - De volta à tela `Manage settings` clique no botão `Save`
+    > (`Antes de executar sua primeira consulta, é necessário definir um local para o resultado da consulta no Amazon S3.`)
+    > - Clique em **Edit settings** (Editar configurações);
+    > - Na tela **Manage settings** (Gerenciar configurações), para o campo **Query result location and encryption** clique no botão **Browse S3** (Navegue pelo S3)
+    > - Na tela **Choose S3 data set** clique no link do bucket criado neste laboratório;
+    > - Clique no radio button correspondente à pasta **results** e então clique no botão **Choose**;
+    > - De volta à tela **Manage settings** clique no botão **Save**.
+    > - Clique novamente em **Query editor** no painel lateral esquerdo;
 
-3. Clique novamente em `Query editor` (painel lateral)
-4. No editor que estará disponível digite a seguinte consulta SQL:
+3. No editor que estará disponível digite a seguinte consulta SQL:
     ```
-    SELECT * FROM "labdb"."bolsafamilia_raw" limit 10;
+    SELECT * FROM "bolsafamilia"."pagamentos_raw" limit 10;
     ```
-5. Clique no botão `Run`
-6. Verifique o resultado. Perceba a estrutura da tabela e seus dados.
+4. Clique no botão **Run**
+5. Verifique o resultado. Perceba a estrutura da tabela e seus dados.
 
 ### Consultas analíticas
 
 Vamos fazer algumas consultas analíticas para nos familiarizar mais com o ambiente **Athena**
 
-Primeiro, vamos contar quantos registros há na tabela
+Primeiro, vamos contar a **quantidade de registros** há na tabela
 ```
 SELECT count(1) qtt
-FROM "labdb"."bolsafamilia_raw"
+FROM "bolsafamilia"."pagamentos_raw"
 ```
 
-Agora vamos contar quandos NIS distintos há na tabela
+Agora vamos contar a **quantidade de NIS distintos** há na tabela
 ```
 SELECT count(1) qtt_registros
     ,count(distinct nis) qtt_nis
-FROM "labdb"."bolsafamilia_raw"
+FROM "bolsafamilia"."pagamentos_raw"
 ```
 
 > Perceba a diferença entre a quantidade de CPF versus a quantidade de registros
 
-Agova vamos somar o valor total pago pelo benefício:
+Agova vamos somar o **valor total pago** pelo benefício:
 ```
 SELECT sum(valor) vl_total
     ,count(1) qtt_registros
     ,count(distinct nis) qtt_nis
-FROM "labdb"."bolsafamilia_raw"
+FROM "bolsafamilia"."pagamentos_raw"
 ```
 
 > Perceba que o valor aparece em notação exponencial.
@@ -62,16 +63,16 @@ FROM "labdb"."bolsafamilia_raw"
 SELECT format('%,.2f',sum(valor)) vl_total
     ,count(1) qtt_registros
     ,count(distinct cpf) qtt_cpf
-FROM "labdb"."bolsafamilia_raw"
+FROM "bolsafamilia"."pagamentos_raw"
 ```
 
-Vamos analisar os gastos do benefício por UF:
+Vamos analisar o **valor total pago agrupado por UF**:
 ```
 SELECT uf
     ,format('%,.2f',sum(valor)) vl_total
     ,count(1) qtt_registros
     ,count(distinct nis) qtt_nis
-FROM "labdb"."bolsafamilia_raw"
+FROM "bolsafamilia"."pagamentos_raw"
 GROUP BY ROLLUP (uf)
 ORDER BY sum(valor) DESC
 ```
@@ -84,7 +85,7 @@ SELECT uf
     ,format('%,.2f',sum(valor)) vl_total
     ,count(1) qtt_registros
     ,count(distinct nis) qtt_nis
-FROM "labdb"."bolsafamilia_raw"
+FROM "bolsafamilia"."pagamentos_raw"
 GROUP BY ROLLUP (uf)
 ORDER BY count(nis) DESC
 ```
