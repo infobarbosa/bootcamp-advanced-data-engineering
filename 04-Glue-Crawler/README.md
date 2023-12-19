@@ -51,7 +51,7 @@ The following crawler is now created: "bolsafamilia_crawler1"
 ### Inspecione a tabela `bolsafamilia_raw`
 Se tudo ocorreu como esperado, o crawler criará uma tabela `bolsafamilia_raw`.
 1. No painel lateral (esquerdo), clique em Databases
-2. Clique no link do database `labdb`
+2. Clique no link do database `bolsafamilia`
 3. Na sessão `Tables`, clique em `bolsafamilia_raw`
 
 Agora você pode revisar os metadados criados pelo crawler.
@@ -83,14 +83,14 @@ aws cloudformation create-stack --stack-name gluecrawler --template-body file://
 ```
 export bucket_name=[NOME DO SEU BUCKET AQUI]
 export role_name=LabRole
-export database_name=labdb
+export database_name=bolsafamilia
 ```
 
 #### Crie o database
 
 
 ```
-aws glue create-database --database-input "{\"Name\":\"labdb\"}"
+aws glue create-database --database-input "{\"Name\":\"bolsafamilia\"}"
 ```
 
 #### Crie o crawler
