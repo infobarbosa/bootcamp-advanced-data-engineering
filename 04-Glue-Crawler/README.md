@@ -48,11 +48,11 @@ The following crawler is now created: "bolsafamilia_crawler1"
     > ### Atenção!
     > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
 
-### Inspecione a tabela `bolsafamilia_raw`
-Se tudo ocorreu como esperado, o crawler criará uma tabela `bolsafamilia_raw`.
-1. No painel lateral (esquerdo), clique em Databases
-2. Clique no link do database `bolsafamilia`
-3. Na sessão `Tables`, clique em `bolsafamilia_raw`
+### Inspecione a tabela `pagamentos_raw`
+Se tudo ocorreu como esperado, o crawler criará uma tabela `pagamentos_raw`.
+1. No painel lateral (esquerdo), clique em Databases;
+2. Clique no link do database `bolsafamilia`;
+3. Na sessão `Tables`, clique em `pagamentos_raw`
 
 Agora você pode revisar os metadados criados pelo crawler.
 
