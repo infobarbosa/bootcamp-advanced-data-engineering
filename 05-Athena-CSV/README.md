@@ -3,9 +3,9 @@ Author: Prof. Barbosa<br>
 Contact: infobarbosa@gmail.com<br>
 Github: [infobarbosa](https://github.com/infobarbosa)
 
-## 05 - Athena
+## 05 - Athena (CSV)
 
-O objetivo desta sessão é executar queries na tabela `pagamentos_raw`
+O objetivo desta sessão é executar queries na tabela `pagamentos_raw` (baseada em arquivo **csv**)
 
 ### Primeira consulta
 1. Na barra de pesquisa, busque por **Athena**.
