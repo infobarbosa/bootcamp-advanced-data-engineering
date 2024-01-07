@@ -31,7 +31,7 @@ Preencha as informações desta tela conforme a seguir:
 
 Exemplo: 
 ```
-lab-data-eng-202311-12345
+lab-data-eng-202402-12345
 ```
 O objetivo do número aleatório é não haver colisão de nomes entre os diversos laboratórios.
 
