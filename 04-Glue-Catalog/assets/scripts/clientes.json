@@ -1,0 +1,25 @@
+{"Name":"clientes", "StorageDescriptor":{ 
+    "Columns":[
+        { "Name":"id", "Type":"int" }, 
+        { "Name":"nome", "Type":"string" }, 
+        { "Name":"data_nasc", "Type":"date" }, 
+        { "Name":"cpf", "Type":"string" }, 
+        { "Name":"email", "Type":"string" }
+    ], 
+    "Location":"s3://lab-data-eng-202402-p4004/raw/ecommerce/clientes/",
+    "InputFormat":"org.apache.hadoop.mapred.TextInputFormat",
+    "SerdeInfo":{ 
+        "SerializationLibrary":"org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe", 
+        "Parameters":{ 
+            "field.delim":";"
+        } 
+    }
+    },
+    "Parameters":{ 
+        "classification":"csv", 
+        "compressionType":"gzip", 
+        "delimiter":";", 
+        "typeOfData":"file",
+        "skip.header.line.count":"1"
+        }
+}
