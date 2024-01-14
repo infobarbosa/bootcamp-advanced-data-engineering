@@ -116,10 +116,10 @@ Resolving deltas: 100% (3/3), done.
 ```
 
 
-17. Navegue para o diretório ` bootcamp_advanced_data_engineering/scripts/`:
+17. Navegue para o diretório `bootcamp_advanced_data_engineering/01-Cloud9-Environment/assets/scripts`:
 
 ```
-cd bootcamp_advanced_data_engineering/scripts/
+cd bootcamp_advanced_data_engineering/01-Cloud9-Environment/assets/scripts
 ```
 
 Output:
@@ -130,7 +130,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
 
 18. Execute o script `setup_cloud9_env.sh` conforme a seguir:
 ```
-sh scripts/setup_cloud9_env.sh
+sh setup_cloud9_env.sh
 ```
 
 Output:
