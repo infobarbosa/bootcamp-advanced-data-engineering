@@ -5,7 +5,7 @@ echo "### Instalando o pacote boto3  ###"
 pip install boto3
 
 echo "### Instalando o jq, a lightweight and flexible command-line JSON processor  ###"
-sudo apt install -y jq
+sudo apt install -y jq tree
 
 echo "### Redimensionando o disco ###"
 echo "### O tamanho desejado em GiB ###"
