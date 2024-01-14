@@ -94,11 +94,20 @@ Ao final a estrutura de pastas deverá estar assim:
 ![img/021_bucket_s3_estrutura_pastas.png](img/021_bucket_s3_estrutura_pastas.png)
 
 
-
+3. Crie a pasta `ecommerce` dentro da pasta `raw`
 
 ## Bônus - Via terminal Cloud9
 
 #### Variável de ambiente `bucket_name`
+> Atenção!
+> - Substitua [ANOMÊS] pelo ano e mês correntes no formato AAAAMM. 
+> - Substitua [NUMERO ALEATÓRIO] por um número aleatório qualquer. 
+
+```
+export bucket_name=lab-data-eng-[ANOMES]-[NUMERO ALEATORIO]
+```
+
+Por exemplo:
 ```
 export bucket_name=lab-data-eng-202312-p4004
 ```
@@ -129,6 +138,11 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api put-
     "ServerSideEncryption": "AES256"
 }
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
+```
+
+Crie a pasta `ecommerce` dentro da pasta `raw`:
+```
+aws s3api put-object --bucket ${bucket_name} --key raw/ecommerce/
 ```
 
 Crie a mesma estrutura para as demais pastas:

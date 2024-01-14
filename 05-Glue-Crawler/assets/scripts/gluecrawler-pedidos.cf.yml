@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  CFNCrawlerName:  
+    Type: String
+    Default: pedidos_crawler
+    Description: O nome do nosso crawler
+  CFNDatabaseName:
+    Type: String
+    Default: ecommerce
+    Description: O nome do banco de dados
+  CFNTablePrefixName:
+    Type: String
+    Default: pedidos_
+    Description: prefixo que o crawler deve atribuir a nossa tabela 
+  BucketURI:
+    Type: String
+    Default: "s3://[EDITE AQUI. COLOQUE O NOME DO SEU BUCKET]/raw/ecommerce/pedidos/"
+    Description: O bucket e pasta que armazena o arquivo de pedidos do nosso ecommerce.
+  RoleARN:
+    Type: String
+    Default: "[EDITE AQUI. Ex.: arn:aws:iam::9876543210:role/LabRole]"
+    Description: A role que usaremos pra que o crawler consiga fazer o manejo tanto do S3 quanto do Glue Catalog.
+Resources:
+  # Criacao do crawler
+  CFNCrawlerPedidos:
+    Type: AWS::Glue::Crawler
+    Properties:
+      Name: !Ref CFNCrawlerName
+      Role: !Ref RoleARN
+      Description: AWS Glue crawler para coleta e catalogacao dos dados de pedidos do nosso ecommerce
+      DatabaseName: !Ref CFNDatabaseName
+      Targets:
+        S3Targets:
+          - Path: !Ref BucketURI
+      TablePrefix: !Ref CFNTablePrefixName
+      SchemaChangePolicy:
+        UpdateBehavior: "UPDATE_IN_DATABASE"
+        DeleteBehavior: "LOG"
+      Configuration: "{\"Version\":1.0,\"CrawlerOutput\":{\"Partitions\":{\"AddOrUpdateBehavior\":\"InheritFromTable\"},\"Tables\":{\"AddOrUpdateBehavior\":\"MergeNewColumns\"}}}"

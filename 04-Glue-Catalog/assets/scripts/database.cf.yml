@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  CFNDatabaseName:
+    Type: String
+    Default: ecommerce
+    Description: O nome do banco de dados
+Resources:
+  # Criacao do database que será o container da tabela criada pelo crawler
+  CFNDatabaseBolsaFamilia:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: !Ref CFNDatabaseName
+        Description: "Database container da tabela criada pelo crawler a partir da base do bolsa familia"
