@@ -7,7 +7,7 @@
         {"Name":"data_criacao"  , "Type":"timestamp"}, 
         {"Name":"uf"            , "Type":"string"}, 
         {"Name":"id_cliente"    , "Type":"bigint"},
-        {"Name": "data_pedido"  , "Type": "date", "PartitionKey": "Partition (0)" }
+        {"Name": "data_pedido"  , "Type": "date" }
     ], 
     "Location":"s3://lab-data-eng-202402-p4004/raw/ecommerce/pedidos/part/",
     "InputFormat":"org.apache.hadoop.mapred.TextInputFormat",
@@ -24,5 +24,8 @@
         "delimiter":";", 
         "typeOfData":"file",
         "skip.header.line.count":"1"
-        }
+    },
+    "PartitionKeys":[ 
+        {"Name":"data_pedido", "Type":"date"}
+    ]
 }
