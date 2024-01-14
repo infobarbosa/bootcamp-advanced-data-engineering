@@ -30,7 +30,9 @@ ls -la 03-Datasets/assets/data/clientes*
 
 Output esperado:
 ```
-
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la 03-Datasets/assets/data/clientes*
+-rw-rw-r-- 1 ubuntu ubuntu 329123 Jan 14 15:38 03-Datasets/assets/data/clientes.csv.gz
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
 3. Execute o comando a seguir 
