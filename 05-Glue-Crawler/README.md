@@ -45,11 +45,11 @@ The following crawler is now created: "pedidos_crawler"
     > ### Atenção!
     > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
 
-### Inspecione a tabela `pedidos_raw`
-Se tudo ocorreu como esperado, o crawler criará uma tabela `pedidos_raw`.
+### Inspecione a tabela `pedidos`
+Se tudo ocorreu como esperado, o crawler criará uma tabela `pedidos`.
 1. No painel lateral (esquerdo), clique em Databases;
 2. Clique no link do database `ecommerce`;
-3. Na sessão `Tables`, clique em `pedidos_raw`
+3. Na sessão `Tables`, clique em `pedidos`
 
 Agora você pode revisar os metadados criados pelo crawler.
 
@@ -89,11 +89,11 @@ The following crawler is now created: "clientes_crawler"
     > ### Atenção!
     > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
 
-### Inspecione a tabela `clientes_raw`
-Se tudo ocorreu como esperado, o crawler criará uma tabela `pedidos_raw`.
+### Inspecione a tabela `clientes`
+Se tudo ocorreu como esperado, o crawler criará uma tabela `clientes`.
 1. No painel lateral (esquerdo), clique em Databases;
 2. Clique no link do database `ecommerce`;
-3. Na sessão `Tables`, clique em `pedidos_raw`
+3. Na sessão `Tables`, clique em `clientes`
 
 Agora você pode revisar os metadados criados pelo crawler.
 
