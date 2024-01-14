@@ -28,7 +28,7 @@ O objetivo desta sessão é criar a estrutura de dados no Glue Catalog e executa
 8. Na tela **Configure security settings**, em **IAM Role** escolha `LabRole`;
 9. Clique no botão **Next** ao final da página;
 10. Na tela **Set output and scheduling**, em **Target database** escolha `ecommerce`;
-11. No campo **Table name prefix**, digite `pedidos_`;
+11. Deixe o campo **Table name prefix** vazio;
 12. Em **Crawler schedule**, no campo **Frequency** mantenha `On demand` ;
 13. Clique no botão **Next** ao final da página;
 13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
@@ -72,7 +72,7 @@ Agora você pode revisar os metadados criados pelo crawler.
 8. Na tela **Configure security settings**, em **IAM Role** escolha `LabRole`;
 9. Clique no botão **Next** ao final da página;
 10. Na tela **Set output and scheduling**, em **Target database** escolha `ecommerce`;
-11. No campo **Table name prefix**, digite `clientes_`;
+11. Deixe o campo **Table name prefix** vazio;
 12. Em **Crawler schedule**, no campo **Frequency** mantenha `On demand` ;
 13. Clique no botão **Next** ao final da página;
 13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
