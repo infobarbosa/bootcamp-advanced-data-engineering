@@ -3,81 +3,58 @@ Author: Prof. Barbosa<br>
 Contact: infobarbosa@gmail.com<br>
 Github: [infobarbosa](https://github.com/infobarbosa)
 
-# 04 - Glue 
+# 06 - Tabelas particionadas (Partitioning)
 
-O objetivo desta sessão é criar o banco de dados `ecommerce` no Glue Catalog.<br>
-Há 3 opções para criação: via AWS CLI, via console AWS e via CloudFormation.
+O objetivo desta sessão é criar particionar a tabela `pedidos` no Glue Catalog considerando a data do pedido .<br>
 
-## Via terminal Cloud9
+## Via AWS CLI (terminal)
 
-### Database `ecommerce`
-Execute o comando a seguir no terminal:
-```
-aws glue create-database --database-input "{\"Name\":\"ecommerce\"}" 
-```
-O comando não produz output.<br>
+### Tabela `pedidos_part`
+> Atenção!
+> Você precisará editar o arquivo `pedidos_part.json` para considerar o bucket criado no exercício **02-Bucket-S3**
 
-Verifique se o banco de dados foi criado através do comando a seguir:
+1. Crie a variável de ambiente `BUCKET_NAME`
+> Atenção!
+> Ajuste o nome do bucket para o nome do bucket que você criou no exercício **02-Bucket-S3**
 ```
-aws glue get-databases
-```
-Output:
-```
-voclabs:~/environment $ aws glue get-databases
-{
-    "DatabaseList": [
-        {
-            "Name": "ecommerce",
-            "CreateTime": "2024-01-13T14:44:29+00:00",
-            "CreateTableDefaultPermissions": [
-                {
-                    "Principal": {
-                        "DataLakePrincipalIdentifier": "IAM_ALLOWED_PRINCIPALS"
-                    },
-                    "Permissions": [
-                        "ALL"
-                    ]
-                }
-            ],
-            "CatalogId": "966260589623"
-        }
-    ]
-}
-voclabs:~/environment $ 
+export BUCKET_NAME=lab-data-eng-202402-p4004
+
+echo ${BUCKET_NAME}
 ```
 
-### Tabela `clientes`
+2. Examine o conteúdo do arquivo `06-Tabelas-Particionadas/assets/scripts/pedidos_part.json` 
+> Perceba o atributo `data_pedido` como chave de partição.
+
+3. Crie a tabela `pedidos_part`
+> Atenção!
+> Ajuste o nome do bucket para o nome do bucket que você criou no exercício **02-Bucket-S3**
+> Ex.: s3://SEU_BUCKET_AQUI/raw/ecommerce/pedidos/part/
 ```
-aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Catalog/assets/scripts/clientes.json"
+aws glue create-table --database-name ecommerce --table-input "06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
 ```
 
-### Tabela `pedidos`
+4. Copie um arquivo para a pasta particionada:
 ```
-aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Catalog/assets/scripts/pedidos.json"
-```
-
-## Via console AWS
-
-1. No console AWS, acesse a barra de pesquisa e busque por Glue;
-2. No painel lateral (esquerda), no menu **Data Catalog** clique em **Databases**;
-3. Na tela que abrir clique em **Add database**;
-4. No campo **Name** informe `ecommerce`;
-5. No campo **Description** informe `Banco de dados da nossa empresa fictícia de e-commerce`.
-
-## Via CloudFormation
-
-> ### Atenção! 
-> Nesta etapa você precisará editar o arquivo `database.cf.yml`
-
-Validando o script cloudformation:
-```
-aws cloudformation validate-template --template-body file://04-Glue-Catalog/assets/scripts/database.cf.yml
+aws s3 cp 03-Datasets/assets/data/pedidos-2024-01-01.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/
 ```
 
-Execute o script cloudformation:
+5. Com o conhecimento adquirido no exercício **05-Athena** execute a seguinte consulta:
 ```
-aws cloudformation create-stack --stack-name database-ecommerce --template-body file://04-Glue-Catalog/assets/scripts/database.cf.yml --capabilities CAPABILITY_NAMED_IAM
+SELECT count(1) qtt
+FROM "ecommerce"."pedidos_part";
 ```
+
+Perceba que (provavelmente) nenhum dado retornou. Isso ocorre porque a tabela está particionada porém o catálogo (Glue Catalog) não detecta automaticamente a existência de partições.<br>
+Outra maneira de checar a disponibilidade das partições é através do comando `SHOW PARTITIONS`:
+```
+SHOW PARTITIONS ecommerce.pedidos_part;
+```
+
+Vamos resolver isso via comando `MSCK REPAIR TABLE`:
+```
+MSCK REPAIR TABLE ecommerce.pedidos_part;
+```
+Este comando verifica e atualiza o catálogo de dados caso detecte novas partições.
 
 
 ---
@@ -85,9 +62,5 @@ aws cloudformation create-stack --stack-name database-ecommerce --template-body 
 # Eliminando tabelas
 Caso precise eliminar alguma tabela, você pode fazer isso via terminal com o seguinte comando:
 ```
-aws glue delete-table --database-name ecommerce --name pedidos
-```
-
-```
-aws glue delete-table --database-name ecommerce --name clientes
+aws glue delete-table --database-name ecommerce --name pedidos_part
 ```
