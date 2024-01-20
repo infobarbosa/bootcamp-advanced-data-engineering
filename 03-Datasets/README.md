@@ -44,7 +44,7 @@ export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab
 echo $BUCKET_NAME
 ```
 
-
+4. Executando o upload
 ```
 aws s3 cp 03-Datasets/assets/data/clientes.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/clientes/ 
 ```
@@ -56,7 +56,7 @@ upload: 03-Datasets/assets/data/clientes.csv.gz to s3://lab-data-eng-202402-p400
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-4. Confira se o upload ocorreu como esperado:
+5. Confira se o upload ocorreu como esperado:
 ```
 aws s3 ls s3://${BUCKET_NAME}/raw/ecommerce/clientes/
 ```
