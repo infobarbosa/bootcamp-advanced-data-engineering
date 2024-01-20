@@ -15,8 +15,9 @@ O objetivo desta sessão é executar operações de extração, transformação 
     - No combo **Engine** mantenha **Spark (Python)**;
     - No menu de seleção **Options** escolha **Upload Notebook**;
     - Clique no botão **Choose file**;
-    - Escolha o arquivo `DyF_csv_to_parquet.ipynb` e faça o upload;
+    - Escolha o arquivo `glue-job-pedidos.ipynb` e faça o upload;
     - No combo **IAM Role**, escolha a role disponível (normalmente o nome é **LabRole**);
     - Clique no botão **Create notebook**.
-5. No topo superior esquerdo clique em **Untitled job**, apague o conteúdo e digite `DyF CSV to Parquet` e pressione a tecla Enter;
+5. No topo superior esquerdo clique em **Untitled job**, apague o conteúdo e digite `pedidos parquet` e pressione a tecla Enter;
 
+A partir desse ponto você deve seguir as instruções contidas no notebook.
