@@ -10,35 +10,36 @@ O objetivo desta sessão é criar particionar a tabela `pedidos` no Glue Catalog
 ## Via AWS CLI (terminal)
 
 ### Tabela `pedidos_part`
-> Atenção!
-> Você precisará editar o arquivo `pedidos_part.json` para considerar o bucket criado no exercício **02-Bucket-S3**
+> #### Atenção!
+> Neste exercívio é necessário editar o arquivo `assets/scripts/pedidos_part.json` para considerar o bucket criado no exercício **02-Bucket-S3**.
 
 1. Crie a variável de ambiente `BUCKET_NAME`
-> Atenção!
-> Ajuste o nome do bucket para o nome do bucket que você criou no exercício **02-Bucket-S3**
 ```
-export BUCKET_NAME=lab-data-eng-202402-p4004
+export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
+```
 
-echo ${BUCKET_NAME}
+```
+echo $BUCKET_NAME
 ```
 
 2. Examine o conteúdo do arquivo `06-Tabelas-Particionadas/assets/scripts/pedidos_part.json` 
-> Perceba o atributo `data_pedido` como chave de partição.
+> - Perceba o atributo **PartitionKeys** que especifica `data_pedido` como chave de partição.<br>
+> - Ajuste o atributo **Location** com nome do bucket que você criou no exercício **02-Bucket-S3** <br>
+> Ex.: `"Location":"s3://SEU_BUCKET_AQUI/raw/ecommerce/pedidos/part/"`
 
 3. Crie a tabela `pedidos_part`
-> Atenção!
-> Ajuste o nome do bucket para o nome do bucket que você criou no exercício **02-Bucket-S3**
-> Ex.: s3://SEU_BUCKET_AQUI/raw/ecommerce/pedidos/part/
 ```
-aws glue create-table --database-name ecommerce --table-input "06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
+aws glue create-table --database-name ecommerce --table-input "./06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
 ```
 
-4. Copie um arquivo para a pasta particionada:
+4. Faça o upload de um arquivo para a pasta particionada:
 ```
-aws s3 cp 03-Datasets/assets/data/pedidos-2024-01-01.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-01.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/
 ```
 
-5. Com o conhecimento adquirido no exercício **05-Athena** execute a seguinte consulta:
+5. No **Athena**, abra um editor SQL e execute a seguinte consulta:
+> Utilize o conhecimento adquirido no exercício **05-Athena**
+
 ```
 SELECT count(1) qtt
 FROM "ecommerce"."pedidos_part";
