@@ -32,29 +32,6 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la labsuse
 ```
 
 ## Criação do cluster
-### Via AWS CLI
-1. Criando o cluster
-
-Analise atentamente os parâmetros do comando
-```
-aws emr create-cluster \
-    --release-label emr-6.15.0 \
-    --applications Name=Spark Name=Hadoop Name=Hive \
-    --ec2-attributes KeyName=vockey \
-    --service-role EMR_DefaultRole \
-    --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
-    --instance-groups InstanceGroupType=MASTER,InstanceCount=1,InstanceType=m4.large InstanceGroupType=CORE,InstanceCount=1,InstanceType=m4.large Name=Task,InstanceGroupType=TASK,InstanceType=m4.large,InstanceCount=2
-```
-
-2. Obtendo o ID do cluster criado
-```
-export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
-```
-
-3. Verificando os detalhes do cluster
-```
-aws emr describe-cluster --cluster-id ${ID}
-```
 
 ### Via Console AWS 
 1. Na barra de busca digite **EMR**, clique no link disponibilizado;
@@ -97,8 +74,6 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 > 5. No combo **Type** digite e selecione **SSH**;
 > 6. No campo editável **Source** clique e selecione o security group cujo nome se inicia com **aws-cloud9-lab-...**;
 > 7. Clique em **Save rules**.
-
-
 
 
 1. Abra o terminal (shell) do **Cloud9**;
