@@ -7,7 +7,7 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 O objetivo desta sessão é executar operações de extração, transformação e carga (ETL) utilizando o Glue Job
 
-### Criando um notebook
+### Criando um job baseado em notebook
 1. Na barra de pesquisa, busque por **Glue** a seguir clique em **AWS Glue**;
 2. No painel lateral (esquerdo), abaixo de **ETL Jobs**, clique em **Notebooks**;
 3. Na tela **AWS Glue Studio**, na sessão **Create job**, clique em **Notebook**;
