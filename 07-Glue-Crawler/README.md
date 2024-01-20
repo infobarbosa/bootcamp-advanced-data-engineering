@@ -21,7 +21,7 @@ O objetivo desta sessão é criar a estrutura de dados no Glue Catalog e executa
 6. Clique em **Add a data source**
     - Em **Data source** escolha S3
     - Em **Location of S3 data** mantenha `In this account`
-    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw/ecommerce/pedidos/` ajustando para o nome do seu bucket.
+    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw/ecommerce/pedidos/part` ajustando para o nome do seu bucket.
     - Mantenha as demais configurações inalteradas
     - Clique no botão **Add an S3 data source** ao final da página
 7. De volta à tela **Choose data sources and classifiers** clique no botão `Next` ao final da página;
@@ -33,14 +33,14 @@ O objetivo desta sessão é criar a estrutura de dados no Glue Catalog e executa
 13. Clique no botão **Next** ao final da página;
 13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
 
-Você então receberá a mensagem a seguir no topo da tela
+Você então receberá a mensagem a seguir no topo da tela:
 ```
 One crawler successfully created
 The following crawler is now created: "pedidos_crawler"
 ```
 
 ### Execute do crawler `pedidos_crawler`
-1. Na página de crawlers, selecione o crawler `pedidos_crawler1` e clique em `Run` no topo à direita da página
+1. Na página de crawlers, selecione o crawler `pedidos_crawler` e clique em `Run` no topo à direita da página
 
     > ### Atenção!
     > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
@@ -84,7 +84,7 @@ The following crawler is now created: "clientes_crawler"
 ```
 
 ### Execute do crawler `clientes_crawler`
-1. Na página de crawlers, selecione o crawler `clientes_crawler1` e clique em `Run` no topo à direita da página
+1. Na página de crawlers, selecione o crawler `clientes_crawler` e clique em `Run` no topo à direita da página
 
     > ### Atenção!
     > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
@@ -119,28 +119,30 @@ aws cloudformation create-stack --stack-name gluecrawler --template-body file://
 
 
 
-## Via AWS Cli + terminal Cloud9
+## Via AWS CLI + terminal Cloud9
 
 #### Variáveis de ambiente
 ```
-export bucket_name=[NOME DO SEU BUCKET AQUI]
-export role_name=LabRole
-export database_name=bolsafamilia
+export ROLE_NAME=LabRole
+export DATABASE_NAME=ecommerce
 ```
 
-#### Crie o database
-
+```
+export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
+```
 
 ```
-aws glue create-database --database-input "{\"Name\":\"bolsafamilia\"}"
+echo ${BUCKET_NAME}
+echo ${ROLE_NAME}
+echo ${DATABASE_NAME}
 ```
 
 #### Crie o crawler
 ```
 aws glue create-crawler \
---name ${bucket_name} \
---role ${role_name} \
---database-name ${database_name} \
---table-prefix bolsafamilia_ \
---targets "{\"S3Targets\": [{\"Path\": \"s3://${BUCKET_NAME}/raw/lab1/csv\"} ]}"
+--name pedidos_crawler \
+--role ${ROLE_NAME} \
+--database-name ${DATABASE_NAME} \
+--table-prefix pedidos_ \
+--targets "{\"S3Targets\": [{\"Path\": \"s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/\"} ]}"
 ```
