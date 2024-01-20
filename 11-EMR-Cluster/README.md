@@ -67,6 +67,7 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 
 > ## Atenção!
 > Será necessário adicionar uma regra ao security group para permitir o acesso via porta ssh (porta 22).<br>
+> #### Via Console AWS
 > 1. Na barra de busca superior digite `security groups` e então clique em **Security groups**.
 > 2. Na tela **Security groups** clique no **Security group ID** referente à linha com **Security group name** igual a `ElasticMapReduce-master`;
 > 3. Na aba **Inbound rules** clique em **Edit inbound rules**;
@@ -74,6 +75,20 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 > 5. No combo **Type** digite e selecione **SSH**;
 > 6. No campo editável **Source** clique e selecione o security group cujo nome se inicia com **aws-cloud9-lab-...**;
 > 7. Clique em **Save rules**.
+>
+> #### Via terminal **Cloud9**
+> 1. Crie uma variável de ambiente com o ID do security group
+```
+export EMR_MASTER_SG=$(aws ec2 describe-security-groups --filter Name=group-name,Values=ElasticMapReduce-master --query 'SecurityGroups[*].[GroupId]' --output text)
+```
+> 2. Adicione a regra ao security group
+```
+aws ec2 authorize-security-group-ingress \
+    --group-id ${EMR_MASTER_SG} \
+    --protocol tcp \
+    --port 22 \
+    --cidr 0.0.0.0/0
+```
 
 
 1. Abra o terminal (shell) do **Cloud9**;
