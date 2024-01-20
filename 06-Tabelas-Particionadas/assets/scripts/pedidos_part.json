@@ -4,7 +4,7 @@
         {"Name":"produto"       , "Type":"string"}, 
         {"Name":"valor_unitario", "Type":"float"}, 
         {"Name":"quantidade"    , "Type":"bigint"}, 
-        {"Name":"data_criacao"  , "Type":"timestamp"}, 
+        {"Name":"data_criacao"  , "Type":"string"}, 
         {"Name":"uf"            , "Type":"string"}, 
         {"Name":"id_cliente"    , "Type":"bigint"}
     ], 
@@ -25,6 +25,6 @@
         "skip.header.line.count":"1"
     },
     "PartitionKeys":[ 
-        {"Name":"data_pedido", "Type":"date"}
+        {"Name":"data_pedido", "Type":"string"}
     ]
 }
