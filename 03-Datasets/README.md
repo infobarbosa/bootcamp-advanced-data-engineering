@@ -35,14 +35,15 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la 03-Data
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-3. Execute o comando a seguir 
-> Atenção!
-> Ajuste o nome do bucket para o nome do bucket que você criou no exercício **02-Bucket-S3**
+3. Vamos criar uma variável de ambiente `bucket`
 ```
-export BUCKET_NAME=lab-data-eng-202402-p4004
+export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
+```
 
-echo ${BUCKET_NAME}
 ```
+echo $BUCKET_NAME
+```
+
 
 ```
 aws s3 cp 03-Datasets/assets/data/clientes.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/clientes/ 
