@@ -35,7 +35,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la 03-Data
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-3. Vamos criar uma variável de ambiente `bucket`
+3. Vamos criar uma variável de ambiente `BUCKET_NAME`
 ```
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 ```
