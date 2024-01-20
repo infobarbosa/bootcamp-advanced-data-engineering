@@ -101,9 +101,9 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 
 
 
- To connect to your EMR leader node, paste the following commands in the Session Manager terminal:
+1. Abra o terminal (shell) do **Cloud9**;
 
-1. Obtenha o ID do cluster EMR via terminal **Cloud9**
+2. Obtenha o ID do cluster EMR via terminal **Cloud9**
 ```
 export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
 ```
@@ -112,7 +112,7 @@ export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
 echo ${ID}
 ```
 
-2. Use o ID para obter o DNS público do cluster
+3. Use o ID para obter o DNS público do cluster
 ```
 export MASTER_HOST=$(aws emr describe-cluster --cluster-id $ID | jq '.Cluster.MasterPublicDnsName' | tr -d '"')
 ```
@@ -121,7 +121,7 @@ export MASTER_HOST=$(aws emr describe-cluster --cluster-id $ID | jq '.Cluster.Ma
 echo $MASTER_HOST
 ```
 
-3. Conecte-se ao cluster via SSH
+4. Conecte-se ao cluster via SSH
 ```
 ssh -i ./labsuser.pem hadoop@$MASTER_HOST
 ```
@@ -161,7 +161,7 @@ EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
 
 ```
 
-4. Vamos criar uma variável de ambiente `bucket`
+5. Vamos criar uma variável de ambiente `bucket`
 ```
 export bucket=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 
@@ -169,7 +169,7 @@ echo $bucket
 
 ```
 
-5. Abra o spark-shell
+6. Abra o spark-shell
 ```
 spark-shell
 ```
@@ -200,7 +200,7 @@ Type :help for more information.
 scala> 
 ```
 
-6. Crie um Dataframe a partir do dataset `clientes.csv.gz`
+7. Crie um Dataframe a partir do dataset `clientes.csv.gz`
 ```
 val bucket = System.getenv("bucket")
 ```
@@ -219,6 +219,7 @@ scala> val df = spark.read.option("header","true").option("inferSchema","true").
 df: org.apache.spark.sql.DataFrame = [id: int, nome: string ... 3 more fields]  
 ```
 
+8. Inspecione os dados do dataframe
 ```
 df.printSchema()
 ```
@@ -263,8 +264,10 @@ res5: org.apache.spark.sql.DataFrame = [summary: string, id: string ... 3 more f
 
 Analise atentamente os resultados. 
 
-7. Para sair do spark-shell digite:
+9. Para sair do spark-shell digite:
 ```
 sys.exit
 ```
 
+### Parabéns!
+Se você chegou até aqui então criou e ativou seu cluster EMR com sucesso e fez testes utilizando linguagem Scala. 
