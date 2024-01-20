@@ -21,3 +21,69 @@ O objetivo desta sessão é executar operações de extração, transformação 
 5. No topo superior esquerdo clique em **Untitled job**, apague o conteúdo e digite `pedidos parquet` e pressione a tecla Enter;
 
 A partir desse ponto você deve seguir as instruções contidas no notebook.
+
+### Criando um job baseado em script
+
+#### Variáveis de ambiente
+```
+export ROLE_NAME=LabRole
+export DATABASE_NAME=ecommerce
+```
+
+```
+export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
+```
+
+```
+echo ${BUCKET_NAME}
+echo ${ROLE_NAME}
+echo ${DATABASE_NAME}
+```
+
+#### Upload dos scripts
+1. `glue-job-clientes.py`
+```
+aws s3 cp 08-Glue-Job/assets/scripts/glue-job-clientes.py s3://${BUCKET_NAME}/scripts/ 
+```
+
+2. `glue-job-pedidos.py` 
+
+```
+aws s3 cp 08-Glue-Job/assets/scripts/glue-job-pedidos.py s3://${BUCKET_NAME}/scripts/ 
+```
+
+#### Criando os jobs
+1. Clientes
+```
+aws glue create-job \
+    --name clientes-job \
+    --role ${ROLE_NAME} \
+    --command '{ \
+        "Name": "pythonshell", \
+        "ScriptLocation": "s3://${BUCKET_NAME}/scripts/glue-job-clientes.py" \
+    }' \
+    --output json
+```
+
+2. Pedidos
+```
+aws glue create-job \
+    --name pedidos-job \
+    --role ${ROLE_NAME} \
+    --command '{ \
+        "Name": "pythonshell", \
+        "ScriptLocation": "s3://${BUCKET_NAME}/scripts/glue-job-pedidos.py" \
+    }' \
+    --output json
+```
+
+#### Executando os jobs
+1. Clientes
+```
+aws glue start-job-run --job-name clientes-job
+```
+
+2. Pedidos
+```
+aws glue start-job-run --job-name pedidos-job
+```
