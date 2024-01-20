@@ -21,7 +21,7 @@ O objetivo desta sessão é criar a estrutura de dados no Glue Catalog e executa
 6. Clique em **Add a data source**
     - Em **Data source** escolha S3
     - Em **Location of S3 data** mantenha `In this account`
-    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/stage/ecommerce/pedidos/` ajustando para o nome do seu bucket.
+    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw/ecommerce/pedidos/` ajustando para o nome do seu bucket.
     - Mantenha as demais configurações inalteradas
     - Clique no botão **Add an S3 data source** ao final da página
 7. De volta à tela **Choose data sources and classifiers** clique no botão `Next` ao final da página;
@@ -65,7 +65,7 @@ Agora você pode revisar os metadados criados pelo crawler.
 6. Clique em **Add a data source**
     - Em **Data source** escolha S3
     - Em **Location of S3 data** mantenha `In this account`
-    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/stage/ecommerce/clientes/` ajustando para o nome do seu bucket.
+    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw/ecommerce/clientes/` ajustando para o nome do seu bucket.
     - Mantenha as demais configurações inalteradas
     - Clique no botão **Add an S3 data source** ao final da página
 7. De volta à tela **Choose data sources and classifiers** clique no botão `Next` ao final da página;
