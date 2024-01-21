@@ -160,7 +160,7 @@ The filesystem on /dev/nvme0n1p1 is now 39293179 (4k) blocks long.
 ```
 
 > #### Atenção!
-> Caso a execução do script pare neste ponto, apenas digite a letra `Q` (quit) para continuar:
+> Caso a execução do script pare neste ponto abaixo, apenas digite a letra `Q` (quit) para continuar:
 ```
 ### Redimensionamento do volume EBS ###
 {
