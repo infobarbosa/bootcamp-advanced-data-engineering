@@ -58,7 +58,7 @@ Neste laboratório faremos uso recorrente do serviço Cloud9.
 
 ![img/009_cloud9_tela_criar_ambiente_nome.png](img/009_cloud9_tela_criar_ambiente_nome.png)
 
-7. Campo **Descrição**: deixe em branco.
+7. Campo **Descrição**: informe `Ambiente do Bootcamp Advanced Data Engineering`.
 
 8. **Tipo de ambiente**: selecione `Nova instância do EC2`.
 
