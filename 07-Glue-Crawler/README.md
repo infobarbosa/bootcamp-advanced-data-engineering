@@ -3,11 +3,58 @@ Author: Prof. Barbosa<br>
 Contact: infobarbosa@gmail.com<br>
 Github: [infobarbosa](https://github.com/infobarbosa)
 
-# 05 - Glue Crawler
+# 07 - Glue Crawler
 
-O objetivo desta sessão é criar a estrutura de dados no Glue Catalog e executar a ingestão de dados.
+O objetivo desta sessão é apresentar o Glue Crawler como ferramenta de descoberta de dados e metadados.<br>
+No exercício anterior, **06-Tabelas-Particionadas**, adicionamos partições manualmente via comando `ALTER TABLE ADD PARTITION`.<br>
+No dia-a-dia esse processo manual é inviável então uma automação se torna necessária.<br>
+
+Neste exercício faremos algo simples, adição de partições. Porém, o Glue Crawler possui várias possibilidades de conexão aos seus armazenamentos (S3, bancos de dados relacionais, etc.) para determinar alterações de estrutura (schema) e então criar ou atualizar metadados de tabelas no catálogo de dados (Glue Catalog).
+
 
 ## Via console AWS
+
+---
+## Clientes
+---
+### Crie o crawler `clientes_crawler`
+1. No console AWS, acesse a barra de pesquisa e busque por Glue;
+2. No painel lateral (esquerda), abaixo de **Databases**, clique em **Tables**;
+3. Na tela que se abrir clique no botão **Add tables using crawler**;
+4. Em **name**, digite `clientes_crawler`;
+5. Clique no botão **Next** ao final da página;
+6. Clique em **Add a data source**
+    - Em **Data source** escolha S3
+    - Em **Location of S3 data** mantenha `In this account`
+    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw/ecommerce/clientes/` ajustando para o nome do seu bucket.
+    - Mantenha as demais configurações inalteradas
+    - Clique no botão **Add an S3 data source** ao final da página
+7. De volta à tela **Choose data sources and classifiers** clique no botão `Next` ao final da página;
+8. Na tela **Configure security settings**, em **IAM Role** escolha `LabRole`;
+9. Clique no botão **Next** ao final da página;
+10. Na tela **Set output and scheduling**, em **Target database** escolha `ecommerce`;
+11. Deixe o campo **Table name prefix** vazio;
+12. Em **Crawler schedule**, no campo **Frequency** mantenha `On demand` ;
+13. Clique no botão **Next** ao final da página;
+13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
+
+Você então receberá a mensagem a seguir no topo da tela
+```
+One crawler successfully created
+The following crawler is now created: "clientes_crawler"
+```
+
+### Execute do crawler `clientes_crawler`
+1. Na página de crawlers, selecione o crawler `clientes_crawler` e clique em `Run` no topo à direita da página
+
+    > ### Atenção!
+    > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
+
+### Inspecione a tabela `clientes`
+Se tudo ocorreu como esperado, o crawler criará uma tabela `clientes`.
+1. No painel lateral (esquerdo), clique em Databases;
+2. Clique no link do database `ecommerce`;
+3. Na sessão `Tables`, clique em `clientes`
 
 ---
 ## Pedidos
@@ -53,47 +100,6 @@ Se tudo ocorreu como esperado, o crawler criará uma tabela `pedidos`.
 
 Agora você pode revisar os metadados criados pelo crawler.
 
----
-## Clientes
----
-### Crie o crawler `clientes_crawler`
-1. No console AWS, acesse a barra de pesquisa e busque por Glue;
-2. No painel lateral (esquerda), abaixo de **Databases**, clique em **Tables**;
-3. Na tela que se abrir clique no botão **Add tables using crawler**;
-4. Em **name**, digite `clientes_crawler`;
-5. Clique no botão **Next** ao final da página;
-6. Clique em **Add a data source**
-    - Em **Data source** escolha S3
-    - Em **Location of S3 data** mantenha `In this account`
-    - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw/ecommerce/clientes/` ajustando para o nome do seu bucket.
-    - Mantenha as demais configurações inalteradas
-    - Clique no botão **Add an S3 data source** ao final da página
-7. De volta à tela **Choose data sources and classifiers** clique no botão `Next` ao final da página;
-8. Na tela **Configure security settings**, em **IAM Role** escolha `LabRole`;
-9. Clique no botão **Next** ao final da página;
-10. Na tela **Set output and scheduling**, em **Target database** escolha `ecommerce`;
-11. Deixe o campo **Table name prefix** vazio;
-12. Em **Crawler schedule**, no campo **Frequency** mantenha `On demand` ;
-13. Clique no botão **Next** ao final da página;
-13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
-
-Você então receberá a mensagem a seguir no topo da tela
-```
-One crawler successfully created
-The following crawler is now created: "clientes_crawler"
-```
-
-### Execute do crawler `clientes_crawler`
-1. Na página de crawlers, selecione o crawler `clientes_crawler` e clique em `Run` no topo à direita da página
-
-    > ### Atenção!
-    > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
-
-### Inspecione a tabela `clientes`
-Se tudo ocorreu como esperado, o crawler criará uma tabela `clientes`.
-1. No painel lateral (esquerdo), clique em Databases;
-2. Clique no link do database `ecommerce`;
-3. Na sessão `Tables`, clique em `clientes`
 
 Agora você pode revisar os metadados criados pelo crawler.
 
