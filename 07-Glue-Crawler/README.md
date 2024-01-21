@@ -181,9 +181,9 @@ Concluímos que o Glue Crawler pode ser um aliado importante na automação de d
 ## [OPCIONAL] Via CloudFormation + terminal Cloud9
 
 > ### Atenção! 
-> Nesta etapa você precisará editar o arquivo `gluecrawler-clientes.cf.yml`;<br>
-> O arquivo está na pasta `07-Glue-Crawler/assets/scripts/`;<br>
-> Utilize o editor do Cloud9.
+> - Nesta etapa você precisará editar o arquivo `gluecrawler-clientes.cf.yml`;<br>
+> - O arquivo está na pasta `07-Glue-Crawler/assets/scripts/`;<br>
+> - Utilize o editor do Cloud9.
 
 1. Abra o arquivo `gluecrawler-clientes.cf.yml`. 
 - Altere o valor do parâmetro `BucketURI` para a URI do bucket S3 criado no laboratório. Ex.: `s3://lab-data-eng-202402-p40041/raw/ecommerce/clientes/`;
