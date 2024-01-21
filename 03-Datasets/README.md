@@ -218,3 +218,5 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
 ```
 
 Se tudo estiver correto então você verá 31 arquivos referentes a pedidos entre 01/01/2024 a 31/01/2024.
+
+> Aproveite para checar o upload dos arquivos diretamente no S3 no console AWS.
