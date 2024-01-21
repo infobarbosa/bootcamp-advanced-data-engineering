@@ -71,7 +71,8 @@ Mantenha inalterado
 
 ![img/017_bucket_s3_botao_criar_bucket.png](img/017_bucket_s3_botao_criar_bucket.png)
 
-Será exibida a tela com a lista de buckets e uma tarja verde superior.<br>
+Será exibida a tela **Amazon S3 >
+Buckets** com a lista de buckets e uma tarja verde superior.<br>
 ![img/018-0_bucket_s3_bucket_criado.png](img/018-0_bucket_s3_bucket_criado.png)
 
 12. Clique no botão **View details** na tarja verde superior.<br>
