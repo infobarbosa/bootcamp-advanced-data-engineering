@@ -81,6 +81,8 @@ Você será direcionado ao painel onde é exibido o conteúdo do bucket criado <
 
 ![img/018-1_bucket_s3_bucket_criado.png](img/018-1_bucket_s3_bucket_criado.png)
 
+> Você também poderia clicar no link do bucket criado para acessar a mesma pasta.
+
 ## A estrutura de diretórios
 
 Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AWS [aqui](https://docs.aws.amazon.com/prescriptive-guidance/latest/defining-bucket-names-data-lakes/naming-structure-data-layers.html)
