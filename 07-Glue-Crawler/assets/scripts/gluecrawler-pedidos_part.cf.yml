@@ -2,16 +2,12 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   CFNCrawlerName:  
     Type: String
-    Default: pedidos_crawler
+    Default: crawler_pedidos
     Description: O nome do nosso crawler
   CFNDatabaseName:
     Type: String
     Default: ecommerce
     Description: O nome do banco de dados
-  CFNTablePrefixName:
-    Type: String
-    Default: pedidos_
-    Description: prefixo que o crawler deve atribuir a nossa tabela 
   BucketURI:
     Type: String
     Default: "s3://[EDITE AQUI. COLOQUE O NOME DO SEU BUCKET]/raw/ecommerce/pedidos/"
@@ -32,7 +28,6 @@ Resources:
       Targets:
         S3Targets:
           - Path: !Ref BucketURI
-      TablePrefix: !Ref CFNTablePrefixName
       SchemaChangePolicy:
         UpdateBehavior: "UPDATE_IN_DATABASE"
         DeleteBehavior: "LOG"

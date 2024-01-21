@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   CFNCrawlerName:  
     Type: String
-    Default: clientes_crawler
+    Default: crawler_clientes
     Description: O nome do nosso crawler
   CFNDatabaseName:
     Type: String
@@ -10,7 +10,7 @@ Parameters:
     Description: O nome do banco de dados
   CFNTablePrefixName:
     Type: String
-    Default: clientes_
+    Default: tb_crawler_
     Description: prefixo que o crawler deve atribuir a nossa tabela 
   BucketURI:
     Type: String

@@ -81,7 +81,7 @@ Se tudo ocorreu como esperado, o crawler terá criado uma tabela `tb_crawler_cli
 14. Clique em **Next** ao fim da página;
 15. Na tela **Set output and scheduling**, na sessão **Crawler schedule**, no combo **Frequency** mantenha `On demand` ;
 16. Clique no botão **Next** ao final da página;
-17. Na tela **Review and create**, revise as configurações e então clique em `Create crawler` ao final da página.
+17. Na tela **Review and create**, revise as configurações e então clique em **Create crawler** ao final da página.
 
 Você então receberá a mensagem a seguir no topo da tela:
 ```
@@ -90,10 +90,10 @@ The following crawler is now created: "crawler_pedidos"
 ```
 
 ### Inspecione a tabela `pedidos_part`
-1. No painel lateral (esquerdo), clique em Databases;
+1. No painel lateral (esquerdo), clique em **Databases**;
 2. Clique no link do database `ecommerce`;
-3. Na sessão `Tables`, clique em `pedidos_part`;
-4. Clique na aba **Partitions**;
+3. Na sessão **Tables**, clique em `pedidos_part`;
+4. Mais abaixo, clique na aba **Partitions**;
     > Repare que a tabela possui apenas uma partição (data_pedido=2024-01-01) que adicionamos no exercício **06-Tabelas-Particionadas**;
 
 ### Adicione uma nova partição à tabela `pedidos_part`
@@ -176,25 +176,27 @@ Concluímos que o Glue Crawler pode ser um aliado importante na automação de d
 ## [OPCIONAL] Via CloudFormation + terminal Cloud9
 
 > ### Atenção! 
-> Nesta etapa você precisará editar o arquivo `gluecrawler.cf.yml`
+> Nesta etapa você precisará editar o arquivo `gluecrawler-clientes.cf.yml`;<br>
+> O arquivo está na pasta `07-Glue-Crawler/assets/scripts/`;<br>
+> Utilize o editor do Cloud9.
 
-Abra o arquivo `assets/gluecrawler.cf.yml`. 
-- Altere o valor do parâmetro `BucketURI` para a URI do bucket S3 criado no laboratório. Ex.: s3://data-science-bucket--6082f1d0/raw/
-- Altere o valor do parâmetro `RoleARN` para a ARN da Role utilizada no laboratório. Ex.: arn:aws:iam::9876543210:role/LabRole
+1. Abra o arquivo `gluecrawler-clientes.cf.yml`. 
+- Altere o valor do parâmetro `BucketURI` para a URI do bucket S3 criado no laboratório. Ex.: `s3://lab-data-eng-202402-p40041/raw/ecommerce/clientes/`;
+- Altere o valor do parâmetro `RoleARN` para a ARN da Role utilizada no laboratório. Ex.: `arn:aws:iam::9876543210:role/LabRole`.
 
-Validando o script cloudformation:
+2. Valide o script cloudformation:
 ```
-aws cloudformation validate-template --template-body file://assets/gluecrawler.cf.yml
+aws cloudformation validate-template --template-body file://07-Glue-Crawler/assets/scripts/gluecrawler-clientes.cf.yml
 ```
 
-Execute o script cloudformation:
+3. Execute o script cloudformation:
 ```
-aws cloudformation create-stack --stack-name gluecrawler --template-body file://gluecrawler.cf.yml --capabilities CAPABILITY_NAMED_IAM
+aws cloudformation create-stack --stack-name gluecrawler-clientes --template-body file://07-Glue-Crawler/assets/scripts/gluecrawler-clientes.cf.yml --capabilities CAPABILITY_NAMED_IAM
 ```
 
 ## [OPCIONAL] Via AWS CLI + terminal Cloud9
 
-#### Variáveis de ambiente
+1. Variáveis de ambiente
 ```
 export ROLE_NAME=LabRole
 export DATABASE_NAME=ecommerce
@@ -210,12 +212,12 @@ echo ${ROLE_NAME}
 echo ${DATABASE_NAME}
 ```
 
-#### Crie o crawler
+2. Crie o crawler
 ```
 aws glue create-crawler \
---name crawler_pedidos \
+--name crawler_clientess \
 --role ${ROLE_NAME} \
 --database-name ${DATABASE_NAME} \
 --table-prefix tb_crawler_ \
---targets "{\"S3Targets\": [{\"Path\": \"s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/\"} ]}"
+--targets "{\"S3Targets\": [{\"Path\": \"s3://${BUCKET_NAME}/raw/ecommerce/clientes/\"} ]}"
 ```
