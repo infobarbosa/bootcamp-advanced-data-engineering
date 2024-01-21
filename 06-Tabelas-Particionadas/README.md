@@ -31,7 +31,7 @@ echo $BUCKET_NAME
 
 4. Crie a tabela `pedidos_part`
 ```
-aws glue create-table --database-name ecommerce --table-input "./06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
+aws glue create-table --database-name ecommerce --table-input "file://./06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
 ```
 
 5. Faça o upload de um arquivo para a pasta particionada:
