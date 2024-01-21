@@ -10,7 +10,7 @@ No exercício **04-Glue-Catalog**, nós criamos as tabelas `clientes` e `pedidos
 Já no exercício anterior, **06-Tabelas-Particionadas**, adicionamos partições manualmente via comando `ALTER TABLE ADD PARTITION`.<br>
 No dia-a-dia esse processo manual é inviável então uma automação se torna necessária.<br>
 
-Neste exercício faremos algo simples, criação de tabela (`clientes`) e adição de partições (`pedidos_part`). Porém, o Glue Crawler possui várias possibilidades de conexão a sistemas de armazenamento (S3, bancos de dados relacionais, etc.) para determinar alterações de estrutura (schema) e então criar ou atualizar metadados de tabelas no catálogo de dados (Glue Catalog).
+Neste exercício faremos algo simples, criação de tabela (`tb_crawler_clientes`) e adição de partições (`pedidos_part`). Porém, o Glue Crawler possui várias possibilidades de conexão a sistemas de armazenamento (S3, bancos de dados relacionais, etc.) para determinar alterações de estrutura (schema) e então criar ou atualizar metadados de tabelas no catálogo de dados (Glue Catalog).
 
 
 ## Via console AWS
