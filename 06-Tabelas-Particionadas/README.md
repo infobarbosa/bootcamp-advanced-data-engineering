@@ -34,7 +34,22 @@ echo $BUCKET_NAME
 aws glue create-table --database-name ecommerce --table-input "file://./06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
 ```
 
-5. Faça o upload de um arquivo para a pasta particionada:
+5. Verifique se a tabela `pedidos_part` foi criada corretamente:
+```
+aws glue get-tables --database-name 'ecommerce'  --query "TableList[].Name"
+```
+
+Output esperado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws glue get-tables --database-name 'ecommerce'  --query "TableList[].Name"
+[
+    "clientes",
+    "pedidos",
+    "pedidos_part"
+]
+```
+
+6. Faça o upload de um arquivo para a pasta particionada:
 > Atenção! Perceba que agora estamos fazendo o upload para outra pasta diferente da que utilizamos no exercício **03-Datasets**.<br>
 > Com este comando nós criaremos duas sub-pastas: `part` e, embaixo desta, `data_pedido=2024-01-01`.
 
@@ -42,7 +57,7 @@ aws glue create-table --database-name ecommerce --table-input "file://./06-Tabel
 aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-01.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/
 ```
 
-6. No **Athena**, abra um editor SQL e execute a seguinte consulta:
+7. No **Athena**, abra um editor SQL e execute a seguinte consulta:
 > Utilize o conhecimento adquirido no exercício **05-Athena**
 
 ```
@@ -56,7 +71,7 @@ Outra maneira de checar a disponibilidade das partições é através do comando
 SHOW PARTITIONS ecommerce.pedidos_part;
 ```
 
-7. Vamos resolver isso via comando `MSCK REPAIR TABLE`:
+8. Vamos resolver isso via comando `MSCK REPAIR TABLE`:
 ```
 MSCK REPAIR TABLE ecommerce.pedidos_part;
 ```
