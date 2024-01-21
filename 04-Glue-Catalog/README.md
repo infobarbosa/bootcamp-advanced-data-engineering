@@ -62,7 +62,7 @@ aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Ca
 aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Catalog/assets/scripts/pedidos.json"
 ```
 
-## Via console AWS
+## [OPCIONAL] Via console AWS
 
 1. No console AWS, acesse a barra de pesquisa e busque por Glue;
 2. No painel lateral (esquerda), no menu **Data Catalog** clique em **Databases**;
@@ -70,7 +70,7 @@ aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Ca
 4. No campo **Name** informe `ecommerce`;
 5. No campo **Description** informe `Banco de dados da nossa empresa fictícia de e-commerce`.
 
-## Via CloudFormation
+## [OPCIONAL] Via CloudFormation
 
 > ### Atenção! 
 > Nesta etapa você precisará editar o arquivo `database.cf.yml`
