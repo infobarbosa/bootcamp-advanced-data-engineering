@@ -191,7 +191,7 @@ The filesystem on /dev/nvme0n1p1 is now 39293179 (4k) blocks long.
 df -h
 ```
 
-Output:
+Output esperado:
 ```
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ df -h
 Filesystem       Size  Used Avail Use% Mounted on
