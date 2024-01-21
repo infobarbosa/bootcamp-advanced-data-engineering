@@ -78,12 +78,27 @@ Outra maneira de checar a disponibilidade das partições é através do comando
 SHOW PARTITIONS ecommerce.pedidos_part;
 ```
 
-8. Vamos resolver isso via comando `MSCK REPAIR TABLE`:
-```
-MSCK REPAIR TABLE ecommerce.pedidos_part;
-```
-Este comando verifica e atualiza o catálogo de dados caso detecte novas partições.
+8. Vamos resolver isso via comando `ALTER TABLE .. ADD PARTITION`:
 
+Ainda no editor SQL do Athena, digite:
+```
+ALTER TABLE ecommerce.pedidos_part ADD PARTITION (data_pedido='2024-01-01');
+```
+Este atualiza o catálogo de dados caso detecte novas partições.
+
+9. [OPCIONAL] O comando acima também pode ser executado no terminal Cloud9:
+
+```
+aws athena start-query-execution --query-string "ALTER TABLE ecommerce.pedidos_part ADD PARTITION (data_pedido='2024-01-01')" --result-configuration "OutputLocation=s3://${BUCKET_NAME}/results/"
+```
+
+Output esperado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws athena start-query-execution --query-string "ALTER TABLE ecommerce.pedidos_part ADD PARTITION (data_pedido='2024-01-01')" --result-configuration "OutputLocation=s3://${BUCKET_NAME}/results/"
+{
+    "QueryExecutionId": "82a1906f-8c3a-4dad-8b21-366bd896152a"
+}
+```
 
 ---
 
