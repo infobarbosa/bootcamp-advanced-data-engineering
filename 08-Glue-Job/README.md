@@ -46,11 +46,23 @@ echo ${DATABASE_NAME}
 aws s3 cp 08-Glue-Job/assets/scripts/glue-job-clientes.py s3://${BUCKET_NAME}/scripts/ 
 ```
 
+Conferindo:
+```
+aws s3 ls s3://${BUCKET_NAME}/scripts/glue-job-clientes.py 
+```
+
+
 2. `glue-job-pedidos.py` 
 
 ```
 aws s3 cp 08-Glue-Job/assets/scripts/glue-job-pedidos.py s3://${BUCKET_NAME}/scripts/ 
 ```
+
+Conferindo:
+```
+aws s3 ls s3://${BUCKET_NAME}/scripts/glue-job-pedidos.py 
+```
+
 
 #### Criando os jobs
 1. Clientes
