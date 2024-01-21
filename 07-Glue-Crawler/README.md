@@ -81,7 +81,7 @@ Se tudo ocorreu como esperado, o crawler terá criado uma tabela `tb_crawler_cli
 14. Clique em **Next** ao fim da página;
 15. Na tela **Set output and scheduling**, na sessão **Crawler schedule**, no combo **Frequency** mantenha `On demand` ;
 16. Clique no botão **Next** ao final da página;
-17. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
+17. Na tela **Review and create**, revise as configurações e então clique em `Create crawler` ao final da página.
 
 Você então receberá a mensagem a seguir no topo da tela:
 ```
