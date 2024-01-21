@@ -56,6 +56,7 @@ Agora vamos contar a **quantidade de clientes distintos** que realizaram pedidos
 SELECT count(distinct id_cliente) qtt_clientes
       ,count(1) qtt_registros
 FROM "ecommerce"."pedidos"
+WHERE cast(data_criacao as date) = date_parse('2024-01-02', '%Y-%m-%d')
 ```
 
 > Perceba a diferença entre a quantidade de clientes versus a quantidade de registros
