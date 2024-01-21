@@ -73,8 +73,14 @@ aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Ca
 
 7. Verifique se as tabelas foram criadas corretamente:
 ```
+aws glue get-tables --database-name 'ecommerce'  --query "TableList[].Name"
+```
+
+8. [OPCIONAL] Caso você queira ver mais detalhes das tabelas criadas:
+```
 aws glue get-tables --database-name 'ecommerce'
 ```
+> Digite `Q` (quit) para sair do prompt do comando acima.
 
 ## [OPCIONAL] Via console AWS
 
