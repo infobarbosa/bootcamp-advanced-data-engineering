@@ -19,7 +19,7 @@ Neste exercício faremos algo simples, criação de tabela e adição de partiç
 ## Clientes
 ---
 ### Crie o crawler `crawler_clientes`
-1. No console AWS, acesse a barra de pesquisa e busque por Glue;
+1. No console AWS, digite `glue` na barra de pesquisa e então clique em **AWS Glue**;
 2. No painel lateral (esquerda), abaixo de **Databases**, clique em **Tables**;
 3. Na tela que se abrir clique no botão **Add tables using crawler**;
 4. Em **name**, digite `crawler_clientes`;
