@@ -38,7 +38,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
 
 3. Vamos criar uma variável de ambiente `BUCKET_NAME`
 
-> O script abaixo apenas lista (via api do S3 os buckets disponíveis filtrando aquele que será utilizado no laboratório, então atribui esse nome à variável de ambiente `BUCKET_NAME` )
+> O script abaixo apenas lista (via api do S3) os buckets disponíveis filtrando aquele que será utilizado no laboratório, então atribui esse nome à variável de ambiente `BUCKET_NAME` 
 
 ```
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
