@@ -26,18 +26,18 @@ Neste exercício faremos algo simples, criação de tabela e adição de partiç
 5. Clique no botão **Next** ao final da página;
 6. Clique em **Add a data source**
     - Em **Data source** escolha S3
-    - Em **Location of S3 data** mantenha `In this account`
+    - Em **Location of S3 data** mantenha **In this account**
     - Em **S3 path** informe `s3://[SEU BUCKET AQUI]/raw/ecommerce/clientes/` ajustando para o nome do seu bucket.
     - Mantenha as demais configurações inalteradas
     - Clique no botão **Add an S3 data source** ao final da página
-7. De volta à tela **Choose data sources and classifiers** clique no botão `Next` ao final da página;
+7. De volta à tela **Choose data sources and classifiers** clique no botão **Next** ao final da página;
 8. Na tela **Configure security settings**, em **IAM Role** escolha `LabRole`;
 9. Clique no botão **Next** ao final da página;
 10. Na tela **Set output and scheduling**, em **Target database** escolha `ecommerce`;
 11. Em **Table name prefix** informe `tb_crawler_`;
 12. Em **Crawler schedule**, no campo **Frequency** mantenha `On demand` ;
 13. Clique no botão **Next** ao final da página;
-13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
+13. Na tela **Review and create**, revise as configurações e então clique em **Create crawler** ao final da página.
 
 Você então receberá a mensagem a seguir no topo da tela
 ```
@@ -48,18 +48,18 @@ The following crawler is now created: "crawler_clientes"
 ### Execute do crawler `crawler_clientes`
 1. Na página de crawlers, selecione o crawler `crawler_clientes` e clique em `Run` no topo à direita da página
 
-> ### Atenção!
-> O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
+    > ### Atenção!
+    > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
 
 
 ### Inspecione a tabela `tb_crawler_clientes`
 Se tudo ocorreu como esperado, o crawler terá criado uma tabela `tb_crawler_clientes`.
 1. No painel lateral (esquerdo), clique em Databases;
 2. Clique no link do database `ecommerce`;
-3. Na sessão `Tables`, clique em `tb_crawler_clientes`;
+3. Na sessão **Tables**, clique em `tb_crawler_clientes`;
 4. Examine os metadados da tabela;
 5. Abra o Athena e inspecione o conteúdo da tabela `tb_crawler_clientes`;
-> Utilize o conhecimento adquirido no exercício **05-Athena**.
+    > Utilize o conhecimento adquirido no exercício **05-Athena**.
 
 ---
 ## Pedidos
