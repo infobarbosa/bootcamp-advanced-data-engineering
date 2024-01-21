@@ -71,9 +71,14 @@ Mantenha inalterado
 
 ![img/017_bucket_s3_botao_criar_bucket.png](img/017_bucket_s3_botao_criar_bucket.png)
 
-12. Você será direcionado ao painel onde é exibido o conteúdo do bucket criado <br>
+Será exibida a tela com a lista de buckets e uma tarja verde superior.<br>
+![img/018-0_bucket_s3_bucket_criado.png](img/018-0_bucket_s3_bucket_criado.png)
 
-![img/018_bucket_s3_bucket_criado.png](img/018_bucket_s3_bucket_criado.png)
+12. Clique no botão **View details** na tarja verde superior.<br>
+
+Você será direcionado ao painel onde é exibido o conteúdo do bucket criado <br>
+
+![img/018-1_bucket_s3_bucket_criado.png](img/018-1_bucket_s3_bucket_criado.png)
 
 ## A estrutura de diretórios
 
