@@ -61,10 +61,11 @@ WHERE cast(data_criacao as date) = date_parse('2024-01-02', '%Y-%m-%d')
 
 > Perceba a diferença entre a quantidade de clientes versus a quantidade de registros
 
-Agova vamos somar o **valor total pago** pelo benefício:
+Agova vamos somar o **valor total** dos pedidos de **2024**:
 ```
 SELECT sum(quantidade * valor_unitario) vl_total
 FROM "ecommerce"."pedidos"
+WHERE year(data_criacao) = 2024
 ```
 
 > Perceba que o valor aparece em notação exponencial.
@@ -73,6 +74,7 @@ FROM "ecommerce"."pedidos"
 ```
 SELECT format('%,.2f',sum(quantidade * valor_unitario)) vl_total
 FROM "ecommerce"."pedidos"
+WHERE year(data_criacao) = 2024
 ```
 
 Vamos analisar o **valor total pago agrupado por UF**:
