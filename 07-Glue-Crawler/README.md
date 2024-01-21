@@ -173,6 +173,11 @@ GROUP BY data_pedido
 # Parabéns!
 Concluímos que o Glue Crawler pode ser um aliado importante na automação de descoberta e atualização de metadados do Glue Catalog.
 
+<br>
+<br>
+
+---
+
 ## [OPCIONAL] Via CloudFormation + terminal Cloud9
 
 > ### Atenção! 
@@ -195,7 +200,7 @@ aws cloudformation create-stack --stack-name gluecrawler-clientes --template-bod
 ```
 <br>
 <br>
----
+
 ## [OPCIONAL] Via AWS CLI + terminal Cloud9
 
 1. Variáveis de ambiente
