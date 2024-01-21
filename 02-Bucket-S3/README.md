@@ -91,9 +91,11 @@ Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AW
 
 ![img/019_bucket_s3_botao_criar_pasta.png](img/019_bucket_s3_botao_criar_pasta.png)
 
-2. Informe `raw` como nome da pasta e deixe os demais campos inalterados. <br>
+2. Em **Nome da pasta** informe `raw`, deixe os demais campos inalterados. <br>
 
 ![img/020_bucket_s3_pagina_criar_pasta.png](img/020_bucket_s3_pagina_criar_pasta.png)
+
+3. Clique no botão **Criar pasta**
 
 Faça o mesmo para as outras duas pastas: `stage`, `analytics` e `results`
 
