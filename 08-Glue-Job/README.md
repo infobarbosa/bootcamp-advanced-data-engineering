@@ -24,7 +24,7 @@ A partir desse ponto você deve seguir as instruções contidas no notebook.
 > Atenção!<br>
 > Caso você não tenha familiaridade com o uso de notebooks, leia atentamente as instruções no início do notebook que acabou de abrir.
 
-### Criando um job baseado em script
+### [OPCIONAL] Criando um job baseado em script
 
 #### Variáveis de ambiente
 ```
