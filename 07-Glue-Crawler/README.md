@@ -193,6 +193,8 @@ aws cloudformation validate-template --template-body file://07-Glue-Crawler/asse
 ```
 aws cloudformation create-stack --stack-name gluecrawler-clientes --template-body file://07-Glue-Crawler/assets/scripts/gluecrawler-clientes.cf.yml --capabilities CAPABILITY_NAMED_IAM
 ```
+<br>
+<br>
 
 ## [OPCIONAL] Via AWS CLI + terminal Cloud9
 
