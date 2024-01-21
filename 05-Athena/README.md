@@ -85,9 +85,9 @@ FROM "ecommerce"."pedidos"
 GROUP BY ROLLUP (uf)
 ORDER BY sum(quantidade * valor_unitario) DESC
 ```
+Qual foi a UF com maior valor de vendas?
 
-Quais foram os top 10 clientes que mais compraram?
-
+Agora vamos verificar os top 10 clientes em valor de vendas:
 ```
 WITH top_clientes as (
     SELECT id_cliente
