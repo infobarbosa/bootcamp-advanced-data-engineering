@@ -106,7 +106,10 @@ Ao final a estrutura de pastas deverá estar assim:
 
 3. Crie a pasta `ecommerce` dentro da pasta `raw`
 
-## Bônus - Via terminal Cloud9
+## OPCIONAL - Via terminal Cloud9
+
+> #### Atenção
+> Esta sessão é opcional e apresenta outra forma para criação do bucket e estrutura de pastas via terminal shell.
 
 #### Variável de ambiente `bucket_name`
 > Atenção!
