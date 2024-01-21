@@ -86,6 +86,9 @@ ALTER TABLE ecommerce.pedidos_part ADD PARTITION (data_pedido='2024-01-01');
 ```
 Este atualiza o catálogo de dados caso detecte novas partições.
 
+> Para saber mais sobre o comando `ALTER TABLE ADD PARTITION` clique [aqui](https://docs.aws.amazon.com/athena/latest/ug/alter-table-add-partition.html) <br>
+> Outro comando interessante é o `MSCK REPAIR TABLE` que pode ser encontrado [aqui](https://docs.aws.amazon.com/athena/latest/ug/msck-repair-table.html)
+
 9. [OPCIONAL] O comando acima também pode ser executado no terminal Cloud9:
 
 ```
