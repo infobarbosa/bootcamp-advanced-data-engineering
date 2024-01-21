@@ -47,15 +47,15 @@ voclabs:~/environment $
 ```
 
 ### Tabela `clientes`
-<code style="color : red">ATENÇÃO!</code><br>
-Você precisará editar o arquivo `clientes.json` para considerar o bucket criado no exercício **02-Bucket-S3**
+### <span style="color : red">ATENÇÃO!</span>
+Edite o arquivo `clientes.json` para considerar o bucket criado no exercício **02-Bucket-S3**
 
 ```
 aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Catalog/assets/scripts/clientes.json"
 ```
 
 ### Tabela `pedidos`
-<code style="color : red">ATENÇÃO!</code><br>
+### <span style="color : red">ATENÇÃO!</span>
 Edite o arquivo `pedidos.json` para considerar o bucket criado no exercício **02-Bucket-S3**
 
 ```
