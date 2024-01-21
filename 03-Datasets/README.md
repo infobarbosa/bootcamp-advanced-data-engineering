@@ -5,7 +5,8 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 # 03 - Bases de dados
 
-O objetivo desta sessão é obter os datasets (bases de dados) necessários à execução do laboratório.
+O objetivo desta sessão é fazer o upload dos datasets (bases de dados) necessários à execução do laboratório.
+
 ## Bases de Clientes
 1. Certifique-se que está no diretório do projeto:
 ```
