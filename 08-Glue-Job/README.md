@@ -21,6 +21,8 @@ O objetivo desta sessão é executar operações de extração, transformação 
 5. No topo superior esquerdo clique em **Untitled job**, apague o conteúdo e digite `pedidos parquet` e pressione a tecla Enter;
 
 A partir desse ponto você deve seguir as instruções contidas no notebook.
+> Atenção!
+> Caso você não tenha familiaridade com o uso de notebooks, leia atentamente as instruções no início do notebook que acabou de abrir.
 
 ### Criando um job baseado em script
 
