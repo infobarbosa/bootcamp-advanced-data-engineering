@@ -97,7 +97,7 @@ Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AW
 
 3. Clique no botão **Criar pasta**
 
-Faça o mesmo para as outras duas pastas: `stage`, `analytics` e `results`
+4. Repita o procedimento acima para criar as pastas: `stage`, `analytics` e `results`
 
 Ao final a estrutura de pastas deverá estar assim:
 
