@@ -195,7 +195,7 @@ aws cloudformation create-stack --stack-name gluecrawler-clientes --template-bod
 ```
 <br>
 <br>
-
+---
 ## [OPCIONAL] Via AWS CLI + terminal Cloud9
 
 1. Variáveis de ambiente
