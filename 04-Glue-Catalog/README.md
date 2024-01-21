@@ -11,17 +11,18 @@ Há 3 opções para criação: via AWS CLI, via console AWS e via CloudFormation
 ## Via terminal Cloud9
 
 ### Database `ecommerce`
-Execute o comando a seguir no terminal:
+1. Execute o comando a seguir no terminal:
 ```
 aws glue create-database --database-input "{\"Name\":\"ecommerce\"}" 
 ```
 O comando não produz output.<br>
 
-Verifique se o banco de dados foi criado através do comando a seguir:
+2. Verifique se o banco de dados foi criado através do comando a seguir:
 ```
 aws glue get-databases
 ```
-Output:
+
+Output esperado:
 ```
 voclabs:~/environment $ aws glue get-databases
 {
@@ -48,16 +49,18 @@ voclabs:~/environment $
 
 ### Tabela `clientes`
 ### <span style="color : red">ATENÇÃO!</span>
-Edite o arquivo `clientes.json` para considerar o bucket criado no exercício **02-Bucket-S3**
+4. Edite o arquivo `clientes.json` para considerar o bucket criado no exercício **02-Bucket-S3**
 
+5. Execute o comando de criação a seguir:
 ```
 aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Catalog/assets/scripts/clientes.json"
 ```
 
 ### Tabela `pedidos`
 ### <span style="color : red">ATENÇÃO!</span>
-Edite o arquivo `pedidos.json` para considerar o bucket criado no exercício **02-Bucket-S3**
+6. Edite o arquivo `pedidos.json` para considerar o bucket criado no exercício **02-Bucket-S3**
 
+7. Execute o comando de criação a seguir:
 ```
 aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Catalog/assets/scripts/pedidos.json"
 ```
