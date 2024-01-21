@@ -57,6 +57,13 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws glue get-t
 aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-01.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/
 ```
 
+Output esperado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-01.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/
+upload: 03-Datasets/assets/data/pedidos-2024-01-01.csv.gz to s3://lab-data-eng-202402-p40041/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/pedidos-2024-01-01.csv.gz
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
+```
+
 7. No **Athena**, abra um editor SQL e execute a seguinte consulta:
 > Utilize o conhecimento adquirido no exercício **05-Athena**
 
