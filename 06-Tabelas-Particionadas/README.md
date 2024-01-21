@@ -35,6 +35,9 @@ aws glue create-table --database-name ecommerce --table-input "file://./06-Tabel
 ```
 
 5. Faça o upload de um arquivo para a pasta particionada:
+> Atenção! Perceba que agora estamos fazendo o upload para outra pasta diferente da que utilizamos no exercício **03-Datasets**.<br>
+> Com este comando nós criaremos duas sub-pastas: `part` e, embaixo desta, `data_pedido=2024-01-01`.
+
 ```
 aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-01.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-01/
 ```
