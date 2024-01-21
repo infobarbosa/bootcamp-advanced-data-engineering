@@ -6,10 +6,11 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 # 07 - Glue Crawler
 
 O objetivo desta sessão é apresentar o Glue Crawler como ferramenta de descoberta de dados e metadados.<br>
-No exercício anterior, **06-Tabelas-Particionadas**, adicionamos partições manualmente via comando `ALTER TABLE ADD PARTITION`.<br>
+No exercício **04-Glue-Catalog**, nós criamos as tabelas `clientes` e `pedidos` com base em definições pré-estabelecidas. O que acontece quando temos um dataset para o qual não temos uma definição sobre os metadados do seu conteúdo?<br>
+Já no exercício anterior, **06-Tabelas-Particionadas**, adicionamos partições manualmente via comando `ALTER TABLE ADD PARTITION`.<br>
 No dia-a-dia esse processo manual é inviável então uma automação se torna necessária.<br>
 
-Neste exercício faremos algo simples, adição de partições. Porém, o Glue Crawler possui várias possibilidades de conexão aos seus armazenamentos (S3, bancos de dados relacionais, etc.) para determinar alterações de estrutura (schema) e então criar ou atualizar metadados de tabelas no catálogo de dados (Glue Catalog).
+Neste exercício faremos algo simples, criação de tabela e adição de partições. Porém, o Glue Crawler possui várias possibilidades de conexão a sistemas de armazenamento (S3, bancos de dados relacionais, etc.) para determinar alterações de estrutura (schema) e então criar ou atualizar metadados de tabelas no catálogo de dados (Glue Catalog).
 
 
 ## Via console AWS
@@ -17,11 +18,11 @@ Neste exercício faremos algo simples, adição de partições. Porém, o Glue C
 ---
 ## Clientes
 ---
-### Crie o crawler `clientes_crawler`
+### Crie o crawler `crawler_clientes`
 1. No console AWS, acesse a barra de pesquisa e busque por Glue;
 2. No painel lateral (esquerda), abaixo de **Databases**, clique em **Tables**;
 3. Na tela que se abrir clique no botão **Add tables using crawler**;
-4. Em **name**, digite `clientes_crawler`;
+4. Em **name**, digite `crawler_clientes`;
 5. Clique no botão **Next** ao final da página;
 6. Clique em **Add a data source**
     - Em **Data source** escolha S3
@@ -33,7 +34,7 @@ Neste exercício faremos algo simples, adição de partições. Porém, o Glue C
 8. Na tela **Configure security settings**, em **IAM Role** escolha `LabRole`;
 9. Clique no botão **Next** ao final da página;
 10. Na tela **Set output and scheduling**, em **Target database** escolha `ecommerce`;
-11. Deixe o campo **Table name prefix** vazio;
+11. Em **Table name prefix** informe `tb_crawler_`;
 12. Em **Crawler schedule**, no campo **Frequency** mantenha `On demand` ;
 13. Clique no botão **Next** ao final da página;
 13. Na tela `Review and create`, revise as configurações e então clique em `Create crawler` ao final da página.
@@ -41,20 +42,24 @@ Neste exercício faremos algo simples, adição de partições. Porém, o Glue C
 Você então receberá a mensagem a seguir no topo da tela
 ```
 One crawler successfully created
-The following crawler is now created: "clientes_crawler"
+The following crawler is now created: "crawler_clientes"
 ```
 
-### Execute do crawler `clientes_crawler`
-1. Na página de crawlers, selecione o crawler `clientes_crawler` e clique em `Run` no topo à direita da página
+### Execute do crawler `crawler_clientes`
+1. Na página de crawlers, selecione o crawler `crawler_clientes` e clique em `Run` no topo à direita da página
 
-    > ### Atenção!
-    > O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
+> ### Atenção!
+> O status do crawler ficará em **Running** por cerca de 3 minutos. Ao final do processamento o status mudará para **Ready**
 
-### Inspecione a tabela `clientes`
-Se tudo ocorreu como esperado, o crawler criará uma tabela `clientes`.
+
+### Inspecione a tabela `tb_crawler_clientes`
+Se tudo ocorreu como esperado, o crawler terá criado uma tabela `tb_crawler_clientes`.
 1. No painel lateral (esquerdo), clique em Databases;
 2. Clique no link do database `ecommerce`;
-3. Na sessão `Tables`, clique em `clientes`
+3. Na sessão `Tables`, clique em `tb_crawler_clientes`;
+4. Examine os metadados da tabela;
+5. Abra o Athena e inspecione o conteúdo da tabela `tb_crawler_clientes`;
+> Utilize o conhecimento adquirido no exercício **05-Athena**.
 
 ---
 ## Pedidos
