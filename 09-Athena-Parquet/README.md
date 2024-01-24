@@ -25,68 +25,79 @@ Este lab é exatamente igual ao lab 05. A diferente está apenas no tempo de exe
 
 3. No editor que estará disponível digite a seguinte consulta SQL:
     ```
-    SELECT * FROM "bolsafamilia"."pagamentos_parquet" limit 10;
+    SELECT * FROM "ecommerce"."pagamentos_parquet" limit 10;
     ```
 4. Clique no botão **Run**
 5. Verifique o resultado. Perceba a estrutura da tabela e seus dados.
 
 ### Consultas analíticas
 
+### Consultas analíticas
+
 Vamos fazer algumas consultas analíticas para nos familiarizar mais com o ambiente **Athena**
 
-Primeiro, vamos contar a **quantidade de registros** há na tabela
+Primeiro, vamos contar a **quantidade de registros** há nas tabelas
+
+Quantos clientes temos na base?
 ```
 SELECT count(1) qtt
-FROM "bolsafamilia"."pagamentos_parquet"
+FROM "ecommerce"."clientes"
 ```
 
-Agora vamos contar a **quantidade de NIS distintos** há na tabela
+E quantos pedidos?
 ```
-SELECT count(1) qtt_registros
-    ,count(distinct nis) qtt_nis
-FROM "bolsafamilia"."pagamentos_parquet"
+SELECT count(1) qtt
+FROM "ecommerce"."pedidos"
 ```
 
-> Perceba a diferença entre a quantidade de CPF versus a quantidade de registros
-
-Agova vamos somar o **valor total pago** pelo benefício:
+Agora vamos contar a **quantidade de clientes distintos** que realizaram pedidos no dia **02/01/2024**
 ```
-SELECT sum(valor) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct nis) qtt_nis
-FROM "bolsafamilia"."pagamentos_parquet"
+SELECT count(distinct id_cliente) qtt_clientes
+      ,count(1) qtt_registros
+FROM "ecommerce"."pedidos"
+WHERE cast(data_criacao as date) = date_parse('2024-01-02', '%Y-%m-%d')
+```
+
+> Perceba a diferença entre a quantidade de clientes versus a quantidade de registros
+
+Agova vamos somar o **valor total** dos pedidos de **2024**:
+```
+SELECT sum(quantidade * valor_unitario) vl_total
+FROM "ecommerce"."pedidos"
+WHERE year(data_criacao) = 2024
 ```
 
 > Perceba que o valor aparece em notação exponencial.
 > Vamos contornar isso com a função `format`
 
 ```
-SELECT format('%,.2f',sum(valor)) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct cpf) qtt_cpf
-FROM "bolsafamilia"."pagamentos_parquet"
+SELECT format('%,.2f',sum(quantidade * valor_unitario)) vl_total
+FROM "ecommerce"."pedidos"
+WHERE year(data_criacao) = 2024
 ```
 
 Vamos analisar o **valor total pago agrupado por UF**:
 ```
 SELECT uf
-    ,format('%,.2f',sum(valor)) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct nis) qtt_nis
-FROM "bolsafamilia"."pagamentos_parquet"
+    ,format('%,.2f',sum(quantidade * valor_unitario)) vl_total
+FROM "ecommerce"."pedidos"
 GROUP BY ROLLUP (uf)
-ORDER BY sum(valor) DESC
+ORDER BY sum(quantidade * valor_unitario) DESC
 ```
+Qual foi a UF com maior valor de vendas?
 
-Qual foi a UF que com maior volume financeiro recebido pelo benefício?
-
-Se ordenarmos pelo número de beneficiários, qual o resultado?
+Agora vamos verificar os top 10 clientes em valor de vendas:
 ```
-SELECT uf
-    ,format('%,.2f',sum(valor)) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct nis) qtt_nis
-FROM "bolsafamilia"."pagamentos_parquet"
-GROUP BY ROLLUP (uf)
-ORDER BY count(nis) DESC
+WITH top_clientes as (
+    SELECT id_cliente
+        ,format('%,.2f',sum(quantidade * valor_unitario)) vl_total
+    FROM "ecommerce"."pedidos"
+    GROUP BY id_cliente
+    ORDER BY sum(quantidade * valor_unitario) DESC
+    LIMIT 10
+) 
+SELECT c.nome, c.cpf, t.*
+FROM top_clientes t
+INNER JOIN ecommerce.clientes c on c.id = t.id_cliente;
+
 ```
