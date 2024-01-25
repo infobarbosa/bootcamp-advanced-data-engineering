@@ -20,7 +20,6 @@
         "--TempDir": "s3://lab-data-eng-202402-p40041/temp"
     },
     "MaxRetries": 0,
-    "AllocatedCapacity": 2,
     "Timeout": 2880,
     "MaxCapacity": 2.0,
     "WorkerType": "G.1X",
