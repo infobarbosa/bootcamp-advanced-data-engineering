@@ -158,111 +158,221 @@ EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
 
 5. Vamos criar uma variável de ambiente `bucket`
 ```
-export bucket=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
+export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 
-echo $bucket
+echo $BUCKET_NAME
 
 ```
 
 6. Abra o spark-shell
 ```
-spark-shell
+pyspark
 ```
 
 > A ativação do spark-shell leva de 1 a 2 minutos.
 
 Output esperado:
 ```
-[hadoop@ip-172-31-81-171 ~]$ spark-shell
+[hadoop@ip-172-31-93-227 ~]$ pyspark
+Python 3.7.16 (default, Aug 30 2023, 20:37:53) 
+[GCC 7.3.1 20180712 (Red Hat 7.3.1-15)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
 Setting default log level to "WARN".
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-24/01/20 14:09:34 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
-24/01/20 14:10:00 WARN YarnSchedulerBackend$YarnSchedulerEndpoint: Attempted to request executors before the AM has registered!
-Spark context Web UI available at http://ip-172-31-81-171.ec2.internal:4040
-Spark context available as 'sc' (master = yarn, app id = application_1705757433450_0001).
-Spark session available as 'spark'.
+24/01/25 21:30:41 WARN HiveConf: HiveConf of name hive.server2.thrift.url does not exist
+24/01/25 21:30:45 WARN Client: Neither spark.yarn.jars nor spark.yarn.archive is set, falling back to uploading libraries under SPARK_HOME.
 Welcome to
       ____              __
      / __/__  ___ _____/ /__
     _\ \/ _ \/ _ `/ __/  '_/
-   /___/ .__/\_,_/_/ /_/\_\   version 3.4.1-amzn-2
+   /__ / .__/\_,_/_/ /_/\_\   version 3.4.1-amzn-2
       /_/
-         
-Using Scala version 2.12.15 (OpenJDK 64-Bit Server VM, Java 1.8.0_402)
-Type in expressions to have them evaluated.
-Type :help for more information.
 
-scala> 
-```
-
-7. Crie um Dataframe a partir do dataset `clientes.csv.gz`
-```
-val bucket = System.getenv("bucket")
+Using Python version 3.7.16 (default, Aug 30 2023 20:37:53)
+Spark context Web UI available at http://ip-172-31-93-227.ec2.internal:4040
+Spark context available as 'sc' (master = yarn, app id = application_1706217953761_0001).
+SparkSession available as 'spark'.
+>>>
 ```
 
+7. Criando dataframes
+
+###### Importando bibliotecas
 ```
-val clientes_loc = "s3://"+bucket+"/raw/ecommerce/clientes/clientes.csv.gz"
+import sys
+from datetime import datetime
 ```
 
 ```
-val df = spark.read.option("header","true").option("inferSchema","true").option("delimiter", ";").option("compression", "gzip").csv(clientes_loc)
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
 ```
 
-Output esperado:
+###### Abrindo uma sessão
 ```
-scala> val df = spark.read.option("header","true").option("inferSchema","true").option("delimiter", ";").option("compression", "gzip").csv(clientes_loc)
-df: org.apache.spark.sql.DataFrame = [id: int, nome: string ... 3 more fields]  
-```
-
-8. Inspecione os dados do dataframe
-```
-df.printSchema()
+spark = SparkSession \
+    .builder \
+    .appName("data-eng-lab") \
+    .getOrCreate()
 ```
 
 Output esperado:
 ```
-scala> df.printSchema()
-root
- |-- id: integer (nullable = true)
- |-- nome: string (nullable = true)
- |-- data_nasc: date (nullable = true)
- |-- cpf: string (nullable = true)
- |-- email: string (nullable = true)
+>>> spark = SparkSession \
+...     .builder \
+...     .appName("data-eng-lab") \
+...     .getOrCreate()
+24/01/25 21:58:31 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+```
+
+###### Definindo o database do Glue Catalog
+```
+spark.catalog.setCurrentDatabase("ecommerce")
+```
+
+Output esperado:
+```
+>>> spark.catalog.setCurrentDatabase("ecommerce")
+24/01/25 22:01:48 INFO HiveConf: Found configuration file file:/etc/spark/conf.dist/hive-site.xml
+24/01/25 22:01:48 WARN HiveConf: HiveConf of name hive.server2.thrift.url does not exist
+24/01/25 22:01:49 INFO AWSGlueClientFactory: Using region from ec2 metadata : us-east-1
+24/01/25 22:01:50 WARN CredentialsLegacyConfigLocationProvider: Found the legacy config profiles file at [/home/hadoop/.aws/config]. Please move it to the latest default location [~/.aws/credentials].
+```
+
+###### Dataframe `clientes_parquet`
+```
+dfCli = spark.sql("select * from ecommerce.clientes_parquet")
 ```
 
 ```
-df.show(5)
+dfCli.show(5)
 ```
+
 Output esperado:
 ```
-scala> df.show(5)
+>>> dfCli.show(5)
 +---+--------------------+----------+--------------+--------------------+       
 | id|                nome| data_nasc|           cpf|               email|
 +---+--------------------+----------+--------------+--------------------+
-|  1|    Isabelly Barbosa|1963-08-15|137.064.289-03|isabelly.barbosa@...|
-|  2|      Larissa Fogaça|1933-09-29|703.685.294-10|larissa.fogaca@ex...|
-|  3|João Gabriel Silv...|1958-05-27|520.179.643-52|joao.gabriel.silv...|
-|  4|Pedro Lucas Nasci...|1950-08-23|274.351.896-00|pedro.lucas.nasci...|
-|  5|      Felipe Azevedo|1986-12-31|759.061.842-01|felipe.azevedo@ex...|
+|  9|        Alícia Souza|1960-08-26|784.563.029-29|alicia.souza@exam...|
+| 29|Maria Luiza Nogueira|1963-01-29|580.769.423-65|maria.luiza.nogue...|
+| 49|   Maria Luiza Lopes|1957-08-17|592.134.068-51|maria.luiza.lopes...|
+| 69|         Yago Campos|1944-03-17|342.617.850-80|yago.campos@examp...|
+| 89|       Milena Mendes|1975-01-22|389.541.720-32|milena.mendes@exa...|
 +---+--------------------+----------+--------------+--------------------+
 only showing top 5 rows
+
 ```
 
 ```
-df.describe()
+dfCli.printSchema()
+```
+
+Output esperado:
+```
+>>> dfCli.printSchema()
+root
+ |-- id: integer (nullable = true)
+ |-- nome: string (nullable = true)
+ |-- data_nasc: string (nullable = true)
+ |-- cpf: string (nullable = true)
+ |-- email: string (nullable = true)
+
+>>> 
+```
+
+###### Dataframe `pedidos_parquet`
+```
+dfPed = spark.sql("select * from ecommerce.pedidos_parquet")
+```
+
+```
+dfPed.show(5)
 ```
 Output esperado:
 ```
-scala> df.describe()
-res5: org.apache.spark.sql.DataFrame = [summary: string, id: string ... 3 more fields]
+>>> dfPed.show(5)
++--------------------+---------+--------------+----------+-------------------+---+----------+-----------+
+|           id_pedido|  produto|valor_unitario|quantidade|       data_criacao| uf|id_cliente|data_pedido|
++--------------------+---------+--------------+----------+-------------------+---+----------+-----------+
+|a3476cd9-b8b6-4fa...|   TABLET|          1100|         2|2024-01-01T07:00:58| TO|     13417| 2024-01-01|
+|d2729a43-68a7-41c...|GELADEIRA|          2000|         3|2024-01-01T04:46:53| SE|     12762| 2024-01-01|
+|e96a5477-cf3f-4e0...| SOUNDBAR|           900|         3|2024-01-01T05:57:58| AP|      6716| 2024-01-01|
+|2a5bf8db-0695-4ed...|       TV|          2500|         3|2024-01-01T09:25:07| PI|     13112| 2024-01-01|
+|b47080eb-675f-44a...|   TABLET|          1100|         2|2024-01-01T20:10:45| PR|      9190| 2024-01-01|
++--------------------+---------+--------------+----------+-------------------+---+----------+-----------+
+only showing top 5 rows
+``` 
+
+```
+dfPed.printSchema()
 ```
 
-Analise atentamente os resultados. 
-
-9. Para sair do spark-shell digite:
+Output esperado:
 ```
-sys.exit
+>>> dfPed.printSchema()
+root
+ |-- id_pedido: string (nullable = true)
+ |-- produto: string (nullable = true)
+ |-- valor_unitario: long (nullable = true)
+ |-- quantidade: long (nullable = true)
+ |-- data_criacao: string (nullable = true)
+ |-- uf: string (nullable = true)
+ |-- id_cliente: long (nullable = true)
+ |-- data_pedido: string (nullable = true)
+
+```
+
+8. Calculando os top 10 clientes
+```
+dfTop10 = spark.sql(
+ """SELECT cli.nome, cli.email, sum(ped.quantidade * ped.valor_unitario) total
+    FROM clientes_parquet cli
+    INNER JOIN pedidos_parquet ped on ped.id_cliente = cli.id
+    WHERE ped.data_pedido = '2024-01-01'
+    GROUP BY cli.nome, cli.email
+    ORDER BY sum(ped.quantidade * ped.valor_unitario) DESC
+    LIMIT 10""")
+```
+
+```
+dfTop10.show(10)
+```
+
+Output esperado:
+```
+>>> dfTop10.show(10)
++-----------------+--------------------+-----+                                  
+|             nome|               email|total|
++-----------------+--------------------+-----+
+|     Marina Silva|marina.silva@exam...|11700|
+|Leandro das Neves|leandro.das.neves...| 9500|
+|    Clarice Porto|clarice.porto@exa...| 9500|
+|       Levi Souza|levi.souza@exampl...| 8700|
+|Ana Lívia Ribeiro|ana.livia.ribeiro...| 8500|
+| Gabrielly Aragão|gabrielly.aragao@...| 7800|
+|   Caroline Pinto|caroline.pinto@ex...| 7500|
+|   Bruno Nogueira|bruno.nogueira@ex...| 7500|
+|   Joaquim Vieira|joaquim.vieira@ex...| 7500|
+|     Júlia Fogaça|julia.fogaca@exam...| 7500|
++-----------------+--------------------+-----+
+```
+
+9. Exportando os resultados
+```
+dfPed.write.format("json").mode("overwrite").save("s3://lab-data-eng-202402-p40041/output/pedidos/")
+```
+
+```
+dfTop10.write.format("json").mode("overwrite").save("s3://lab-data-eng-202402-p40041/output/top10/")
+```
+
+Verifique os arquivos no bucket.
+
+10. Para sair do pyspark digite:
+```
+quit()
 ```
 
 ### Parabéns!
-Se você chegou até aqui então criou e ativou seu cluster EMR com sucesso e fez testes utilizando linguagem Scala. 
+Se você chegou até aqui então criou e ativou seu cluster EMR com sucesso e fez testes utilizando linguagem Python. 
