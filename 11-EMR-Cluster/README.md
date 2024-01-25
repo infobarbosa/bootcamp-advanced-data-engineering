@@ -78,9 +78,11 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 >
 > #### Via terminal **Cloud9**
 > 1. Crie uma variável de ambiente com o ID do security group
-```
-export EMR_MASTER_SG=$(aws ec2 describe-security-groups --filter Name=group-name,Values=ElasticMapReduce-master --query 'SecurityGroups[*].[GroupId]' --output text)
-```
+  ```
+  export EMR_MASTER_SG=$(aws ec2 describe-security-groups \
+    --filter Name=group-name,Values=ElasticMapReduce-master \
+    --query 'SecurityGroups[*].[GroupId]' --output text)
+  ```
 > 2. Adicione a regra ao security group
 ```
 aws ec2 authorize-security-group-ingress \
