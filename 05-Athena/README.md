@@ -18,7 +18,7 @@ O objetivo desta sessão é executar queries nas tabelas baseadas em arquivos cs
     > - Clique em **Edit settings** (Editar configurações);
     > - Na tela **Manage settings** (Gerenciar configurações), para o campo **Query result location and encryption** clique no botão **Browse S3** (Navegue pelo S3)
     > - Na tela **Choose S3 data set** clique no link do bucket criado neste laboratório;
-    > - Clique no radio button correspondente à pasta **results** e então clique no botão **Choose**;
+    > - Clique no radio button correspondente à pasta `results` e então clique no botão **Choose**;
     > - De volta à tela **Manage settings** clique no botão **Save**.
     > - Clique novamente em **Query editor** no painel lateral esquerdo;
 
