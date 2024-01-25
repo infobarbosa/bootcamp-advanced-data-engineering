@@ -6,6 +6,25 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 # 03 - Bases de dados
 
 O objetivo desta sessão é fazer o upload dos datasets (bases de dados) necessários à execução do laboratório.
+São basicamente duas bases: Clientes e Pedidos.
+Exemplos:
+Clientes
+```
+id;nome;data_nasc;cpf;email
+1;Isabelly Barbosa;1963-08-15;137.064.289-03;isabelly.barbosa@example.com
+2;Larissa Fogaça;1933-09-29;703.685.294-10;larissa.fogaca@example.com
+3;João Gabriel Silveira;1958-05-27;520.179.643-52;joao.gabriel.silveira@example.com
+4;Pedro Lucas Nascimento;1950-08-23;274.351.896-00;pedro.lucas.nascimento@example.com
+```
+
+Pedidos
+```
+id_pedido;produto;valor_unitario;quantidade;data_criacao;uf;id_cliente
+7d8120cd-85a5-44ff-b8fb-3541c9bec2cb;CELULAR;1000;2;2024-01-01T15:44:46;SP;9990
+3218fd00-78d3-4621-b846-6e17995ced5c;COMPUTADOR;700;2;2024-01-01T20:25:07;PR;11392
+8a30705d-1e2b-4a43-8c98-012c2e942ed6;HOMETHEATER;500;2;2024-01-01T15:32:23;SE;1761
+ac4bb780-ba30-4696-9f4d-3b1cec29185c;SOUNDBAR;900;1;2024-01-01T19:53:50;AP;8914
+```
 
 ## Bases de Clientes
 1. Certifique-se que está no diretório do projeto:
