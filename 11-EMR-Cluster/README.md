@@ -53,7 +53,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la labsuse
 17. Role a tela até a sessão **Identity and Access Management (IAM) roles**;
 18. Em **Amazon EMR service role**, selecione **Choose an existing service role**;
 19. Em **Service role**, selecione **EMR_DefaultRole**;
-20. Em **EC2 instance profile for Amazon EMR**, escolha **Choose an existing instance profile;
+20. Em **EC2 instance profile for Amazon EMR**, escolha **Choose an existing instance profile**;
 21. Em **Instance profile**, selecione ** **EMR_EC2_DefaultRole**;
 21. Clique em **Create cluster**;
 
