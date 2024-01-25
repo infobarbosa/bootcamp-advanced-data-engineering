@@ -12,7 +12,7 @@ def get_s3_bucket():
     return s3_bucket
 
 def set_s3_bucket():
-    print("Definindo a variável s3_bucket que vamos utilizar ao longo do código")
+    print("Definindo a variável s3_bucket que vamos utilizar para armazenar os resultados das consultas.")
     s3_client = boto3.client('s3')
     response = s3_client.list_buckets()
 
