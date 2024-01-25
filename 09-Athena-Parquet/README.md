@@ -3,10 +3,10 @@ Author: Prof. Barbosa<br>
 Contact: infobarbosa@gmail.com<br>
 Github: [infobarbosa](https://github.com/infobarbosa)
 
-## 07 - Athena (Parquet)
+## 09 - Athena (De novo!)
 
-O objetivo desta sessão é executar queries na tabela `pagamentos_parquet` e confrontar o tempo de execução das consultas com o observado no lab **05-Athena (CSV)**.
-Este lab é exatamente igual ao lab 05. A diferente está apenas no tempo de execução das consultas.
+O objetivo desta sessão é executar queries nas tabelas `parquet` e confrontar o tempo de execução das consultas com o observado no lab **05-Athena (CSV)**.
+Este lab é exatamente igual ao lab 05. A diferença está apenas no tempo de execução das consultas.
 
 ### Primeira consulta
 1. Na barra de pesquisa, busque por **Athena**.
@@ -19,18 +19,16 @@ Este lab é exatamente igual ao lab 05. A diferente está apenas no tempo de exe
     > - Clique em **Edit settings** (Editar configurações);
     > - Na tela **Manage settings** (Gerenciar configurações), para o campo **Query result location and encryption** clique no botão **Browse S3** (Navegue pelo S3)
     > - Na tela **Choose S3 data set** clique no link do bucket criado neste laboratório;
-    > - Clique no radio button correspondente à pasta **results** e então clique no botão **Choose**;
+    > - Clique no radio button correspondente à pasta `results` e então clique no botão **Choose**;
     > - De volta à tela **Manage settings** clique no botão **Save**.
     > - Clique novamente em **Query editor** no painel lateral esquerdo;
 
 3. No editor que estará disponível digite a seguinte consulta SQL:
     ```
-    SELECT * FROM "ecommerce"."pagamentos_parquet" limit 10;
+    SELECT * FROM "ecommerce"."pedidos_parquet" limit 10;
     ```
 4. Clique no botão **Run**
 5. Verifique o resultado. Perceba a estrutura da tabela e seus dados.
-
-### Consultas analíticas
 
 ### Consultas analíticas
 
