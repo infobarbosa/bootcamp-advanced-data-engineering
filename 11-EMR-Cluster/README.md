@@ -40,22 +40,23 @@ O objetivo deste exercício é ativar um cluster EMR e executar algumas operaç�
 4. Em **Amazon EMR release**, selecione **emr-6.15.0**;
 5. Em **Application bundle**, selecione **Spark Interactive**;
 6. Abaixo é exibida uma lista de componentes. Mantenha inalterado;
-7. Na sessão **Cluster configuration**, selecione **Uniform instance groups**;
-8. Na sessão **Instance groups section** selecione **m4.large** para **Primary**, **Core** e **Task 1 of 1**;
-9. Role a tela até a sessão **Networking**;
-10. Em **Virtual private (VPC)**, verifique a VPC pré-selecionada, mas mantenha inalterado;
-11. Em **Subnet**, verifique a subnet pré-selecionada, mas mantenha inalterada;
-12. Role a tela até a sessão **Cluster termination**;
-13. Em **Cluster termination**, selecione **Manually terminate cluster**;
-14. Role a tela até a sessão **Security configuration and EC2 key pair**;
-15. Em **Security configuration**, deixe em branco;
-16. Em **Amazon EC2 key pair for SSH to the cluster**, escolha **vockey**;
-17. Role a tela até a sessão **Identity and Access Management (IAM) roles**;
-18. Em **Amazon EMR service role**, selecione **Choose an existing service role**;
-19. Em **Service role**, selecione **EMR_DefaultRole**;
-20. Em **EC2 instance profile for Amazon EMR**, escolha **Choose an existing instance profile**;
-21. Em **Instance profile**, selecione **EMR_EC2_DefaultRole**;
-21. Clique em **Create cluster**;
+7. Em **AWS Glue Data Catalog settings**, marque **Use for Spark table metadata**;
+8. Na sessão **Cluster configuration**, selecione **Uniform instance groups**;
+9. Na sessão **Instance groups section** selecione **m4.large** para **Primary**, **Core** e **Task 1 of 1**;
+10. Role a tela até a sessão **Networking**;
+11. Em **Virtual private (VPC)**, verifique a VPC pré-selecionada, mas mantenha inalterado;
+12. Em **Subnet**, verifique a subnet pré-selecionada, mas mantenha inalterada;
+13. Role a tela até a sessão **Cluster termination**;
+14. Em **Cluster termination**, selecione **Manually terminate cluster**;
+15. Role a tela até a sessão **Security configuration and EC2 key pair**;
+16. Em **Security configuration**, deixe em branco;
+17. Em **Amazon EC2 key pair for SSH to the cluster**, escolha **vockey**;
+18. Role a tela até a sessão **Identity and Access Management (IAM) roles**;
+19. Em **Amazon EMR service role**, selecione **Choose an existing service role**;
+20. Em **Service role**, selecione **EMR_DefaultRole**;
+21. Em **EC2 instance profile for Amazon EMR**, escolha **Choose an existing instance profile**;
+22. Em **Instance profile**, selecione **EMR_EC2_DefaultRole**;
+23. Clique em **Create cluster**;
 
 A criação e ativação do cluster leva em torno de 10 minutos.
 
