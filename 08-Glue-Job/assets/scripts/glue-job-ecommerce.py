@@ -15,6 +15,7 @@ sc = SparkContext.getOrCreate()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 job = Job(glueContext)
+print("Contexto do Glue criado com sucesso")
 print("Definindo a variável s3_bucket que vamos utilizar ao longo do código")
 s3_bucket = ""
 s3_client = boto3.client('s3')
@@ -33,6 +34,11 @@ dfCli = dyfClientes.toDF()
 dfCli.show(5)
 dfPed = dyfPedidos.toDF()
 dfPed.show(5)
+# Primeiro vamos limpar a pasta destino
+response = s3_client.list_objects_v2(Bucket=s3_bucket, Prefix='stage/ecommerce/clientes/')
+
+for object in response['Contents']:
+    out = s3_client.delete_object(Bucket=s3_bucket, Key=object['Key'])
 s3output = glueContext.getSink(
   path="s3://" + s3_bucket + "/stage/ecommerce/clientes/",
   connection_type="s3",
@@ -47,6 +53,11 @@ s3output.setCatalogInfo(
 )
 s3output.setFormat("glueparquet")
 s3output.writeFrame(dyfClientes)
+# Primeiro vamos limpar a pasta destino
+response = s3_client.list_objects_v2(Bucket=s3_bucket, Prefix='stage/ecommerce/pedidos/')
+
+for object in response['Contents']:
+    out = s3_client.delete_object(Bucket=s3_bucket, Key=object['Key'])
 s3output = glueContext.getSink(
   path="s3://" + s3_bucket + "/stage/ecommerce/pedidos/",
   connection_type="s3",
@@ -108,6 +119,13 @@ dfTop10 = dfClientesPedidos.groupBy("id_cliente", "nome", "email") \
         .agg(sum("valor_total").alias("tot")) \
         .sort(desc("tot")) \
         .limit(10)
+# Primeiro vamos limpar a pasta destino
+response = s3_client.list_objects_v2(Bucket=s3_bucket, Prefix='analytics/ecommerce/relatorios/top10pedidosdia/')
+
+for object in response['Contents']:
+    out = s3_client.delete_object(Bucket=s3_bucket, Key=object['Key'])
+dyfTop10 = DynamicFrame.fromDF(dfTop10, glueContext, "dyfTop10")
+
 s3output = glueContext.getSink(
   path="s3://" + s3_bucket + "/analytics/ecommerce/relatorios/top10pedidosdia/",
   connection_type="s3",
@@ -121,5 +139,5 @@ s3output.setCatalogInfo(
   catalogDatabase="ecommerce", catalogTableName="top_10_pedidos_dia"
 )
 s3output.setFormat("glueparquet")
-s3output.writeFrame(dfTop10)
+s3output.writeFrame(dyfTop10)
 job.commit()
