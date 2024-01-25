@@ -94,7 +94,7 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 >```
 
 
-###### Vamos começar!
+### Vamos começar!
 1. Abra o terminal (shell) do **Cloud9**;
 
 2. Obtenha o ID do cluster EMR via terminal **Cloud9**
