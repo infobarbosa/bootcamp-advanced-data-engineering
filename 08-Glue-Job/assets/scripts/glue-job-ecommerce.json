@@ -1,13 +1,11 @@
 {    
-    "Name": "ecommerce_glue_job2",
+    "Name": "ecommerce_glue_job",
     "Description": "glue job de ingestão de dados do ecommerce",
-    "Role": "arn:aws:iam::071830242630:role/LabRole",
     "ExecutionProperty": {
         "MaxConcurrentRuns": 1
     },
     "Command": {
         "Name": "glueetl",
-        "ScriptLocation": "s3://lab-data-eng-202402-p40041/scripts/glue-job-ecommerce.py",
         "PythonVersion": "3"
     },
     "DefaultArguments": {
@@ -16,8 +14,7 @@
         "--spark-event-logs-path": "s3://lab-data-eng-202402-p40041/spark-ui/",
         "--enable-job-insights": "true",
         "--enable-continuous-cloudwatch-log": "true",
-        "--job-language": "python",
-        "--TempDir": "s3://lab-data-eng-202402-p40041/temp"
+        "--job-language": "python"
     },
     "MaxRetries": 0,
     "Timeout": 2880,
