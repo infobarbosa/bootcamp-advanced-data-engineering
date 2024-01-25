@@ -17,19 +17,19 @@ O objetivo deste exercício é ativar um cluster EMR e executar algumas operaç�
 > Clique em **AWS Details** e na sequência em **Download PEM**.<br> 
 > Arraste então o arquivo `labsuser.pem` da sua máquina para a pasta do projeto no **AWS Cloud9**.<br>
 > Execute o comando:
-```
-chmod 600 labsuser.pem 
-```
+>```
+>   chmod 600 labsuser.pem 
+>```
 > Liste o arquivo para checar as permissões:
-```
-ls -la
-```
-
-Output esperado:
-```
-voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la labsuser.pem
--rw------- 1 ubuntu ubuntu 1678 Jan 20 13:09 labsuser.pem 
-```
+>```
+>   ls -la
+>```
+>
+> Output esperado:
+>```
+>   voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la labsuser.pem
+>   -rw------- 1 ubuntu ubuntu 1678 Jan 20 13:09 labsuser.pem 
+>```
 
 ## Criação do cluster
 
