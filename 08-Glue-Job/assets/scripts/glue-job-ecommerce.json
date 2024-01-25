@@ -1,32 +1,30 @@
-{
-    "Job": {
-        "Name": "ecommerce_glue_job2",
-        "Description": "glue job de ingestão de dados do ecommerce",
-        "Role": "arn:aws:iam::071830242630:role/LabRole",
-        "ExecutionProperty": {
-            "MaxConcurrentRuns": 1
-        },
-        "Command": {
-            "Name": "glueetl",
-            "ScriptLocation": "s3://lab-data-eng-202402-p40041/scripts/glue-job-ecommerce.py",
-            "PythonVersion": "3"
-        },
-        "DefaultArguments": {
-            "--enable-metrics": "true",
-            "--enable-spark-ui": "true",
-            "--spark-event-logs-path": "s3://lab-data-eng-202402-p40041/spark-ui/",
-            "--enable-job-insights": "true",
-            "--enable-continuous-cloudwatch-log": "true",
-            "--job-language": "python",
-            "--TempDir": "s3://lab-data-eng-202402-p40041/temp"
-        },
-        "MaxRetries": 0,
-        "AllocatedCapacity": 2,
-        "Timeout": 2880,
-        "MaxCapacity": 2.0,
-        "WorkerType": "G.1X",
-        "NumberOfWorkers": 2,
-        "GlueVersion": "4.0",
-        "ExecutionClass": "STANDARD"
-    }
+{    
+    "Name": "ecommerce_glue_job2",
+    "Description": "glue job de ingestão de dados do ecommerce",
+    "Role": "arn:aws:iam::071830242630:role/LabRole",
+    "ExecutionProperty": {
+        "MaxConcurrentRuns": 1
+    },
+    "Command": {
+        "Name": "glueetl",
+        "ScriptLocation": "s3://lab-data-eng-202402-p40041/scripts/glue-job-ecommerce.py",
+        "PythonVersion": "3"
+    },
+    "DefaultArguments": {
+        "--enable-metrics": "true",
+        "--enable-spark-ui": "true",
+        "--spark-event-logs-path": "s3://lab-data-eng-202402-p40041/spark-ui/",
+        "--enable-job-insights": "true",
+        "--enable-continuous-cloudwatch-log": "true",
+        "--job-language": "python",
+        "--TempDir": "s3://lab-data-eng-202402-p40041/temp"
+    },
+    "MaxRetries": 0,
+    "AllocatedCapacity": 2,
+    "Timeout": 2880,
+    "MaxCapacity": 2.0,
+    "WorkerType": "G.1X",
+    "NumberOfWorkers": 2,
+    "GlueVersion": "4.0",
+    "ExecutionClass": "STANDARD"
 }
