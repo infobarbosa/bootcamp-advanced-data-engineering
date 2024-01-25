@@ -7,8 +7,8 @@ echo $BUCKET_NAME
 aws s3 cp 08-Glue-Job/assets/scripts/glue-job-ecommerce.py s3://lab-data-eng-202402-p40041/scripts/glue-job-ecommerce.py
 
 # Criando as pastas no S3
-aws s3api put-object --bucket ${bucket_name} --key temp/
-aws s3api put-object --bucket ${bucket_name} --key spark-ui/
+aws s3api put-object --bucket ${BUCKET_NAME} --key temp/
+aws s3api put-object --bucket ${BUCKET_NAME} --key spark-ui/
 
 # Criando o job
 aws glue create-job \
