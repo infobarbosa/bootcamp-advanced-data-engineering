@@ -15,7 +15,15 @@ aws glue create-job \
     --name ecommerce_glue_job \
     --role LabRole \
     --command Name=glueetl,ScriptLocation=s3://${BUCKET_NAME}/scripts/glue-job-ecommerce.py \
-    --default-arguments '{"--TempDir": "s3://'"${BUCKET_NAME}"'/temp", "--spark-event-logs-path": "s3://'"${BUCKET_NAME}"'/spark-ui/"}' \
+    --default-arguments '{"--TempDir": "s3://'"${BUCKET_NAME}"'/temp","--enable-spark-ui": "true","--spark-event-logs-path": "s3://'"${BUCKET_NAME}"'/spark-ui/","--enable-metrics":"true","--enable-job-insights":"true","--enable-continuous-cloudwatch-log":"true","--job-language":"python"}' \
     --cli-input-json "file://08-Glue-Job/assets/scripts/glue-job-ecommerce.json"
 
 
+# Executando o job
+aws glue start-job-run --job-name ecommerce_glue_job
+
+# Monitorando o job
+aws glue get-job-runs --job-name ecommerce_glue_job
+
+# interrompendo o job
+aws glue stop-job-run --job-name ecommerce_glue_job --run-id 00000
