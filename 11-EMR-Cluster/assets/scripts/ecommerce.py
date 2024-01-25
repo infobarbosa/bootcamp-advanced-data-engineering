@@ -12,3 +12,5 @@ spark = SparkSession\
 spark.catalog.setCurrentDatabase("ecommerce")
 df = spark.sql("select * from clientes")
 df.show(5)
+
+df.write.format("json").mode("overwrite").save("s3://lab-data-eng-202402-p40041/output/")
