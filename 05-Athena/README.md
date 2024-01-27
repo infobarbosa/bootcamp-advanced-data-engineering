@@ -46,20 +46,20 @@ Primeiro, vamos contar a **quantidade de registros** há nas tabelas
 Quantos clientes temos na base?
 ```
 SELECT count(1) qtt
-FROM "ecommerce"."clientes"
+FROM "ecommerce"."tb_raw_clientes"
 ```
 
 E quantos pedidos?
 ```
 SELECT count(1) qtt
-FROM "ecommerce"."pedidos"
+FROM "ecommerce"."tb_raw_pedidos"
 ```
 
 Agora vamos contar a **quantidade de clientes distintos** que realizaram pedidos no dia **02/01/2024**
 ```
 SELECT count(distinct id_cliente) qtt_clientes
       ,count(1) qtt_registros
-FROM "ecommerce"."pedidos"
+FROM "ecommerce"."tb_raw_pedidos"
 WHERE cast(data_criacao as date) = date_parse('2024-01-02', '%Y-%m-%d')
 ```
 
@@ -68,7 +68,7 @@ WHERE cast(data_criacao as date) = date_parse('2024-01-02', '%Y-%m-%d')
 Agova vamos somar o **valor total** dos pedidos de **2024**:
 ```
 SELECT sum(quantidade * valor_unitario) vl_total
-FROM "ecommerce"."pedidos"
+FROM "ecommerce"."tb_raw_pedidos"
 WHERE year(data_criacao) = 2024
 ```
 
@@ -77,7 +77,7 @@ WHERE year(data_criacao) = 2024
 
 ```
 SELECT format('%,.2f',sum(quantidade * valor_unitario)) vl_total
-FROM "ecommerce"."pedidos"
+FROM "ecommerce"."tb_raw_pedidos"
 WHERE year(data_criacao) = 2024
 ```
 
@@ -85,7 +85,7 @@ Vamos analisar o **valor total pago agrupado por UF**:
 ```
 SELECT uf
     ,format('%,.2f',sum(quantidade * valor_unitario)) vl_total
-FROM "ecommerce"."pedidos"
+FROM "ecommerce"."tb_raw_pedidos"
 GROUP BY ROLLUP (uf)
 ORDER BY sum(quantidade * valor_unitario) DESC
 ```
@@ -96,7 +96,7 @@ Agora vamos verificar os top 10 clientes em valor de vendas:
 WITH top_clientes as (
     SELECT id_cliente
         ,format('%,.2f',sum(quantidade * valor_unitario)) vl_total
-    FROM "ecommerce"."pedidos"
+    FROM "ecommerce"."tb_raw_pedidos"
     GROUP BY id_cliente
     ORDER BY sum(quantidade * valor_unitario) DESC
     LIMIT 10
