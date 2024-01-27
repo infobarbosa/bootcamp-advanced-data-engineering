@@ -15,7 +15,7 @@ Vamos priorizar o uso do **terminal com AWS CLI** neste laboratório.
 ## Via terminal com AWS CLI
 
 ### Passo a passo
-#### Variável de ambiente `BUCKET_NAME`
+#### 1. Crie a variável de ambiente `BUCKET_NAME`
 
 > ### Atenção!
 > - Substitua [ANOMÊS] pelo ano e mês correntes no formato AAAAMM. 
@@ -29,7 +29,7 @@ Por exemplo:
 ```
 export BUCKET_NAME=lab-data-eng-202312-p4004
 ```
-#### Criando o bucket
+#### 2. Crie o bucket
 ```
 aws s3api create-bucket --bucket ${BUCKET_NAME}
 ```
@@ -43,7 +43,20 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api crea
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-#### Criando a estrutura de pastas
+#### 3. Verifique se o bucket foi criado corretamente
+```
+aws s3 ls
+```
+
+Output esperado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3 ls
+2024-01-27 20:56:32 lab-data-eng-202402-p4004
+```
+
+#### 4. Crie a estrutura de pastas
+
+###### Pasta `raw`
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key raw/
 ```
@@ -58,6 +71,8 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api put-
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
 ```
 
+###### Pasta `ecommerce`
+
 Crie a pasta `ecommerce` dentro da pasta `raw`:
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key raw/ecommerce/
@@ -65,20 +80,31 @@ aws s3api put-object --bucket ${BUCKET_NAME} --key raw/ecommerce/
 
 Crie a mesma estrutura para as demais pastas:
 
+###### Pasta `stage`
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key stage/
 ```
 
+###### Pasta `analytics`
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key analytics/
 ```
 
+###### Pasta `scripts`
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key scripts/
 ```
 
+###### Pasta `results`
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key results/
+```
+
+Pronto! A estrutura das principais pastas que vamos usar neste laboratório está criada.<br>
+
+###### Conferindo tudo
+```
+aws s3 ls ${BUCKET_NAME}
 ```
 
 ---
