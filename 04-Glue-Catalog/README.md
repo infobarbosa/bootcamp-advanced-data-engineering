@@ -97,9 +97,9 @@ aws glue get-tables --database-name 'ecommerce'
 
 Caso precise eliminar alguma tabela, você pode fazer isso via terminal com o seguinte comando:
 ```
-aws glue delete-table --database-name ecommerce --name pedidos
+aws glue delete-table --database-name ecommerce --name tb_raw_pedidos
 ```
 
 ```
-aws glue delete-table --database-name ecommerce --name clientes
+aws glue delete-table --database-name ecommerce --name tb_raw_clientes
 ```
