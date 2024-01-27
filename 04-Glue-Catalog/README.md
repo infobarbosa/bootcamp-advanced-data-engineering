@@ -3,7 +3,7 @@ Author: Prof. Barbosa<br>
 Contact: infobarbosa@gmail.com<br>
 Github: [infobarbosa](https://github.com/infobarbosa)
 
-# 04 - Glue 
+# 04 - Glue Catalog
 
 O objetivo desta sessão é criar o banco de dados `ecommerce` no Glue Catalog.<br>
 Há 3 opções para criação: via AWS CLI, via console AWS e via CloudFormation.<br>
