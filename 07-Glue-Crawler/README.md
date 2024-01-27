@@ -62,6 +62,10 @@ Se tudo ocorreu como esperado, o crawler terá criado uma tabela `tb_crawler_cli
 
 
 ## Pedidos
+> Atenção!<br>
+> Este procedimento **não** é exatamente igual ao utilizado para a tabela `tb_crawler_clientes`.
+
+Diferente do que fizemos no crawler `crawler_clientes`, neste exercício pretende demonstrar como o crawler `crawler_pedidos` automatiza o processo de adição de partições na tabela `pedidos_part`.
 
 ### Crie o crawler `crawler_pedidos`
 1. No console AWS, digite `glue` na barra de pesquisa e então clique em **AWS Glue**;
@@ -74,7 +78,7 @@ Se tudo ocorreu como esperado, o crawler terá criado uma tabela `tb_crawler_cli
 8. Na sessão **Glue tables**, clique em **Add tables**;
 9. Na tela **Add Glue tables**, no combo **Database** escolha `ecommerce`;
 10. No combo **Tables** selecione apenas a tabela `pedidos_part`;
-    > Atenção! **Não** confundir com a tabela `pedidos`.
+    > Atenção! **Não** confundir com a tabela `tb_raw_pedidos`.
 11. Clique no botão **Confirm**;
 12. De volta à tela **Choose data sources and classifiers**, clique em **Next**;
 13. Na tela **Configure security settings**, na sessão **IAM role**, abra o combo **Existing IAM role** e escolha `LabRole`;
