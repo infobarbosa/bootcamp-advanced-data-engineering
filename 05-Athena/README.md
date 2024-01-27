@@ -28,13 +28,13 @@ Você pode encontrar mais informações sobre o AWS Athena na [documentação](h
 
 3. No editor que estará disponível digite a seguinte consulta SQL:
     ```
-    SELECT * FROM "ecommerce"."clientes" limit 10;
+    SELECT * FROM "ecommerce"."tb_raw_clientes" limit 10;
     ```
 4. Clique no botão **Run**;
 5. Verifique o resultado. Perceba a estrutura da tabela e seus dados.
 6. Faça o mesmo para a tabela `pedidos`:
     ```
-    SELECT * FROM "ecommerce"."pedidos" limit 10;
+    SELECT * FROM "ecommerce"."tb_raw_pedidos" limit 10;
     ```
 
 ### Consultas analíticas
