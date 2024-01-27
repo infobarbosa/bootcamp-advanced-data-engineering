@@ -15,10 +15,10 @@ Passo-a-passo:
 4. Crie o Glue Crawler `pagmentos_crawler`
     > Utilize o conhecimento adquirido no exercício **05-Glue-Crawler**
     > O database será o `bolsafamilia`
-    > O nome da tabela será `pedidos_raw`
+    > O nome da tabela será `pagamentos_raw`
     > A role utilizada será `LabRole`
-5. Verifique os metadados da tabela `pedidos_raw` 
-6. Faça consultas na tabela `pedidos_raw` via AWS Athena:
+5. Verifique os metadados da tabela `pagamentos_raw` 
+6. Faça consultas na tabela `pagamentos_raw` via AWS Athena:
 
 6.a. Primeiro, vamos contar a **quantidade de registros** há na tabela
 ```
