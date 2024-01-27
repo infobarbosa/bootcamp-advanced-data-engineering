@@ -8,7 +8,7 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 O objetivo desta sessão é criar o banco de dados `ecommerce` no Glue Catalog.<br>
 Há 3 opções para criação: via AWS CLI, via console AWS e via CloudFormation.
 
-## Via terminal Cloud9
+## Via terminal com AWS CLI
 
 ### Database `ecommerce`
 1. Execute o comando a seguir no terminal:
@@ -82,6 +82,8 @@ aws glue get-tables --database-name 'ecommerce'
 ```
 > Digite `Q` (quit) para sair do prompt do comando acima.
 
+---
+
 ## [OPCIONAL] Via console AWS
 
 1. No console AWS, acesse a barra de pesquisa e busque por Glue;
@@ -89,6 +91,8 @@ aws glue get-tables --database-name 'ecommerce'
 3. Na tela que abrir clique em **Add database**;
 4. No campo **Name** informe `ecommerce`;
 5. No campo **Description** informe `Banco de dados da nossa empresa fictícia de e-commerce`.
+
+---
 
 ## [OPCIONAL] Via CloudFormation
 
@@ -104,7 +108,6 @@ Execute o script cloudformation:
 ```
 aws cloudformation create-stack --stack-name database-ecommerce --template-body file://04-Glue-Catalog/assets/scripts/database.cf.yml --capabilities CAPABILITY_NAMED_IAM
 ```
-
 
 ---
 
