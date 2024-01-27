@@ -10,12 +10,15 @@ Passo-a-passo:
 1. Crie a pasta `raw/bolsafamilia/pagamentos` no bucket S3 criado neste bootcamp
     - Utilize o conhecimento adquirido no exercício **02-Bucket-S3**;
     - Perceba que criaremos **apenas o database**, sem tabelas.
-2. Faça o upload dos arquivos `202303_NovoBolsaFamilia_[UF].csv.gz` para o bucket no S3 na pasta `raw/bolsafamilia/pagamentos`.
+2. Faça o upload dos arquivos `202303_NovoBolsaFamilia_[UF].csv.gz` para o bucket no S3 na pasta `raw/bolsafamilia/pagamentos`;
     - Os arquivos estão na pasta `20-Desafio/assets/data`;
-    - Utilize o conhecimento adquirido no exercício **02-Bucket-S3**.
+    - Utilize o conhecimento adquirido no exercício **03-Datasets**.
+    - Não esqueça de exportar a variável de ambiente BUCKET_NAME;
+    - Utilize o comando a seguir para o upload:
     ```
     aws s3 cp 20-Desafio/assets/data/ s3://${BUCKET_NAME}/raw/bolsafamilia/pagamentos/ --recursive --exclude "*" --include "202311_NovoBolsaFamilia_*.csv.gz"
     ```
+    - Não esqueça de conferir se todos os arquivos foram carregados corretamente na pasta `raw/bolsafamilia/pagamentos`.
 
 3. Crie o database `bolsafamilia` no **Glue Catalog**;
     - Utilize o conhecimento adquirido no exercício **04-Glue-Catalog**.
