@@ -79,6 +79,10 @@ aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Ca
 aws glue get-tables --database-name 'ecommerce'  --query "TableList[].Name"
 ```
 
+```
+aws glue get-tables --database-name 'ecommerce'  --query "TableList[].StorageDescriptor.Location"
+```
+
 8. [OPCIONAL] Caso você queira ver mais detalhes das tabelas criadas:
 ```
 aws glue get-tables --database-name 'ecommerce'
