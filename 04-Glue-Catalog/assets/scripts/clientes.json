@@ -1,4 +1,4 @@
-{"Name":"clientes", "StorageDescriptor":{ 
+{"Name":"tb_raw_clientes", "StorageDescriptor":{ 
     "Columns":[
         { "Name":"id", "Type":"int" }, 
         { "Name":"nome", "Type":"string" }, 

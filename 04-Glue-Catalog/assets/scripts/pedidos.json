@@ -1,4 +1,4 @@
-{"Name":"pedidos", "StorageDescriptor":{ 
+{"Name":"tb_raw_pedidos", "StorageDescriptor":{ 
     "Columns":[ 
         {"Name":"id_pedido"     , "Type":"string"}, 
         {"Name":"produto"       , "Type":"string"}, 

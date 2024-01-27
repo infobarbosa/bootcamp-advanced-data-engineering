@@ -6,7 +6,8 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 # 04 - Glue 
 
 O objetivo desta sessão é criar o banco de dados `ecommerce` no Glue Catalog.<br>
-Há 3 opções para criação: via AWS CLI, via console AWS e via CloudFormation.
+Há 3 opções para criação: via AWS CLI, via console AWS e via CloudFormation.<br>
+Neste exercício priorizaremos **via terminal com AWS CLI**.
 
 ## Via terminal com AWS CLI
 
@@ -49,7 +50,7 @@ voclabs:~/environment $
 
 > Digite `Q` (quit) para sair do prompt do comando acima.
 
-### Tabela `clientes`
+### Tabela `tb_raw_clientes`
 ### <span style="color : red">ATENÇÃO!</span>
 3. Edite o arquivo `clientes.json` para considerar o bucket criado no exercício **02-Bucket-S3**
 > - O arquivo está na pasta `04-Glue-Catalog/assets/scripts`
@@ -60,7 +61,7 @@ voclabs:~/environment $
 aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Catalog/assets/scripts/clientes.json"
 ```
 
-### Tabela `pedidos`
+### Tabela `tb_raw_pedidos`
 ### <span style="color : red">ATENÇÃO!</span>
 5. Edite o arquivo `pedidos.json` para considerar o bucket criado no exercício **02-Bucket-S3**
 > - O arquivo está na pasta `04-Glue-Catalog/assets/scripts`
@@ -84,34 +85,10 @@ aws glue get-tables --database-name 'ecommerce'
 
 ---
 
-## [OPCIONAL] Via console AWS
+# [OPCIONAL] Eliminando tabelas
+> Atenção!<br>
+> Esta sessão não é necessária para prossegumento do laboratório. Apenas elimine tabelas no caso da criação nos passos anteriores tenha falhado.
 
-1. No console AWS, acesse a barra de pesquisa e busque por Glue;
-2. No painel lateral (esquerda), no menu **Data Catalog** clique em **Databases**;
-3. Na tela que abrir clique em **Add database**;
-4. No campo **Name** informe `ecommerce`;
-5. No campo **Description** informe `Banco de dados da nossa empresa fictícia de e-commerce`.
-
----
-
-## [OPCIONAL] Via CloudFormation
-
-> ### Atenção! 
-> Nesta etapa você precisará editar o arquivo `database.cf.yml`
-
-Validando o script cloudformation:
-```
-aws cloudformation validate-template --template-body file://04-Glue-Catalog/assets/scripts/database.cf.yml
-```
-
-Execute o script cloudformation:
-```
-aws cloudformation create-stack --stack-name database-ecommerce --template-body file://04-Glue-Catalog/assets/scripts/database.cf.yml --capabilities CAPABILITY_NAMED_IAM
-```
-
----
-
-# Eliminando tabelas
 Caso precise eliminar alguma tabela, você pode fazer isso via terminal com o seguinte comando:
 ```
 aws glue delete-table --database-name ecommerce --name pedidos
