@@ -53,7 +53,8 @@ voclabs:~/environment $
 ### Tabela `tb_raw_clientes`
 ### <span style="color : red">ATENÇÃO!</span>
 3. Edite o arquivo `clientes.json` para considerar o bucket criado no exercício **02-Bucket-S3**
-> - O arquivo está na pasta `04-Glue-Catalog/assets/scripts`
+> - O arquivo está na pasta `04-Glue-Catalog/assets/scripts`;
+> - Altere a tag **"Location"** no arquivo com o nome do seu bucket;
 > - Utilize o editor do Cloud9
 
 4. Execute o comando de criação a seguir:
@@ -64,7 +65,8 @@ aws glue create-table --database-name ecommerce --table-input "file://04-Glue-Ca
 ### Tabela `tb_raw_pedidos`
 ### <span style="color : red">ATENÇÃO!</span>
 5. Edite o arquivo `pedidos.json` para considerar o bucket criado no exercício **02-Bucket-S3**
-> - O arquivo está na pasta `04-Glue-Catalog/assets/scripts`
+> - O arquivo está na pasta `04-Glue-Catalog/assets/scripts`;
+> - Altere a tag **"Location"** no arquivo com o nome do seu bucket;
 > - Utilize o editor do Cloud9
 
 6. Execute o comando de criação a seguir:
