@@ -130,5 +130,5 @@ MES_COMPETENCIA MES_REFERENCIA  UF  CODIGO_MUNICIPIO_SIAFI  MUNICIPIO           
 
 8. Crie um Glue Job baseado em notebook
     - Utilize o conhecimento adquirido no exercício **08-Glue-Job**;
-    - Utilize o notebook `desafio.ipynb` disponibilizado na pasta `20-Desafio/assets/notebook/`;
+    - Utilize o notebook `glue-job-desafio.ipynb` disponibilizado na pasta `20-Desafio/assets/notebook/`;
     - Após criar Glue Job no console AWS, siga as instruções contidas no notebook.
