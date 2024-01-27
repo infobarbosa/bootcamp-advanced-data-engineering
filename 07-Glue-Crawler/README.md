@@ -65,7 +65,7 @@ Se tudo ocorreu como esperado, o crawler terá criado uma tabela `tb_crawler_cli
 > Atenção!<br>
 > Este procedimento **não** é exatamente igual ao utilizado para a tabela `tb_crawler_clientes`.
 
-Diferente do que fizemos no crawler `crawler_clientes`, neste exercício pretende demonstrar como o crawler `crawler_pedidos` automatiza o processo de adição de partições na tabela `pedidos_part`.
+Diferente do que fizemos no crawler `crawler_clientes`, este exercício pretende demonstrar como o crawler `crawler_pedidos` automatiza o processo de adição de partições na tabela `pedidos_part`.
 
 ### Crie o crawler `crawler_pedidos`
 1. No console AWS, digite `glue` na barra de pesquisa e então clique em **AWS Glue**;
