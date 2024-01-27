@@ -106,3 +106,10 @@ FROM top_clientes t
 INNER JOIN ecommerce.tb_raw_clientes c on c.id = t.id_cliente;
 
 ```
+
+Quais foram os clientes com maior valor em pedidos?
+
+--- 
+
+## Parabéns!
+Exercício finalizado, você pode prosseguir para a próxima etapa.
