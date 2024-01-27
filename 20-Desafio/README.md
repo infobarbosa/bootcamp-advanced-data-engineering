@@ -94,4 +94,5 @@ Passo-a-passo:
 
 8. Crie um Glue Job baseado em notebook
     - Utilize o conhecimento adquirido no exercício **08-Glue-Job**;
-    - Utilize o notebook `desafio.ipynb` disponibilizado na pasta `20-Desafio/assets/notebook/`. 
+    - Utilize o notebook `desafio.ipynb` disponibilizado na pasta `20-Desafio/assets/notebook/`;
+    - Após criar Glue Job no console AWS, siga as instruções contidas no notebook.
