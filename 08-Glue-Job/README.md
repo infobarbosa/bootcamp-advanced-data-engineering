@@ -22,7 +22,8 @@ O objetivo desta sessão é executar operações de extração, transformação 
 
 A partir desse ponto você deve seguir as instruções contidas no notebook.
 > Atenção!<br>
-> Caso você não tenha familiaridade com o uso de notebooks, leia atentamente as instruções no início do notebook que acabou de abrir.
+> - Caso você não tenha familiaridade com o uso de notebooks, leia atentamente as instruções no início do notebook que acabou de abrir.
+> - Ao término do uso do notebook, clique em **Stop notebook** para evitar cobranças adicionais.
 
 <br>
 
