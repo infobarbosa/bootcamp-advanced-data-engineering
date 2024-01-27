@@ -67,6 +67,7 @@ MES_COMPETENCIA MES_REFERENCIA  UF  CODIGO_MUNICIPIO_SIAFI  MUNICIPIO           
 
 5. Execute o Glue Crawler `crawler_pagamentos`;
 6. Verifique os metadados da tabela `raw_pagamentos`;
+    - Utilize o menu AWS Glue > Tables;
 7. Faça consultas na tabela `raw_pagamentos` via **AWS Athena**:
     -  Utilize o conhecimento adquirido no exercício **05-Athena**.
 
