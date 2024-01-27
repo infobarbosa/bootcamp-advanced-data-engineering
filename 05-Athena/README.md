@@ -7,6 +7,9 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 O objetivo desta sessão é executar queries nas tabelas baseadas em arquivos csv criadas nos exercícios anteriores.
 
+### Referências
+Você pode encontrar mais informações sobre o AWS Athena na [documentação](https://docs.aws.amazon.com/athena/latest/ug/using-athena-sql.html).
+
 ### Primeira consulta
 1. Na barra de pesquisa, busque por **Athena**.
 2. No painel lateral (esquerdo), clique em **Query editor** (Editor de consultas).
