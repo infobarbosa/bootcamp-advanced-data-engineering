@@ -60,6 +60,9 @@ O objetivo deste exercício é ativar um cluster EMR e executar algumas operaç�
 
 A criação e ativação do cluster leva em torno de 10 minutos.
 
+> Importante! No passo 7 indicamos que queremos usar o Glue Catalog como metastore do EMR.<br>
+> Você pode estudar mais sobre isso [aqui](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark-glue.html).
+
 ---
 
 ## Acesso ao cluster
@@ -372,6 +375,15 @@ Verifique os arquivos no bucket.
 10. Para sair do pyspark digite:
 ```
 quit()
+```
+
+## Execução de scripts
+Uma doc completa pode ser encontrada [aqui](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-commandrunner.html#emr-commandrunner-other-uses).
+
+```
+aws emr add-steps \
+--cluster-id j-2AXXXXXXGAPLF \
+--steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,S3://${BUCKET_NAME}/scripts/ecommerce.py]
 ```
 
 ### Parabéns!
