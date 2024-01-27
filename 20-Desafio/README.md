@@ -21,7 +21,7 @@ Os dados podem ser baixados livremente através do [Portal da Transparência](ht
 - Os valores foram convertidos do padrão brasileiro (vírgula decimal) para o americano (ponto decimal);
 - O header (cabeçalho) do arquivo foi tratado retirando acentuações e espaços;
 - O conteúdo da base (valores, municípios e beneficiários) permanece fiel ao disponibilizado pelo **Portal da Transparência**. Ou seja, não foram adicionados, removidos ou alterados registros nem alterado qualquer valor;
-- O projeto utilizados para os tratamentos acima pode ser encontrado [aqui](https://github.com/infobarbosa/bolsafamilia_conversor_utf-8).
+- O projeto utilizado para os tratamentos acima pode ser encontrado [aqui](https://github.com/infobarbosa/bolsafamilia_conversor_utf-8).
 
 Abaixo segue uma pequena amostra do conteúdo de um dos arquivos:
 ```
