@@ -3,7 +3,7 @@ Author: Prof. Barbosa<br>
 Contact: infobarbosa@gmail.com<br>
 Github: [infobarbosa](https://github.com/infobarbosa)
 
-## 06 - Glue ETL
+## 08 - Glue ETL
 
 O objetivo desta sessão é executar operações de extração, transformação e carga (ETL) utilizando o Glue Job
 
