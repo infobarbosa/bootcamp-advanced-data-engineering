@@ -25,6 +25,8 @@ Você será direcionado para a página inicial do S3:
 Preencha as informações desta tela conforme a seguir:
 
 4. **Nome do bucket**: `lab-data-eng-[ANOMÊS]-[NUMERO ALEATORIO]`
+    > **Atenção!**<br>
+    > O nome do bucket sugerido é de extrema importância para a execução deste laboratório.
 
 - Substitua [ANOMÊS] pelo ano e mês correntes no formato AAAAMM. 
 - Substitua [NUMERO ALEATÓRIO] por um número aleatório qualquer. 
