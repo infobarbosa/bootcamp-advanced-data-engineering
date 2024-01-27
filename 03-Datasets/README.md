@@ -108,7 +108,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ pwd
 > Atenção!
 > Caso não esteja no diretório `/home/ubuntu/environment/bootcamp-advanced-data-engineering`, você pode navegar até ele através do comando:
 > ```
-> /home/ubuntu/environment/bootcamp-advanced-data-engineering
+> cd /home/ubuntu/environment/bootcamp-advanced-data-engineering
 > ```
 
 ##### 2. Liste os arquivos disponíveis em `assets\data`
