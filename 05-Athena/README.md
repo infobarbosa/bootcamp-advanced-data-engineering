@@ -11,16 +11,17 @@ O objetivo desta sessão é executar queries nas tabelas baseadas em arquivos cs
 1. Na barra de pesquisa, busque por **Athena**.
 2. No painel lateral (esquerdo), clique em **Query editor** (Editor de consultas).
 
-    > ### Atenção!
-    > Na primeira vez que você acessa o Athena é exibida a seguinte mensagem:
+    ### Atenção!
+    Na primeira vez que você acessa o Athena é exibida a seguinte mensagem:
     > `Before you run your first query, you need to set up a query result location in Amazon S3.`
     > (`Antes de executar sua primeira consulta, é necessário definir um local para o resultado da consulta no Amazon S3.`)
-    > - Clique em **Edit settings** (Editar configurações);
-    > - Na tela **Manage settings** (Gerenciar configurações), para o campo **Query result location and encryption** clique no botão **Browse S3** (Navegue pelo S3)
-    > - Na tela **Choose S3 data set** clique no link do bucket criado neste laboratório;
-    > - Clique no radio button correspondente à pasta `results` e então clique no botão **Choose**;
-    > - De volta à tela **Manage settings** clique no botão **Save**.
-    > - Clique novamente em **Query editor** no painel lateral esquerdo;
+    
+    - Clique em **Edit settings** (Editar configurações);
+    - Na tela **Manage settings** (Gerenciar configurações), para o campo **Query result location and encryption** clique no botão **Browse S3** (Navegue pelo S3)
+    - Na tela **Choose S3 data set** clique no link do bucket criado neste laboratório;
+    - Clique no radio button correspondente à pasta `results` e então clique no botão **Choose**;
+    - De volta à tela **Manage settings** clique no botão **Save**.
+    - Clique novamente em **Query editor** no painel lateral esquerdo;
 
 3. No editor que estará disponível digite a seguinte consulta SQL:
     ```
