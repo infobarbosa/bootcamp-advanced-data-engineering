@@ -8,7 +8,7 @@ O objetivo desse laboratório é promover a prática de pipelines de dados na AW
 Ao final a pessoa deverá ter familiaridade o suficiente para expandir seus estudos nos principais serviços oferecidos pela plataforma.
 
 
-**Alerta Importante: Gerenciamento de Custos na AWS**
+## Alerta Importante! Gerenciamento de Custos na AWS
 
 Este laboratório é baseado na Amazon Web Services (AWS), uma plataforma que cobra com base no uso dos recursos. É crucial que você esteja ciente de que os serviços utilizados neste laboratório podem gerar custos.
 
