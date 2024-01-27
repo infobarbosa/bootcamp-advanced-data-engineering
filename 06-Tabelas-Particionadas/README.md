@@ -11,11 +11,11 @@ O objetivo desta sessão é criar particionar a tabela `pedidos` no Glue Catalog
 
 ### Tabela `pedidos_part`
 
-1. Edite o arquivo `pedidos_part.json` para considerar o bucket criado no exercício **02-Bucket-S3**.
+##### 1. Edite o arquivo `pedidos_part.json` para considerar o bucket criado no exercício **02-Bucket-S3**.
 > - O arquivo se encontra no diretório `06-Tabelas-Particionadas/assets/scripts/`;
 > - Utilize o editor do Cloud9.
 
-2. Crie a variável de ambiente `BUCKET_NAME`
+##### 2. Crie a variável de ambiente `BUCKET_NAME`
 ```
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 ```
@@ -24,17 +24,17 @@ export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab
 echo $BUCKET_NAME
 ```
 
-3. Examine o conteúdo do arquivo `06-Tabelas-Particionadas/assets/scripts/pedidos_part.json` 
+##### 3. Examine o conteúdo do arquivo `06-Tabelas-Particionadas/assets/scripts/pedidos_part.json` 
 > - Perceba o atributo **PartitionKeys** que especifica `data_pedido` como chave de partição.<br>
 > - Ajuste o atributo **Location** com nome do bucket que você criou no exercício **02-Bucket-S3** <br>
 > Ex.: `"Location":"s3://SEU_BUCKET_AQUI/raw/ecommerce/pedidos/part/"`
 
-4. Crie a tabela `pedidos_part`
+##### 4. Crie a tabela `pedidos_part`
 ```
 aws glue create-table --database-name ecommerce --table-input "file://./06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
 ```
 
-5. Verifique se a tabela `pedidos_part` foi criada corretamente:
+##### 5. Verifique se a tabela `pedidos_part` foi criada corretamente:
 ```
 aws glue get-tables --database-name 'ecommerce'  --query "TableList[].Name"
 ```
@@ -49,8 +49,9 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws glue get-t
 ]
 ```
 
-6. Faça o upload de um arquivo para a pasta particionada:
-> Atenção! Perceba que agora estamos fazendo o upload para outra pasta diferente da que utilizamos no exercício **03-Datasets**.<br>
+##### 6. Faça o upload de um arquivo para a pasta particionada:
+> Atenção! <br>
+> Perceba que agora estamos fazendo o upload para outra pasta diferente da que utilizamos no exercício **03-Datasets**.<br>
 > Com este comando nós criaremos duas sub-pastas: `part` e, embaixo desta, `data_pedido=2024-01-01`.
 
 ```
@@ -64,7 +65,7 @@ upload: 03-Datasets/assets/data/pedidos-2024-01-01.csv.gz to s3://lab-data-eng-2
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-7. No **Athena**, abra um editor SQL e execute a seguinte consulta:
+##### 7. No **Athena**, abra um editor SQL e execute a seguinte consulta:
 > Utilize o conhecimento adquirido no exercício **05-Athena**
 
 ```
@@ -78,7 +79,7 @@ Outra maneira de checar a disponibilidade das partições é através do comando
 SHOW PARTITIONS ecommerce.pedidos_part;
 ```
 
-8. Vamos resolver isso via comando `ALTER TABLE .. ADD PARTITION`:
+##### 8. Vamos resolver isso via comando `ALTER TABLE .. ADD PARTITION`:
 
 Ainda no editor SQL do Athena, digite:
 ```
@@ -89,7 +90,7 @@ Este atualiza o catálogo de dados caso detecte novas partições.
 > Para saber mais sobre o comando `ALTER TABLE ADD PARTITION` clique [aqui](https://docs.aws.amazon.com/athena/latest/ug/alter-table-add-partition.html) <br>
 > Outro comando interessante é o `MSCK REPAIR TABLE` que pode ser encontrado [aqui](https://docs.aws.amazon.com/athena/latest/ug/msck-repair-table.html)
 
-9. [OPCIONAL] O comando acima também pode ser executado no terminal Cloud9:
+##### 9. [OPCIONAL] O comando acima também pode ser executado no terminal Cloud9:
 
 ```
 aws athena start-query-execution --query-string "ALTER TABLE ecommerce.pedidos_part ADD PARTITION (data_pedido='2024-01-01')" --result-configuration "OutputLocation=s3://${BUCKET_NAME}/results/"
