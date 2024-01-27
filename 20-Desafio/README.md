@@ -6,7 +6,42 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 # 20 - Desafio
 
 Este desafio tem por objetivo testar seus conhecimentos a partir do que exercitou nos laboratórios anteriores.<br>
-Passo-a-passo:
+
+## Caso de uso
+Vamos utilizar uma base de pagamentos do programa social **Novo Bolsa Família**, do Governo Federal.<br>
+Os dados podem ser baixados livremente através do [Portal da Transparência](https://portaldatransparencia.gov.br/download-de-dados/novo-bolsa-familia).<br>
+
+## O dataset
+    
+- A base de pagamentos será a de Novembro/2023;
+- A base está disponível no diretório `20-Desafio/assets/data`;
+- A base foi convertida de compressão `zip` para `gzip`;
+- A base foi particionada por UF;
+- O character set da base foi alterado de LATIN_1 para UTF-8;
+- Os valores foram convertidos do padrão brasileiro (vírgula decimal) para o americano (ponto decimal);
+- O header (cabeçalho) do arquivo foi tratado retirando acentuações e espaços;
+- O conteúdo da base (valores, municípios e beneficiários) permanece fiel ao disponibilizado pelo **Portal da Transparência**. Ou seja, não foram adicionados, removidos ou alterados registros nem alterado qualquer valor;
+- O projeto utilizados para os tratamentos acima pode ser encontrado [aqui](https://github.com/infobarbosa/bolsafamilia_conversor_utf-8).
+
+Abaixo segue uma pequena amostra do conteúdo de um dos arquivos:
+```
+MES_COMPETENCIA;MES_REFERENCIA;UF;CODIGO_MUNICIPIO_SIAFI;MUNICIPIO;CPF;NIS;FAVORECIDO;VALOR
+202311;202303;SP;3055;ITAPIRAPUA PAULISTA;***.081.588-**;20128077306;ADRIANE DE JESUS SANTOS;750.0
+202311;202303;SP;6739;MORRO AGUDO;***.086.753-**;16358953061;MARIA DO ROSARIO GOMES DE MELO;650.0
+202311;202303;SP;7107;SAO PAULO;***.523.498-**;13622350775;ADRIANA SANTOS;325.0
+202311;202303;SP;7107;SAO PAULO;***.330.168-**;20732189858;DANIELA OLIVEIRA DOS SANTOS;950.0
+```
+
+Agora formatado:
+```
+MES_COMPETENCIA	MES_REFERENCIA	UF	CODIGO_MUNICIPIO_SIAFI	MUNICIPIO	        CPF	            NIS	        FAVORECIDO	                    VALOR
+202311	        202303	        SP	3055	                ITAPIRAPUA PAULISTA	***.081.588-**	20128077306	ADRIANE DE JESUS SANTOS	        750.0
+202311	        202303	        SP	6739	                MORRO AGUDO	        ***.086.753-**	16358953061	MARIA DO ROSARIO GOMES DE MELO	650.0
+202311	        202303	        SP	7107	                SAO PAULO	        ***.523.498-**	13622350775	ADRIANA SANTOS	                325.0
+202311	        202303	        SP	7107	                SAO PAULO	        ***.330.168-**	20732189858	DANIELA OLIVEIRA DOS SANTOS	    950.0
+```
+
+## Passo-a-passo
 1. Crie a pasta `raw/bolsafamilia/pagamentos` no bucket S3 criado neste bootcamp
     - Utilize o conhecimento adquirido no exercício **02-Bucket-S3**;
     - Perceba que criaremos **apenas o database**, sem tabelas.
