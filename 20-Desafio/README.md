@@ -31,58 +31,64 @@ Passo-a-passo:
 6. Verifique os metadados da tabela `raw_pagamentos`;
 7. Faça consultas na tabela `raw_pagamentos` via **AWS Athena**:
     -  Utilize o conhecimento adquirido no exercício **05-Athena**.
-6.a. Primeiro, vamos contar a **quantidade de registros** há na tabela
-```
-SELECT count(1) qtt
-FROM "bolsafamilia"."raw_pagamentos"
-```
 
-6.b. Agora vamos contar a **quantidade de NIS distintos** há na tabela
-```
-SELECT count(distinct nis) qtt_nis
-FROM "bolsafamilia"."raw_pagamentos"
-```
+    ##### 7.1 - Quantidade de registros
+    ```
+    SELECT count(1) qtt
+    FROM "bolsafamilia"."raw_pagamentos"
+    ```
+    Qual a quantidade de registros da tabela?
 
-> Perceba a diferença entre a quantidade de CPF versus a quantidade de registros
+    ##### 7.2 - Quantidade de NIS distintos
+    ```
+    SELECT count(distinct nis) qtt_nis
+    FROM "bolsafamilia"."raw_pagamentos"
+    ```
+    Quantos NIS distintos há na tabela?
+    
+    > Perceba a diferença entre a quantidade de NIS versus a quantidade de registros
 
-6.c. Agova vamos somar o **valor total pago** pelo benefício:
-```
-SELECT sum(valor) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct nis) qtt_nis
-FROM "bolsafamilia"."raw_pagamentos"
-```
+    ##### 7.3 - Valor total pago
+    ```
+    SELECT sum(valor) vl_total
+    FROM "bolsafamilia"."raw_pagamentos"
+    ```
 
-> Perceba que o valor aparece em notação exponencial.
-> Vamos contornar isso com a função `format`
+    > Perceba que o valor aparece em notação exponencial.<br>
+    > Vamos contornar isso com a função `format`
 
-```
-SELECT format('%,.2f',sum(valor)) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct cpf) qtt_cpf
-FROM "bolsafamilia"."raw_pagamentos"
-```
+    ```
+    SELECT format('%,.2f',sum(valor)) vl_total
+    FROM "bolsafamilia"."raw_pagamentos"
+    ```
+    Qual o valor total pago pelo benefício?
 
-6.d. Vamos analisar o **valor total pago agrupado por UF**:
-```
-SELECT uf
-    ,format('%,.2f',sum(valor)) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct nis) qtt_nis
-FROM "bolsafamilia"."raw_pagamentos"
-GROUP BY ROLLUP (uf)
-ORDER BY sum(valor) DESC
-```
+    ##### 7.4 - Valor total pago agrupado por UF
+    ```
+    SELECT uf
+        ,format('%,.2f',sum(valor)) vl_total
+        ,count(1) qtt_registros
+        ,count(distinct nis) qtt_nis
+    FROM "bolsafamilia"."raw_pagamentos"
+    GROUP BY ROLLUP (uf)
+    ORDER BY sum(valor) DESC
+    ```
+    Qual o valor total pago agrupado por UF?
 
-6.e. Qual foi a UF que com maior volume financeiro recebido pelo benefício?
+    ##### 7.5 - UF com maior volume financeiro recebido 
 
-Se ordenarmos pelo número de beneficiários, qual o resultado?
-```
-SELECT uf
-    ,format('%,.2f',sum(valor)) vl_total
-    ,count(1) qtt_registros
-    ,count(distinct nis) qtt_nis
-FROM "bolsafamilia"."raw_pagamentos"
-GROUP BY ROLLUP (uf)
-ORDER BY count(nis) DESC
-```
+    Se ordenarmos pelo número de beneficiários, qual o resultado?
+    ```
+    SELECT uf
+        ,format('%,.2f',sum(valor)) vl_total
+        ,count(1) qtt_registros
+        ,count(distinct nis) qtt_nis
+    FROM "bolsafamilia"."raw_pagamentos"
+    GROUP BY ROLLUP (uf)
+    ORDER BY count(nis) DESC
+    ```
+    Qual foi a UF que com maior volume financeiro recebido pelo benefício?
+
+8. Crie um Glue Job baseado em notebook
+    - Utilize o conhecimento adquirido no exercício **08-Glue-Job**;
+    - Utilize o notebook `desafio.ipynb` disponibilizado na pasta `20-Desafio/assets/notebook/`. 
