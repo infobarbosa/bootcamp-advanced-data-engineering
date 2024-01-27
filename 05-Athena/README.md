@@ -103,6 +103,6 @@ WITH top_clientes as (
 ) 
 SELECT c.nome, c.cpf, t.*
 FROM top_clientes t
-INNER JOIN ecommerce.clientes c on c.id = t.id_cliente;
+INNER JOIN ecommerce.tb_raw_clientes c on c.id = t.id_cliente;
 
 ```
