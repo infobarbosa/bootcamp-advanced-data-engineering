@@ -16,7 +16,7 @@ Você pode encontrar mais informações sobre o AWS Athena na [documentação](h
 
     ### Atenção!
     Na primeira vez que você acessa o Athena é exibida a seguinte mensagem:
-    > `Before you run your first query, you need to set up a query result location in Amazon S3.`
+    > `Before you run your first query, you need to set up a query result location in Amazon S3.`<br>
     > (`Antes de executar sua primeira consulta, é necessário definir um local para o resultado da consulta no Amazon S3.`)
     
     - Clique em **Edit settings** (Editar configurações);
@@ -30,7 +30,7 @@ Você pode encontrar mais informações sobre o AWS Athena na [documentação](h
     ```
     SELECT * FROM "ecommerce"."clientes" limit 10;
     ```
-4. Clique no botão **Run**
+4. Clique no botão **Run**;
 5. Verifique o resultado. Perceba a estrutura da tabela e seus dados.
 6. Faça o mesmo para a tabela `pedidos`:
     ```
