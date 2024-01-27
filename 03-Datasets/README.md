@@ -27,7 +27,7 @@ ac4bb780-ba30-4696-9f4d-3b1cec29185c;SOUNDBAR;900;1;2024-01-01T19:53:50;AP;8914
 ```
 
 ## Bases de Clientes
-###### 1. Certifique-se que está no diretório do projeto:
+##### 1. Certifique-se que está no diretório do projeto:
 ```
 pwd
 ```
@@ -43,7 +43,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ pwd
 > cd /home/ubuntu/environment/bootcamp-advanced-data-engineering
 > ```
 
-###### 2. Liste os arquivos disponíveis em `assets\data`
+##### 2. Liste os arquivos disponíveis em `assets\data`
 ```
 ls -la 03-Datasets/assets/data/clientes*
 ```
@@ -55,7 +55,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la 03-Data
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-###### 3. Vamos criar uma variável de ambiente `BUCKET_NAME`
+##### 3. Vamos criar uma variável de ambiente `BUCKET_NAME`
 
 > O script abaixo apenas lista (via api do S3) os buckets disponíveis filtrando aquele que será utilizado no laboratório, então atribui esse nome à variável de ambiente `BUCKET_NAME` 
 
@@ -67,7 +67,7 @@ export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab
 echo $BUCKET_NAME
 ```
 
-###### 4. Executando o upload
+##### 4. Executando o upload
 ```
 aws s3 cp 03-Datasets/assets/data/clientes.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/clientes/ 
 ```
@@ -79,7 +79,7 @@ upload: 03-Datasets/assets/data/clientes.csv.gz to s3://lab-data-eng-202402-p400
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-###### 5. Confira se o upload ocorreu como esperado:
+##### 5. Confira se o upload ocorreu como esperado:
 ```
 aws s3 ls s3://${BUCKET_NAME}/raw/ecommerce/clientes/
 ```
@@ -95,7 +95,7 @@ Se tudo estiver ok então você verá apenas um arquivo `clientes.csv.gz`
 
 ## Bases de Pedidos
 
-###### 1. Certifique-se que está no diretório do projeto:
+##### 1. Certifique-se que está no diretório do projeto:
 ```
 pwd
 ```
@@ -111,7 +111,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ pwd
 > /home/ubuntu/environment/bootcamp-advanced-data-engineering
 > ```
 
-###### 2. Liste os arquivos disponíveis em `assets\data`
+##### 2. Liste os arquivos disponíveis em `assets\data`
 ```
 ls -la 03-Datasets/assets/data/pedidos*
 ```
@@ -152,7 +152,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ ls -la 03-Data
 -rw-rw-r-- 1 ubuntu ubuntu 33315 Jan 14 19:16 03-Datasets/assets/data/pedidos-2024-01-31.csv.gz
 ```
 
-###### 3. Para o upload execute o comando a seguir :
+##### 3. Para o upload execute o comando a seguir :
 ```
 aws s3 cp 03-Datasets/assets/data/ s3://${BUCKET_NAME}/raw/ecommerce/pedidos/ --recursive --exclude "*" --include "pedidos*"
 ```
@@ -194,7 +194,7 @@ upload: 03-Datasets/assets/data/pedidos-2024-01-29.csv.gz to s3://lab-data-eng-2
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
-###### 4. Confira se o upload ocorreu como esperado:
+##### 4. Confira se o upload ocorreu como esperado:
 ```
 aws s3 ls s3://${BUCKET_NAME}/raw/ecommerce/pedidos/
 ```
