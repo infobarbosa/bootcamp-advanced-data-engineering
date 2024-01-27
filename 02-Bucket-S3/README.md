@@ -5,11 +5,92 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 # 02 - Bucket S3
 
-O objetivo desta sessão é criar o bucket S3 e estrutura de diretórios necessários à execução do laboratório.
+O objetivo desta sessão é criar o bucket S3 e estrutura de diretórios necessários à execução do laboratório.<br>
+A seguir são apresentadas duas opções para criação para criação do bucket: 
+- via terminal com AWS CLI;
+- via console AWS S3.
 
-### O bucket
+Vamos priorizar o uso do **terminal com AWS CLI** neste laboratório.
 
-1. Digite `s3` na barra de buscas do console AWS 
+## Via terminal com AWS CLI
+
+### Passo a passo
+#### Variável de ambiente `BUCKET_NAME`
+
+> ### Atenção!
+> - Substitua [ANOMÊS] pelo ano e mês correntes no formato AAAAMM. 
+> - Substitua [NUMERO ALEATÓRIO] por um número aleatório qualquer. 
+
+```
+export BUCKET_NAME=lab-data-eng-[ANOMES]-[NUMERO ALEATORIO]
+```
+
+Por exemplo:
+```
+export BUCKET_NAME=lab-data-eng-202312-p4004
+```
+#### Criando o bucket
+```
+aws s3api create-bucket --bucket ${BUCKET_NAME}
+```
+
+Output:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api create-bucket --bucket ${BUCKET_NAME}
+{
+    "Location": "/lab-data-eng-202312-p4004"
+}
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
+```
+
+#### Criando a estrutura de pastas
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key raw/
+```
+
+Output:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api put-object --bucket ${BUCKET_NAME} --key raw/
+{
+    "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+    "ServerSideEncryption": "AES256"
+}
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
+```
+
+Crie a pasta `ecommerce` dentro da pasta `raw`:
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key raw/ecommerce/
+```
+
+Crie a mesma estrutura para as demais pastas:
+
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key stage/
+```
+
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key analytics/
+```
+
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key scripts/
+```
+
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key results/
+```
+
+---
+
+## [OPCIONAL] Via console AWS S3
+
+> ### Atenção!
+> Se você utilizou a opção **via terminal AWS CLI** então não é necessário executar esta sessão.<br>
+> Esta sessão é opcional e apresenta a criação do bucket via console (página) do AWS S3.
+
+### Passo a passo
+1. Digite `s3` na barra de buscas do console AWS;
 
 ![img/007_bucket_s3_barra_de_busca.png](img/007_bucket_s3_barra_de_busca.png)
 
@@ -97,83 +178,14 @@ Neste laboratório vamos utilizar a estrutura de diretórios recomendada pela AW
 
 ![img/020_bucket_s3_pagina_criar_pasta.png](img/020_bucket_s3_pagina_criar_pasta.png)
 
-3. Clique no botão **Criar pasta**
+3. Clique no botão **Criar pasta**;
 
-4. Repita o procedimento acima para criar as pastas: `stage`, `analytics` e `results`
+4. Repita o procedimento acima para criar as pastas: `stage`, `analytics` e `results`;
 
 Ao final a estrutura de pastas deverá estar assim:
 
 ![img/021_bucket_s3_estrutura_pastas.png](img/021_bucket_s3_estrutura_pastas.png)
 
+5. Crie a pasta `ecommerce` dentro da pasta `raw`.
 
-3. Crie a pasta `ecommerce` dentro da pasta `raw`
 
-## OPCIONAL - Via terminal Cloud9
-
-> #### Atenção
-> Esta sessão é opcional e apresenta outra forma para criação do bucket e estrutura de pastas via terminal shell.
-
-#### Variável de ambiente `bucket_name`
-> Atenção!
-> - Substitua [ANOMÊS] pelo ano e mês correntes no formato AAAAMM. 
-> - Substitua [NUMERO ALEATÓRIO] por um número aleatório qualquer. 
-
-```
-export bucket_name=lab-data-eng-[ANOMES]-[NUMERO ALEATORIO]
-```
-
-Por exemplo:
-```
-export bucket_name=lab-data-eng-202312-p4004
-```
-#### Criando o bucket
-```
-aws s3api create-bucket --bucket ${bucket_name}
-```
-
-Output:
-```
-voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api create-bucket --bucket ${bucket_name}
-{
-    "Location": "/lab-data-eng-202312-p4004"
-}
-voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
-```
-
-#### Criando a estrutura de pastas
-```
-aws s3api put-object --bucket ${bucket_name} --key raw/
-```
-
-Output:
-```
-voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api put-object --bucket ${bucket_name} --key raw/
-{
-    "ETag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
-    "ServerSideEncryption": "AES256"
-}
-voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
-```
-
-Crie a pasta `ecommerce` dentro da pasta `raw`:
-```
-aws s3api put-object --bucket ${bucket_name} --key raw/ecommerce/
-```
-
-Crie a mesma estrutura para as demais pastas:
-
-```
-aws s3api put-object --bucket ${bucket_name} --key stage/
-```
-
-```
-aws s3api put-object --bucket ${bucket_name} --key analytics/
-```
-
-```
-aws s3api put-object --bucket ${bucket_name} --key scripts/
-```
-
-```
-aws s3api put-object --bucket ${bucket_name} --key results/
-```
