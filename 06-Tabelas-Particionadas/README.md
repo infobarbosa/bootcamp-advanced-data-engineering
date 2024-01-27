@@ -43,10 +43,11 @@ Output esperado:
 ```
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws glue get-tables --database-name 'ecommerce'  --query "TableList[].Name"
 [
-    "clientes",
-    "pedidos",
-    "pedidos_part"
+    "pedidos_part",
+    "tb_raw_clientes",
+    "tb_raw_pedidos"
 ]
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
 
 ##### 6. Faça o upload de um arquivo para a pasta particionada:
