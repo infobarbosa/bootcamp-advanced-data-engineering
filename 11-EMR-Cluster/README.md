@@ -238,6 +238,7 @@ SparkSession available as 'spark'.
 
 ###### Importando bibliotecas
 ```
+import os
 import sys
 from datetime import datetime
 ```
@@ -245,6 +246,8 @@ from datetime import datetime
 ```
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
+
+BUCKET_NAME = os.environ['BUCKET_NAME'] 
 ```
 
 ###### Abrindo uma sessão
@@ -399,11 +402,11 @@ Output esperado:
 
 10. Exportando os resultados
 ```
-dfPed.write.format("json").mode("overwrite").save("s3://${BUCKET_NAME}/output/pedidos/")
+dfPed.write.format("json").mode("overwrite").save("s3://"+ BUCKET_NAME +"/output/pedidos/")
 ```
 
 ```
-dfTop10.write.format("json").mode("overwrite").save("s3://${BUCKET_NAME}/output/top10/")
+dfTop10.write.format("json").mode("overwrite").save("s3://"+ BUCKET_NAME +"/output/top10/")
 ```
 
 Verifique os arquivos no bucket.
