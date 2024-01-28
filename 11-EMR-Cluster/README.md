@@ -441,7 +441,7 @@ echo ${ID}
 ```
 aws emr add-steps \
 --cluster-id ${ID} \
---steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,S3://${BUCKET_NAME}/scripts/ecommerce.py]
+--steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,s3://${BUCKET_NAME}/scripts/ecommerce.py]
 ```
 
 ### Parabéns!
