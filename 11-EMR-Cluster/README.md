@@ -419,9 +419,28 @@ quit()
 ## Execução de scripts
 Uma doc completa pode ser encontrada [aqui](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-commandrunner.html#emr-commandrunner-other-uses).
 
+1. Instale a biblioteca **boto3**
+```
+pip install boto3
+```
+2. Faça o upload do script 
+```
+aws s3 cp 11-EMR-Cluster/assets/scripts/ecommerce.py s3://${BUCKET_NAME}/scripts/
+```
+
+3. Obtenha o ID do cluster EMR via terminal **Cloud9**
+```
+export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
+```
+
+```
+echo ${ID}
+```
+
+4. Adicione um step do EMR
 ```
 aws emr add-steps \
---cluster-id j-2AXXXXXXGAPLF \
+--cluster-id ${ID} \
 --steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,S3://${BUCKET_NAME}/scripts/ecommerce.py]
 ```
 
