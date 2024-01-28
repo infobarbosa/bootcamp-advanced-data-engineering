@@ -80,9 +80,12 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 >       --filter Name=group-name,Values=ElasticMapReduce-master \
 >       --query 'SecurityGroups[*].[GroupId]' --output text)
 >```
->   2. Variável de ambiente com o IP público da instância EC2 do Cloud9
+>   2. Variáveis de ambiente com o IP público e privado da instância EC2 do Cloud9
 >```
 >   EC2_PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+>```
+>```
+>   EC2_PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 >```
 >
 >   3. Adicione a regra ao security group
@@ -94,6 +97,23 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 >    --cidr "${EC2_PUBLIC_IP}/32"
 >```
 >
+>```
+>   aws ec2 authorize-security-group-ingress \
+>    --group-id ${EMR_MASTER_SG} \
+>    --protocol tcp \
+>    --port 22 \
+>    --cidr "172.31.0.0/20"
+>```
+>
+>   Caso os comandos acima não funcionem, você pode abrir a regra para a Internet.<br>
+>   **Importante**! Nunca use esse método em produção!
+>```
+>   aws ec2 authorize-security-group-ingress \
+>    --group-id ${EMR_MASTER_SG} \
+>    --protocol tcp \
+>    --port 22 \
+>    --cidr "0.0.0.0/0"
+>```
 > #### [OPCIONAL] Via Console AWS
 > 1. Na barra de busca superior digite `security groups` e então clique em **Security groups**.
 > 2. Na tela **Security groups** clique no **Security group ID** referente à linha com **Security group name** igual a `ElasticMapReduce-master`;
