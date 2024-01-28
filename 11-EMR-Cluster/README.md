@@ -91,7 +91,7 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 >    --group-id ${EMR_MASTER_SG} \
 >    --protocol tcp \
 >    --port 22 \
->    --cidr ${EC2_PUBLIC_IP}
+>    --cidr "${EC2_PUBLIC_IP}/32"
 >```
 >
 > #### [OPCIONAL] Via Console AWS
