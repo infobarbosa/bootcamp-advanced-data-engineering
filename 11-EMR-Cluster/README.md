@@ -40,7 +40,9 @@ O objetivo deste exercício é ativar um cluster EMR e executar algumas operaç�
 4. Em **Amazon EMR release**, selecione **emr-6.15.0**;
 5. Em **Application bundle**, selecione **Spark Interactive**;
 6. Abaixo é exibida uma lista de componentes. Mantenha inalterado;
-7. Em **AWS Glue Data Catalog settings**, marque **Use for Spark table metadata**;
+7. Em **AWS Glue Data Catalog settings**:
+    - marque **Use for Hive table metadata**;
+    - marque **Use for Spark table metadata**.
 8. Na sessão **Cluster configuration**, selecione **Uniform instance groups**;
 9. Na sessão **Instance groups section** selecione **m4.large** para **Primary**, **Core** e **Task 1 of 1**;
 10. Role a tela até a sessão **Networking**;
