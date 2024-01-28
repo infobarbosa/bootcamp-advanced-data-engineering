@@ -186,7 +186,7 @@ EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
 
 ```
 
-5. Vamos criar uma variável de ambiente `bucket`
+5. Vamos criar uma variável de ambiente `BUCKET_NAME`
 ```
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 
