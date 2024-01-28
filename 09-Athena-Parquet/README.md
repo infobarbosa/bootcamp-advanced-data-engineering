@@ -53,7 +53,7 @@ Agora vamos contar a **quantidade de clientes distintos** que realizaram pedidos
 SELECT count(distinct id_cliente) qtt_clientes
       ,count(1) qtt_registros
 FROM "ecommerce"."pedidos_parquet"
-WHERE cast(data_criacao as date) = date_parse('2024-01-02', '%Y-%m-%d')
+WHERE cast(data_pedido as date) = date_parse('2024-01-02', '%Y-%m-%d')
 ```
 
 > Perceba a diferença entre a quantidade de clientes versus a quantidade de registros
@@ -62,7 +62,7 @@ Agova vamos somar o **valor total** dos pedidos de **2024**:
 ```
 SELECT sum(quantidade * valor_unitario) vl_total
 FROM "ecommerce"."pedidos_parquet"
-WHERE year(data_criacao) = 2024
+WHERE year(cast(data_pedido as date)) = 2024
 ```
 
 > Perceba que o valor aparece em notação exponencial.
@@ -71,7 +71,7 @@ WHERE year(data_criacao) = 2024
 ```
 SELECT format('%,.2f',sum(quantidade * valor_unitario)) vl_total
 FROM "ecommerce"."pedidos_parquet"
-WHERE year(data_criacao) = 2024
+WHERE year(cast(data_pedido as date)) = 2024
 ```
 
 Vamos analisar o **valor total pago agrupado por UF**:
