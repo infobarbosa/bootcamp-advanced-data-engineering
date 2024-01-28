@@ -444,5 +444,53 @@ aws emr add-steps \
 --steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,s3://${BUCKET_NAME}/scripts/ecommerce.py]
 ```
 
+Output esperado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr add-steps \
+> --cluster-id ${ID} \
+> --steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,s3://${BUCKET_NAME}/scripts/ecommerce.py]
+{
+    "StepIds": [
+        "s-04665653O07ZKL7818JO"
+    ]
+}
+```
+
+5. Verifique o status do EMR Step
+> Altere o id do step para o output do comando anterior
+```
+aws emr describe-step --cluster-id ${ID} --step-id s-04665653O07ZKL7818JO
+```
+
+Output esperado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr describe-step --cluster-id ${ID} --step-id s-04665653O07ZKL7818JO
+{
+    "Step": {
+        "Id": "s-04665653O07ZKL7818JO",
+        "Name": "ecommerce command-runner.jar",
+        "Config": {
+            "Jar": "command-runner.jar",
+            "Properties": {},
+            "Args": [
+                "spark-submit",
+                "s3://lab-data-eng-202402-p4004/scripts/ecommerce.py"
+            ]
+        },
+        "ActionOnFailure": "CONTINUE",
+        "Status": {
+            "State": "RUNNING",
+            "StateChangeReason": {},
+            "Timeline": {
+                "CreationDateTime": "2024-01-28T18:19:37.103000+00:00",
+                "StartDateTime": "2024-01-28T18:19:41.507000+00:00"
+            }
+        }
+    }
+}
+```
+
+6. Verifique no console do EMR na aba Steps os arquivos de logs gerados `controller`, `stderr` e `stdout`.
+
 ### Parabéns!
 Se você chegou até aqui então criou e ativou seu cluster EMR com sucesso e fez testes utilizando linguagem Python. 
