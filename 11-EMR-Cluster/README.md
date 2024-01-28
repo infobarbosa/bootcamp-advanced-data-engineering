@@ -125,10 +125,19 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 >
 
 
-### Vamos começar!
+### Passo a passo
 1. Abra o terminal (shell) do **Cloud9**;
 
-2. Obtenha o ID do cluster EMR via terminal **Cloud9**
+2. Crie duas pastas no bucket do S3 que usaremos ao final deste laboratório:
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key output/pedidos/
+```
+
+```
+aws s3api put-object --bucket ${BUCKET_NAME} --key output/top10/
+```
+
+3. Obtenha o ID do cluster EMR via terminal **Cloud9**
 ```
 export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
 ```
@@ -137,7 +146,7 @@ export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
 echo ${ID}
 ```
 
-3. Use o ID para obter o DNS público do cluster
+4. Use o ID para obter o DNS público do cluster
 ```
 export MASTER_HOST=$(aws emr describe-cluster --cluster-id $ID | jq '.Cluster.MasterPublicDnsName' | tr -d '"')
 ```
@@ -146,7 +155,7 @@ export MASTER_HOST=$(aws emr describe-cluster --cluster-id $ID | jq '.Cluster.Ma
 echo $MASTER_HOST
 ```
 
-4. Conecte-se ao cluster via SSH
+5. Conecte-se ao cluster via SSH
 ```
 ssh -i ./labsuser.pem hadoop@$MASTER_HOST
 ```
@@ -186,7 +195,7 @@ EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
 
 ```
 
-5. Vamos criar uma variável de ambiente `BUCKET_NAME`
+6. Vamos criar uma variável de ambiente `BUCKET_NAME`
 ```
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 
@@ -194,7 +203,7 @@ echo $BUCKET_NAME
 
 ```
 
-6. Abra o spark-shell
+7. Abra o spark-shell
 ```
 pyspark
 ```
@@ -225,7 +234,7 @@ SparkSession available as 'spark'.
 >>>
 ```
 
-7. Criando dataframes
+8. Criando dataframes
 
 ###### Importando bibliotecas
 ```
@@ -353,7 +362,7 @@ root
 
 ```
 
-8. Calculando os top 10 clientes
+9. Calculando os top 10 clientes
 ```
 dfTop10 = spark.sql(
  """SELECT cli.nome, cli.email, sum(ped.quantidade * ped.valor_unitario) total
@@ -388,7 +397,7 @@ Output esperado:
 +-----------------+--------------------+-----+
 ```
 
-9. Exportando os resultados
+10. Exportando os resultados
 ```
 dfPed.write.format("json").mode("overwrite").save("s3://lab-data-eng-202402-p40041/output/pedidos/")
 ```
@@ -399,7 +408,7 @@ dfTop10.write.format("json").mode("overwrite").save("s3://lab-data-eng-202402-p4
 
 Verifique os arquivos no bucket.
 
-10. Para sair do pyspark digite:
+11. Para sair do pyspark digite:
 ```
 quit()
 ```
