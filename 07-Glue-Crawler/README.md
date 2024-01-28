@@ -83,9 +83,12 @@ Diferente do que fizemos no crawler `crawler_clientes`, este exercício pretende
 12. De volta à tela **Choose data sources and classifiers**, clique em **Next**;
 13. Na tela **Configure security settings**, na sessão **IAM role**, abra o combo **Existing IAM role** e escolha `LabRole`;
 14. Clique em **Next** ao fim da página;
-15. Na tela **Set output and scheduling**, na sessão **Crawler schedule**, no combo **Frequency** mantenha `On demand` ;
-16. Clique no botão **Next** ao final da página;
-17. Na tela **Review and create**, revise as configurações e então clique em **Create crawler** ao final da página.
+15. Na tela **Set output and scheduling**, abra a sessão **Advanced options**;
+16. Na sessão **Advanced options**, marque o radion button **Ignore the change and don't update the table in the data catalog**;
+17. Ainda na sessão **Advanced options**, selecione o checkbox **Update all new and existing partitions with metadata from the table**;
+18. Na tela **Set output and scheduling**, na sessão **Crawler schedule**, no combo **Frequency** mantenha `On demand` ;
+19. Clique no botão **Next** ao final da página;
+20. Na tela **Review and create**, revise as configurações e então clique em **Create crawler** ao final da página.
 
 Você então receberá a mensagem a seguir no topo da tela:
 ```
