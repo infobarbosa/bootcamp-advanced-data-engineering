@@ -8,12 +8,12 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 Este desafio tem por objetivo testar seus conhecimentos a partir do que exercitou nos laboratórios anteriores.<br>
 
 ## Caso de uso
-Vamos utilizar uma base de pagamentos do programa social **Novo Bolsa Família**, do Governo Federal.<br>
+Vamos carregar, transformar e analisar uma base de pagamentos do programa social **Novo Bolsa Família**, do Governo Federal.<br>
 Os dados podem ser baixados livremente através do [Portal da Transparência](https://portaldatransparencia.gov.br/download-de-dados/novo-bolsa-familia).<br>
 
 ## O dataset
     
-- A base de pagamentos será a de Novembro/2023;
+- A base de pagamentos será a pagamentos referentes a **Novembro/2023**;
 - A base está disponível no diretório `20-Desafio/assets/data`;
 - A base foi convertida de compressão `zip` para `gzip`;
 - A base foi particionada por UF;
