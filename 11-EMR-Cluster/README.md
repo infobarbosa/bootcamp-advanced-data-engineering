@@ -399,11 +399,11 @@ Output esperado:
 
 10. Exportando os resultados
 ```
-dfPed.write.format("json").mode("overwrite").save("s3://lab-data-eng-202402-p40041/output/pedidos/")
+dfPed.write.format("json").mode("overwrite").save("s3://${BUCKET_NAME}/output/pedidos/")
 ```
 
 ```
-dfTop10.write.format("json").mode("overwrite").save("s3://lab-data-eng-202402-p40041/output/top10/")
+dfTop10.write.format("json").mode("overwrite").save("s3://${BUCKET_NAME}/output/top10/")
 ```
 
 Verifique os arquivos no bucket.
