@@ -102,7 +102,7 @@ Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então
 >    --group-id ${EMR_MASTER_SG} \
 >    --protocol tcp \
 >    --port 22 \
->    --cidr "172.31.0.0/20"
+>    --cidr "${EC2_PRIVATE_IP}/20"
 >```
 >
 >   Caso os comandos acima não funcionem, você pode abrir a regra para a Internet.<br>
