@@ -344,7 +344,7 @@ Output esperado:
 root
  |-- id_pedido: string (nullable = true)
  |-- produto: string (nullable = true)
- |-- valor_unitario: long (nullable = true)
+ |-- valor_unitario: float (nullable = true)
  |-- quantidade: long (nullable = true)
  |-- data_criacao: string (nullable = true)
  |-- uf: string (nullable = true)
