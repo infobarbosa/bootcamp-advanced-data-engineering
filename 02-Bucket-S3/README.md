@@ -19,7 +19,7 @@ Vamos priorizar o uso do **terminal com AWS CLI** neste laboratório.
 
 > ### Atenção!
 > - Os próximos comandos têm o propósito de criar um bucket com o seguinte formato:<br>
->       lab-data-eng-[DATA FORMATO YYYYMMDD]-[ID DA CONTA AWS]-[NOME DE USUÁRIO]  
+>   `lab-data-eng-[DATA FORMATO YYYYMMDD]-[ID DA CONTA AWS]-[NOME DE USUÁRIO]`
 > - Não é necessário compreender imediatamente esses comandos, porém é interessante estudá-los no futuro. 
 
 Obtenção do ID da conta AWS:
