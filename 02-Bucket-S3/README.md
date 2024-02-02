@@ -18,17 +18,33 @@ Vamos priorizar o uso do **terminal com AWS CLI** neste laboratório.
 #### 1. Crie a variável de ambiente `BUCKET_NAME`
 
 > ### Atenção!
-> - Substitua [ANOMÊS] pelo ano e mês correntes no formato AAAAMM. 
-> - Substitua [NUMERO ALEATÓRIO] por um número aleatório qualquer. 
+> - Os próximos comandos têm o propósito de criar um bucket com o seguinte formato:<br>
+>       lab-data-eng-[DATA FORMATO YYYYMMDD]-[ID DA CONTA AWS]-[NOME DE USUÁRIO]  
+> - Não é necessário compreender imediatamente esses comandos, porém é interessante estudá-los no futuro. 
+
+Obtenção do ID da conta AWS:
+```
+export AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
+``` 
+
+Obtenção do nome do usuário:
+```
+readarray -d '=' -t strarr <<< `aws sts get-caller-identity --output json | jq '.Arn | split("/")[-1]' -r`
+```
 
 ```
-export BUCKET_NAME=lab-data-eng-[ANOMES]-[NUMERO ALEATORIO]
+export AWS_USER_NAME="${strarr[0]}"
 ```
 
-Por exemplo:
+Criação da variável de ambiente `BUCKET_NAME`
 ```
-export BUCKET_NAME=lab-data-eng-202312-p4004
+export BUCKET_NAME=lab-data-eng-$(date '+%Y%m%d')-${AWS_ACCOUNT_ID}-${AWS_USER_NAME}
 ```
+
+```
+echo ${BUCKET_NAME}
+```
+
 #### 2. Crie o bucket
 ```
 aws s3api create-bucket --bucket ${BUCKET_NAME}
@@ -38,7 +54,7 @@ Output:
 ```
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3api create-bucket --bucket ${BUCKET_NAME}
 {
-    "Location": "/lab-data-eng-202312-p4004"
+    "Location": "/lab-data-eng-202312-1234567890-barbosa"
 }
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
 ```
