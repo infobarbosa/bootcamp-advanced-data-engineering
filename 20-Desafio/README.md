@@ -42,10 +42,10 @@ MES_COMPETENCIA MES_REFERENCIA  UF  CODIGO_MUNICIPIO_SIAFI  MUNICIPIO           
 ```
 
 ## Passo-a-passo
-1. Crie a pasta `raw/bolsafamilia/pagamentos` no bucket S3 criado neste bootcamp
+1. Crie a pasta `raw/bolsafamilia/pagamentos/` no bucket S3 criado neste bootcamp
     - Utilize o conhecimento adquirido no exercício **02-Bucket-S3**;
     - Perceba que criaremos **apenas o database**, sem tabelas.
-2. Faça o upload dos arquivos `202303_NovoBolsaFamilia_[UF].csv.gz` para o bucket no S3 na pasta `raw/bolsafamilia/pagamentos`;
+2. Faça o upload dos arquivos `202303_NovoBolsaFamilia_[UF].csv.gz` para o bucket no S3 na pasta `raw/bolsafamilia/pagamentos/`;
     - Os arquivos estão na pasta `20-Desafio/assets/data`;
     - Utilize o conhecimento adquirido no exercício **03-Datasets**.
     - Não esqueça de exportar a variável de ambiente BUCKET_NAME;
@@ -53,14 +53,14 @@ MES_COMPETENCIA MES_REFERENCIA  UF  CODIGO_MUNICIPIO_SIAFI  MUNICIPIO           
     ```
     aws s3 cp 20-Desafio/assets/data/ s3://${BUCKET_NAME}/raw/bolsafamilia/pagamentos/ --recursive --exclude "*" --include "202311_NovoBolsaFamilia_*.csv.gz"
     ```
-    - Não esqueça de conferir se todos os arquivos foram carregados corretamente na pasta `raw/bolsafamilia/pagamentos`.
+    - Não esqueça de conferir se todos os arquivos foram carregados corretamente na pasta `raw/bolsafamilia/pagamentos/`.
 
 3. Crie o database `bolsafamilia` no **Glue Catalog**;
     - Utilize o conhecimento adquirido no exercício **04-Glue-Catalog**.
 4. Crie o Glue Crawler `crawler_pagamentos`;
     - Utilize o conhecimento adquirido no exercício **07-Glue-Crawler**;
     - Utilize o procedimento que aplicamos para criação do crawler `crawler_clientes`;
-    - Utilize o bucket S3 e path criados no item 1 desse desafio (`raw/bolsafamilia/pagamentos`);
+    - Utilize o bucket S3 e path criados no item 1 desse desafio (`raw/bolsafamilia/pagamentos/`);
     - Utilize o database `bolsafamilia`;
     - Utilize o prefixo `raw_`;
     - Utilize a role `LabRole`.
