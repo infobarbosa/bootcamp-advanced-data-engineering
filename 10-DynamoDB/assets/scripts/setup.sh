@@ -21,7 +21,7 @@ aws glue create-job \
     --role LabRole \
     --command Name=glueetl,ScriptLocation=s3://${BUCKET_NAME}/scripts/glue-job-vendas-90-dias.py \
     --default-arguments '{"--TempDir": "s3://'"${BUCKET_NAME}"'/temp","--enable-spark-ui": "true","--spark-event-logs-path": "s3://'"${BUCKET_NAME}"'/spark-ui/","--enable-metrics":"true","--enable-job-insights":"true","--enable-continuous-cloudwatch-log":"true","--job-language":"python"}' \
-    --cli-input-json "file://08-Glue-Job/assets/scripts/glue-job-vendas-90-dias.json"
+    --cli-input-json "file://10-DynamoDB/assets/scripts/glue-job-vendas-90-dias.json"
 
 
 echo "Executando o job"
