@@ -1,3 +1,8 @@
+# Bootcamp Advanced Data Engineering
+# Author: Prof. Barbosa<br>
+# Contact: infobarbosa@gmail.com<br>
+# Github: [infobarbosa](https://github.com/infobarbosa)
+
 # Variável de ambiente BUCKET_NAME
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 
