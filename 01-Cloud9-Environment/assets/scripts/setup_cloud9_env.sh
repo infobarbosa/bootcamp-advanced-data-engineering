@@ -26,8 +26,33 @@ while [ "$(aws ec2 describe-volumes-modifications --volume-id $CLOUD9_EC2_VOLUME
 	sleep 1
 done
 
-echo "### Reescrevendo a tabela de partição para uso full do espaço solicitado. ###"
-sudo growpart /dev/nvme0n1 1
+echo "### Executando lsblk para verificar o nome do disco. ###"
+lsblk
 
-echo "### Expandindo o tamanho do sistema de arquivos. ###"
-sudo resize2fs /dev/nvme0n1p1
+export DISK_NAME=$(sudo lsblk -o NAME -n | grep '\<nvme0n1\>')
+echo "### O nome do disco é: $DISK_NAME ###"
+
+if [ -z "$DISK_NAME" ]
+then
+	export DISK_NAME=$(sudo lsblk -o NAME -n | grep '\<xvda\>')
+
+	if [ -z "$DISK_NAME" ]
+	then
+		echo "### Não foi possível encontrar o nome do disco. O redimensionamento nao tera efeito. ###"
+		exit 1
+	else
+		echo "### O nome do disco é: $DISK_NAME ###"
+		echo "### Reescrevendo a tabela de partição para uso full do espaço solicitado. ###"
+		sudo growpart /dev/xvda 1
+
+		echo "### Expandindo o tamanho da particao sistema de arquivos. ###"
+		sudo resize2fs /dev/xvda1
+	fi
+else
+	echo "### Reescrevendo a tabela de partição para uso full do espaço solicitado. ###"
+	sudo growpart /dev/nvme0n1 1
+
+	echo "### Expandindo o tamanho do sistema de arquivos. ###"
+	sudo resize2fs /dev/nvme0n1p1
+fi
+
