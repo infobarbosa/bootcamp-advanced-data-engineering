@@ -22,13 +22,25 @@ sc = SparkContext.getOrCreate()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 job = Job(glueContext)
+print("Contexto do Glue criado com sucesso")
 
+print("Criando o dataframe a partir do catálogo")
 dyf = glueContext.create_dynamic_frame.from_catalog(database='ecommerce', table_name='tb_raw_clientes')
 dyf.printSchema()
 
 df = dyf.toDF()
 df.show()
 
+print("Limpeza da pasta destino")
+try:
+  response = s3_client.list_objects_v2(Bucket=s3_bucket, Prefix='stage/ecommerce/clientes/')
+
+  for object in response['Contents']:
+      out = s3_client.delete_object(Bucket=s3_bucket, Key=object['Key'])
+except:
+  print("Nenhum arquivo a remover da pasta destino. Prosseguindo o processamento.")
+
+print("Escrevendo os dados no S3")
 s3output = glueContext.getSink(
   path="s3://" + s3_bucket + "/stage/ecommerce/clientes/",
   connection_type="s3",
