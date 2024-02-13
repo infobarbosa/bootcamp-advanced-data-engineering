@@ -6,17 +6,17 @@
 # Variável de ambiente BUCKET_NAME
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 
-echo $BUCKET_NAME
+echo "Bucket: $BUCKET_NAME"
 
-# Copiando os scripts para o S3
+echo "Copiando os scripts para o S3"
 aws s3 cp 08-Glue-Job/assets/scripts/glue-job-clientes.py s3://${BUCKET_NAME}/scripts/glue-job-clientes.py
 aws s3 cp 08-Glue-Job/assets/scripts/glue-job-pedidos.py s3://${BUCKET_NAME}/scripts/glue-job-pedidos.py
 
-# Criando as pastas no S3
+echo "Criando as pastas no S3"
 aws s3api put-object --bucket ${BUCKET_NAME} --key temp/
 aws s3api put-object --bucket ${BUCKET_NAME} --key spark-ui/
 
-# Criando o job
+echo "Criando o job glue-job-clientes"
 aws glue create-job \
     --name glue-job-clientes \
     --role LabRole \
@@ -24,6 +24,7 @@ aws glue create-job \
     --default-arguments '{"--TempDir": "s3://'"${BUCKET_NAME}"'/temp","--enable-spark-ui": "true","--spark-event-logs-path": "s3://'"${BUCKET_NAME}"'/spark-ui/","--enable-metrics":"true","--enable-job-insights":"true","--enable-continuous-cloudwatch-log":"true","--job-language":"python"}' \
     --cli-input-json "file://08-Glue-Job/assets/scripts/glue-job-clientes.json"
 
+echo "Criando o job glue-job-pedidos"
 aws glue create-job \
     --name glue-job-pedidos \
     --role LabRole \
