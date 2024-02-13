@@ -57,8 +57,8 @@ logging.info("Converte para dataframe para realizar a agregação")
 dfClientesPedidos = dyfClientesPedidos.toDF()
 
 dfVendas90Dias = dfClientesPedidos.groupBy("id_cliente", "nome", "email") \
-        .agg(sum("valor_total").alias("valor_total")) \
-        .agg(count("id_pedido").alias("qtd_pedidos")) 
+        .agg(sum("valor_total").alias("valor_total") \
+            ,count("id_pedido").alias("qtd_pedidos")) 
 
 dyfVendas90Dias = DynamicFrame.fromDF(dfVendas90Dias, glueContext, "dyfVendas90Dias")
 
