@@ -1,0 +1,24 @@
+{    
+    "Name": "glue-job-clientes",
+    "Description": "glue job de ingestão de dados de clientes",
+    "ExecutionProperty": {
+        "MaxConcurrentRuns": 1
+    },
+    "Command": {
+        "Name": "glueetl",
+        "PythonVersion": "3"
+    },
+    "DefaultArguments": {
+        "--enable-metrics": "true",
+        "--enable-spark-ui": "true",
+        "--enable-job-insights": "true",
+        "--enable-continuous-cloudwatch-log": "true",
+        "--job-language": "python"
+    },
+    "MaxRetries": 0,
+    "Timeout": 2880,
+    "WorkerType": "G.1X",
+    "NumberOfWorkers": 2,
+    "GlueVersion": "4.0",
+    "ExecutionClass": "STANDARD"
+}
