@@ -23,6 +23,7 @@ glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 job = Job(glueContext)
 
+print("Criando o dataframe a partir do catálogo")
 dyf = glueContext.create_dynamic_frame.from_catalog(database='ecommerce', table_name='pedidos_part')
 dyf.printSchema()
 
