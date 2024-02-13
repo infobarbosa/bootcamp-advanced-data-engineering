@@ -23,17 +23,24 @@ glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 job = Job(glueContext)
 
-dyf = glueContext.create_dynamic_frame.from_catalog(database='ecommerce', table_name='tb_raw_pedidos')
+dyf = glueContext.create_dynamic_frame.from_catalog(database='ecommerce', table_name='pedidos_part')
 dyf.printSchema()
 
 df = dyf.toDF()
 df.show()
 
+print("Limpeza da pasta destino")
+response = s3_client.list_objects_v2(Bucket=s3_bucket, Prefix='stage/ecommerce/pedidos/')
+
+for object in response['Contents']:
+    out = s3_client.delete_object(Bucket=s3_bucket, Key=object['Key'])
+
+print("Escrevendo os dados no S3")
 s3output = glueContext.getSink(
   path="s3://" + s3_bucket + "/stage/ecommerce/pedidos/",
   connection_type="s3",
   updateBehavior="UPDATE_IN_DATABASE",
-  partitionKeys=[],
+  partitionKeys=["data_pedido"],
   compression="snappy",
   enableUpdateCatalog=True,
   transformation_ctx="s3output",
