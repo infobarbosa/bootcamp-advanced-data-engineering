@@ -64,7 +64,7 @@ dyfVendas90Dias = DynamicFrame.fromDF(dfVendas90Dias, glueContext, "dyfVendas90D
 
 logging.info("Escrevendo o dataframe no DynamoDB")
 glueContext.write_dynamic_frame.from_options(
-    frame = DynamicFrame.fromDF(dyfVendas90Dias, glueContext, "nested"),
+    frame = dyfVendas90Dias,
     connection_type = "dynamodb",
     connection_options = {"dynamodb.output.tableName": "vendas_90_dias",
                             "dynamodb.throughput.write.percent": "1.0",
