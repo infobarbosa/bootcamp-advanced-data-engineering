@@ -38,7 +38,7 @@ then
 
 	if [ -z "$DISK_NAME" ]
 	then
-		echo "### Não foi possível encontrar o nome do disco. O redimensionamento nao tera efeito. ###"
+		echo "### Não foi possível encontrar o nome do disco. O redimensionamento não terá efeito. ###"
 		exit 1
 	else
 		echo "### O nome do disco é: $DISK_NAME ###"
