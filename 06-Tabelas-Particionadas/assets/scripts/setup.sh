@@ -15,6 +15,7 @@ echo "Localização dos dados de pedidos: $PEDIDOS_S3_LOCATION"
 
 echo "Editando o arquivo pedidos_part.json"
 jq --arg S3_LOCATION "$PEDIDOS_S3_LOCATION" '.StorageDescriptor.Location = $S3_LOCATION' 06-Tabelas-Particionadas/assets/scripts/pedidos_part.json > /tmp/pedidos_part.json.tmp
+cat pedidos_part.json.tmp
 mv /tmp/pedidos_part.json.tmp 06-Tabelas-Particionadas/assets/scripts/pedidos_part.json
 
 aws glue create-table --database-name ecommerce --table-input "file://./06-Tabelas-Particionadas/assets/scripts/pedidos_part.json"
