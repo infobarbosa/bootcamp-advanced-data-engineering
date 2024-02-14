@@ -3,7 +3,15 @@
 # Contact: infobarbosa@gmail.com<br>
 # Github: [infobarbosa](https://github.com/infobarbosa)
 
-# Variável de ambiente BUCKET_NAME
+echo "Criando a tabela VENDAS_90_DIAS do DynamoDB"
+aws dynamodb create-table \
+    --table-name vendas_90_dias \
+    --attribute-definitions AttributeName=id_cliente,AttributeType=N \
+    --key-schema AttributeName=id_cliente,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+echo "Tabela vendas_90_dias criada com sucesso!"
+
+echo "Exportanto a variável de ambiente BUCKET_NAME"
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 
 echo "Bucket: $BUCKET_NAME"
