@@ -159,7 +159,7 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $
 2. Clique no link do database `ecommerce`;
 3. Na sessão `Tables`, clique em `pedidos_part`;
 4. Clique na aba **Partitions**;
-    > Repare que agora a tabela possui duas partições (data_pedido 2024-01-01 e 2024-01-02);
+    > Repare que agora a tabela possui duas partições (data_pedido **2024-01-01** e **2024-01-02**);
 5. Abra o AWS Athena e em um editor SQL digite a seguinte consulta:
 ```
 SHOW PARTITIONS ecommerce.pedidos_part;
@@ -177,61 +177,51 @@ FROM "ecommerce"."pedidos_part"
 GROUP BY data_pedido
 ```
 
+### Adicionando as demais partições
+
+No terminal shell do Cloud9 execute os comandos a seguir.
+
+1. Primeiro copiamos os arquivos para suas respectivas pastas de partição
+```
+echo "Fazendo upload dos arquivos para a pasta particionada"
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-03.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-03/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-04.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-04/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-05.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-05/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-06.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-06/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-07.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-07/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-08.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-08/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-09.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-09/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-10.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-10/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-11.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-11/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-12.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-12/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-13.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-13/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-14.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-14/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-15.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-15/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-16.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-16/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-17.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-17/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-18.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-18/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-19.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-19/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-20.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-20/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-21.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-21/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-22.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-22/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-23.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-23/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-24.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-24/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-25.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-25/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-26.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-26/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-27.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-27/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-28.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-28/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-29.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-29/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-30.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-30/
+aws s3 cp ./03-Datasets/assets/data/pedidos-2024-01-31.csv.gz s3://${BUCKET_NAME}/raw/ecommerce/pedidos/part/data_pedido=2024-01-31/
+```
+
+2. Inicialize o crawler `crawler_pedidos`
+```
+aws glue start-crawler --name crawler_pedidos
+```
+
+3. Abra novamente o painel **Tables** do AWS Glue, clique na tabela `pedidos_part` e verifique a aba **Partitions**.
+
 # Parabéns!
 Concluímos que o Glue Crawler pode ser um aliado importante na automação de descoberta e atualização de metadados do Glue Catalog.
 
-<br>
-<br>
-
----
-
-## [OPCIONAL] Via CloudFormation + terminal Cloud9
-
-> ### Atenção! 
-> - Nesta etapa você precisará editar o arquivo `gluecrawler-clientes.cf.yml`;<br>
-> - O arquivo está na pasta `07-Glue-Crawler/assets/scripts/`;<br>
-> - Utilize o editor do Cloud9.
-
-1. Abra o arquivo `gluecrawler-clientes.cf.yml`. 
-- Altere o valor do parâmetro `BucketURI` para a URI do bucket S3 criado no laboratório. Ex.: `s3://lab-data-eng-202402-p40041/raw/ecommerce/clientes/`;
-- Altere o valor do parâmetro `RoleARN` para a ARN da Role utilizada no laboratório. Ex.: `arn:aws:iam::9876543210:role/LabRole`.
-
-2. Valide o script cloudformation:
-```
-aws cloudformation validate-template --template-body file://07-Glue-Crawler/assets/scripts/gluecrawler-clientes.cf.yml
-```
-
-3. Execute o script cloudformation:
-```
-aws cloudformation create-stack --stack-name gluecrawler-clientes --template-body file://07-Glue-Crawler/assets/scripts/gluecrawler-clientes.cf.yml --capabilities CAPABILITY_NAMED_IAM
-```
-<br>
-<br>
-
-## [OPCIONAL] Via AWS CLI + terminal Cloud9
-
-1. Variáveis de ambiente
-```
-export ROLE_NAME=LabRole
-export DATABASE_NAME=ecommerce
-```
-
-```
-export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
-```
-
-```
-echo ${BUCKET_NAME}
-echo ${ROLE_NAME}
-echo ${DATABASE_NAME}
-```
-
-2. Crie o crawler
-```
-aws glue create-crawler \
---name crawler_clientess \
---role ${ROLE_NAME} \
---database-name ${DATABASE_NAME} \
---table-prefix tb_crawler_ \
---targets "{\"S3Targets\": [{\"Path\": \"s3://${BUCKET_NAME}/raw/ecommerce/clientes/\"} ]}"
-```
