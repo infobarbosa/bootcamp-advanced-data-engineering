@@ -5,7 +5,7 @@
         "MaxConcurrentRuns": 1
     },
     "Command": {
-        "Name": "glueetl",
+        "Name": "gluestreaming",
         "PythonVersion": "3"
     },
     "DefaultArguments": {
