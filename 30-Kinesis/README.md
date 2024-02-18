@@ -229,6 +229,11 @@ aws lambda invoke \
 # **Parte 5** - Verificando a ingestão
 
 16. Verifique os arquivos `parquet` criados na pasta `/raw/ecommerce/pedidos/pedidos-stream/`;
+> Atenção!<br>
+> Perceba que os arquivos criados são pequenos (**small files**). Essa condição reflete a natureza do pipeline de dados que criamos baseado em streaming com janelas de 10 segundos.<br>
+> O processamento de small files com recursos analíticos em geral é dispendioso e desaconselhável.<br>
+> Uma boa prática é ter um job de consolidação desses arquivos pequenos em arquivos grandes.
+
 17. Verifique a tabela `pedidos_stream` criada no database `ecommerce`;
 18. Faça consultas via **AWS Athena** na tabela `pedidos_stream`;
 
