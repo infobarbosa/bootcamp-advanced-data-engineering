@@ -19,7 +19,7 @@ args = getResolvedOptions(sys.argv, ['JOB_NAME', 'BUCKET_NAME', 'STREAM_ARN', 'T
 JOB_NAME = args['JOB_NAME']
 BUCKET_NAME = args['BUCKET_NAME']
 STREAM_ARN = args['STREAM_ARN']
-TEMP_DIR = args['TEMP_DIR']
+TEMP_DIR = args['TempDir']
 
 logging.info(f"Bucket name: {BUCKET_NAME}")
 logging.info(f"Stream ARN: {STREAM_ARN}")
