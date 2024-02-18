@@ -132,7 +132,7 @@ aws glue create-job \
 ```
 
 Perceba o parâmetro `--timeout`. O valor padrão é de 2880 minutos (48 horas!).<br> 
-Por se tratar de um job de captura de streaming em ambiente de laboratório, estamos ajustando para 60 minutos. 
+Por se tratar de um job de captura de streaming em ambiente de laboratório, estamos ajustando para 15 minutos. 
 
 
 13. Executando o job
