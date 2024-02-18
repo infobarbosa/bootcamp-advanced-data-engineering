@@ -7,6 +7,8 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 
 O objetivo desta sessão é executar operações de extração, transformação e carga (ETL) utilizando o Glue Job utilizando o Kinesis Data Streams como fonte de dados.
 
+![kinesis-data-stream-workflow.png](kinesis-data-stream-workflow.png)
+
 # **Parte 1** - Preparação da stream AWS Kinesis
 1. Criando a stream `pedidos`
 
