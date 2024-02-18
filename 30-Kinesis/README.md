@@ -61,14 +61,14 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ echo $BUCKET_N
 lab-data-eng-20240213-905418220738-user3047456
 ```
 
-5. Exportando a variável de ambiente `LAB_ROLE`
+5. Exportando a variável de ambiente `LAB_ROLE_ARN`
 ```
-export LAB_ROLE=$(aws iam get-role --role-name LabRole | jq '.Role.Arn' -r)
+export LAB_ROLE_ARN=$(aws iam get-role --role-name LabRole | jq '.Role.Arn' -r)
 ```
 
-6. Verificando o conteúdo da variável `LAB_ROLE`
+6. Verificando o conteúdo da variável `LAB_ROLE_ARN`
 ```
-echo $LAB_ROLE
+echo $LAB_ROLE_ARN
 ```
 
 7. Exportanto a variável de ambiente `STREAM_ARN`
@@ -125,7 +125,7 @@ aws glue create-job \
     --role LabRole \
     --timeout 60 \
     --command Name=gluestreaming,ScriptLocation=s3://${BUCKET_NAME}/scripts/glue-job-pedidos-stream.py \
-    --default-arguments '{"--BUCKET_NAME"='"${BUCKET_NAME}"',"--STREAM_ARN"='"${STREAM_ARN}"',"--TEMP_DIR": "s3://'"${BUCKET_NAME}"'/temp","--enable-spark-ui": "true","--spark-event-logs-path": "s3://'"${BUCKET_NAME}"'/spark-ui/","--enable-metrics":"true","--enable-job-insights":"true","--enable-continuous-cloudwatch-log":"true","--job-language":"python"}' \
+    --default-arguments '{"--BUCKET_NAME":'"${BUCKET_NAME}"',"--STREAM_ARN":'"${STREAM_ARN}"',"--TEMP_DIR":"s3://'"${BUCKET_NAME}"'/temp","--enable-spark-ui":"true","--spark-event-logs-path":"s3://'"${BUCKET_NAME}"'/spark-ui/","--enable-metrics":"true","--enable-job-insights":"true","--enable-continuous-cloudwatch-log":"true","--job-language":"python"}' \
     --cli-input-json "file://30-Kinesis/assets/scripts/glue-job-pedidos-stream.json" 
 ```
 
@@ -150,7 +150,7 @@ aws lambda create-function \
     --zip-file fileb://../lambda/function.zip \
     --handler lambda_function.lambda_handler \
     --runtime python3.12 \
-    --role $LAB_ROLE \
+    --role $LAB_ROLE_ARN \
     --timeout 900
 ```
 
