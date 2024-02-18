@@ -147,12 +147,63 @@ Parabéns! Neste ponto você tem uma stream pronta para receber dados e um job g
 ```
 aws lambda create-function \
     --function-name gerador-pedidos \
-    --zip-file fileb://../lambda/function.zip \
+    --zip-file fileb://./30-Kinesis/assets/lambda/function.zip \
     --handler lambda_function.lambda_handler \
     --runtime python3.12 \
     --role $LAB_ROLE_ARN \
     --timeout 900
 ```
+
+Output esperado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws lambda create-function \
+>     --function-name gerador-pedidos \
+>     --zip-file fileb://./30-Kinesis/assets/lambda/function.zip \
+>     --handler lambda_function.lambda_handler \
+>     --runtime python3.12 \
+>     --role $LAB_ROLE_ARN \
+>     --timeout 900
+{
+    "FunctionName": "gerador-pedidos",
+    "FunctionArn": "arn:aws:lambda:us-east-1:905418220738:function:gerador-pedidos",
+    "Runtime": "python3.12",
+    "Role": "arn:aws:iam::905418220738:role/LabRole",
+    "Handler": "lambda_function.lambda_handler",
+    "CodeSize": 35978375,
+    "Description": "",
+    "Timeout": 900,
+    "MemorySize": 128,
+    "LastModified": "2024-02-18T15:58:53.781+0000",
+    "CodeSha256": "i1fvxjdj2shjojE/wtuqxn1QCQXUarklSztXagNGhVk=",
+    "Version": "$LATEST",
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    },
+    "RevisionId": "b26ea5da-f129-4cb6-a11e-81b76a6688a7",
+    "State": "Pending",
+    "StateReason": "The function is being created.",
+    "StateReasonCode": "Creating",
+    "PackageType": "Zip",
+    "Architectures": [
+        "x86_64"
+    ],
+    "EphemeralStorage": {
+        "Size": 512
+    },
+    "SnapStart": {
+        "ApplyOn": "None",
+        "OptimizationStatus": "Off"
+    },
+    "RuntimeVersionConfig": {
+        "RuntimeVersionArn": "arn:aws:lambda:us-east-1::runtime:776a3759221679a634181f858871d5514dc74a176f78bc535f822a932845ae5a"
+    },
+    "LoggingConfig": {
+        "LogFormat": "Text",
+        "LogGroup": "/aws/lambda/gerador-pedidos"
+    }
+}
+```
+
 
 > Atenção!<br>
 > Se você já tem uma função Lambda e quer atualizá-la com um novo código, use o comando aws lambda update-function-code:
