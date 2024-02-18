@@ -216,8 +216,14 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws lambda cre
 Agora, sua função Lambda está pronta para ser usada na AWS.
 
 15. Invocando a função lambda
+
+Invocação assíncrona
 ```
-aws lambda invoke --function-name gerador-pedidos out.json
+aws lambda invoke \
+    --function-name gerador-pedidos \
+    --invocation-type Event \
+    --cli-binary-format raw-in-base64-out \
+    out.json
 ```
 
 # **Parte 5** - Verificando a ingestão
