@@ -125,7 +125,7 @@ aws glue create-job \
     --role LabRole \
     --timeout 60 \
     --command Name=gluestreaming,ScriptLocation=s3://${BUCKET_NAME}/scripts/glue-job-pedidos-stream.py \
-    --default-arguments '{"--BUCKET_NAME":'"${BUCKET_NAME}"',"--STREAM_ARN":'"${STREAM_ARN}"',"--TEMP_DIR":"s3://'"${BUCKET_NAME}"'/temp","--enable-spark-ui":"true","--spark-event-logs-path":"s3://'"${BUCKET_NAME}"'/spark-ui/","--enable-metrics":"true","--enable-job-insights":"true","--enable-continuous-cloudwatch-log":"true","--job-language":"python"}' \
+    --default-arguments '{"--BUCKET_NAME":"'${BUCKET_NAME}'","--STREAM_ARN":"'${STREAM_ARN}'","--TempDir":"s3://'"${BUCKET_NAME}"'/temp","--enable-spark-ui":"true","--spark-event-logs-path":"s3://'"${BUCKET_NAME}"'/spark-ui/","--enable-metrics":"true","--enable-job-insights":"true","--enable-continuous-cloudwatch-log":"true","--job-language":"python"}' \
     --cli-input-json "file://30-Kinesis/assets/scripts/glue-job-pedidos-stream.json" 
 ```
 
