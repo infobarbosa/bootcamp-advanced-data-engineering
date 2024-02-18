@@ -9,7 +9,7 @@ O objetivo desta sessão é, através de um Glue Job, executar uma operação an
 
 Desta forma vamos simular um caso de uso real onde dados "frios" precisam ser compilados de forma analítica e disponibilizados em um ambiente transacional para consultas em baixíssima latência.
 
-![10-DynamoDB/img/etl-dynamodb.png](10-DynamoDB/img/etl-dynamodb.png)
+![img/etl-dynamodb.png](img/etl-dynamodb.png)
 
 ### 1. Criando a tabela VENDAS_90_DIAS do DynamoDB
 
