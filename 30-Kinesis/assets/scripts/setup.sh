@@ -3,6 +3,14 @@
 # Contact: infobarbosa@gmail.com<br>
 # Github: [infobarbosa](https://github.com/infobarbosa)
 
+echo "Criando o Kinesis Data Stream"
+aws kinesis create-stream --stream-name pedidos --shard-count 1
+echo "Kinesis Data Stream criado com sucesso!"
+
+echo "Instalando a função Lambda"
+./30-Kinesis/assets/scripts/install-lambda.sh
+echo "Função Lambda instalada com sucesso!"
+
 echo "Exportanto a variável de ambiente BUCKET_NAME"
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
 echo "Bucket: $BUCKET_NAME"
@@ -31,3 +39,7 @@ echo "Executando o job"
 aws glue start-job-run --job-name glue-job-pedidos-stream
 
 echo "Glue jobs iniciados com sucesso!"
+
+echo "Invocando a função Lambda"
+./30-Kinesis/assets/scripts/invoke-lambda.sh
+echo "Função Lambda invocada com sucesso!"
