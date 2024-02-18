@@ -14,7 +14,7 @@ logging.getLogger().setLevel(logging.INFO)
 logging.getLogger("boto3").setLevel(logging.WARNING)
 logging.getLogger("botocore").setLevel(logging.WARNING)
 
-args = getResolvedOptions(sys.argv, ['JOB_NAME', 'BUCKET_NAME', 'STREAM_ARN', 'TEMP_DIR'])
+args = getResolvedOptions(sys.argv, ['JOB_NAME', 'BUCKET_NAME', 'STREAM_ARN', 'TempDir'])
 
 JOB_NAME = args['JOB_NAME']
 BUCKET_NAME = args['BUCKET_NAME']
