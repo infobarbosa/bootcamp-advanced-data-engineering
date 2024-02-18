@@ -5,6 +5,10 @@
 
 echo "Invocando a função Lambda"
 
-aws lambda invoke --function-name gerador-pedidos out.json
+aws lambda invoke \
+    --function-name gerador-pedidos \
+    --invocation-type Event \
+    --cli-binary-format raw-in-base64-out \
+    out.json
 
 echo "Lambda instalada com sucesso!"
