@@ -5,16 +5,16 @@
 
 
 echo "01. Obtendo o ARN da role"
-export LAB_ROLE=$(aws iam get-role --role-name LabRole | jq '.Role.Arn' -r)
-echo "ARN da role: " $LAB_ROLE
+export LAB_ROLE_ARN=$(aws iam get-role --role-name LabRole | jq '.Role.Arn' -r)
+echo "ARN da role: " $LAB_ROLE_ARN
 
 echo "02. Instalando a Função Lambda na AWS"
 aws lambda create-function \
     --function-name gerador-pedidos \
-    --zip-file fileb://function.zip \
+    --zip-file fileb://./30-Kinesis/assets/lambda/function.zip \
     --handler lambda_function.lambda_handler \
     --runtime python3.12 \
-    --role $LAB_ROLE \
+    --role $LAB_ROLE_ARN \
     --timeout 900
 
 echo "Lambda instalada com sucesso!"
