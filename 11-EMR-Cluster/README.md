@@ -6,6 +6,8 @@ Github: [infobarbosa](https://github.com/infobarbosa)
 # EMR
 O objetivo deste exercício é ativar um cluster EMR e executar algumas operações em lote (batch) sobre o mesmo.
 
+![aws-emr-data-pipeline.png](aws-emr-data-pipeline.png)
+
 > ## Atenção!
 > ### Custo
 > Parte dos recursos alocados para o cluster EMR continuam sendo cobrados mesmo que desligados.<br>
