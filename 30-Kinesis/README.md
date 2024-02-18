@@ -228,3 +228,10 @@ aws lambda invoke \
 
 # **Parte 5** - Verificando a ingestão
 
+16. Verifique os arquivos `parquet` criados na pasta `/raw/ecommerce/pedidos/pedidos-stream/`;
+17. Verifique a tabela `pedidos_stream` criada no database `ecommerce`;
+18. Faça consultas via **AWS Athena** na tabela `pedidos_stream`;
+
+# **Conclusão**
+
+Parabéns! Você criou um fluxo de ingestão de dados via streaming utilizando AWS Kinesis e AWS Glue.
