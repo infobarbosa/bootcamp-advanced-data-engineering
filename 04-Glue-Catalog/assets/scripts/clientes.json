@@ -6,7 +6,7 @@
         { "Name":"cpf", "Type":"string" }, 
         { "Name":"email", "Type":"string" }
     ], 
-    "Location":"s3://lab-data-eng-202402-p4004/raw/ecommerce/clientes/",
+    "Location":"s3://COLE_O_NOME_DO_SEU_BUCKET_AQUI/raw/ecommerce/clientes/", 
     "InputFormat":"org.apache.hadoop.mapred.TextInputFormat",
     "SerdeInfo":{ 
         "SerializationLibrary":"org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe", 
