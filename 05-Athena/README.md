@@ -111,5 +111,9 @@ Quais foram os clientes com maior valor em pedidos?
 
 --- 
 
+## Desafio rápido
+Qual foi o dia com maior número de vendas de geladeiras?
+Qual foi a UF com maior número de vendas de hometheater em Janeiro/24?
+
 ## Parabéns!
 Exercício finalizado, você pode prosseguir para a próxima etapa.
