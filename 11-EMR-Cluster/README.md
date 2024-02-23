@@ -443,15 +443,16 @@ Verifique os arquivos no bucket.
 quit()
 ```
 
-44. Para sair do host master do EMR digite `Control+D`.
-
 ## Parte 5 - Execução de scripts
 Uma doc completa pode ser encontrada [aqui](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-commandrunner.html#emr-commandrunner-other-uses).
 
-45. Instale a biblioteca **boto3**
+45. Instale a biblioteca **boto3** no master node
 ```
 pip install boto3
 ```
+
+46. Digite `Control+D` para sair do master node.
+> Atenção! Digite apenas uma vez.
 
 46. Faça o upload do script 
 
