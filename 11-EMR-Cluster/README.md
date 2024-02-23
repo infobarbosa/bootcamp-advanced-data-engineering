@@ -454,6 +454,8 @@ pip install boto3
 ```
 
 46. Faça o upload do script 
+
+Examine com atenção o script `ecommerce.py` disponível no diretório `11-EMR-Cluster/assets/scripts/ecommerce.py`. Então faça o upload com o comando a seguir.
 ```
 aws s3 cp 11-EMR-Cluster/assets/scripts/ecommerce.py s3://${BUCKET_NAME}/scripts/
 ```
