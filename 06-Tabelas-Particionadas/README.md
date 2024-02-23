@@ -91,7 +91,22 @@ Este atualiza o catálogo de dados caso detecte novas partições.
 > Para saber mais sobre o comando `ALTER TABLE ADD PARTITION` clique [aqui](https://docs.aws.amazon.com/athena/latest/ug/alter-table-add-partition.html) <br>
 > Outro comando interessante é o `MSCK REPAIR TABLE` que pode ser encontrado [aqui](https://docs.aws.amazon.com/athena/latest/ug/msck-repair-table.html)
 
-##### 9. [OPCIONAL] O comando acima também pode ser executado no terminal Cloud9:
+
+##### 9. Execute novamente `SHOW PARTITIONS`
+```
+SHOW PARTITIONS ecommerce.pedidos_part;
+```
+
+##### 10. Execute novamente a consulta:
+```
+SELECT count(1) qtt
+FROM "ecommerce"."pedidos_part";
+```
+
+Após a execução de `ALTER TABLE ADD PARTITION`, o **Glue Catalog** "entende" que uma nova partição foi adicionada e direciona o **Athena** para a pasta correspondente.
+
+
+##### 11. [OPCIONAL] O comando acima também pode ser executado no terminal Cloud9:
 
 ```
 aws athena start-query-execution --query-string "ALTER TABLE ecommerce.pedidos_part ADD PARTITION (data_pedido='2024-01-01')" --result-configuration "OutputLocation=s3://${BUCKET_NAME}/results/"
@@ -105,6 +120,9 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws athena sta
 }
 ```
 
+# Parabéns!
+Neste ponto você criou uma tabela particionada e entendeu o seu benefício para grandes massas de dados.
+
 ---
 
 # [OPCIONAL] Eliminando tabelas
@@ -112,3 +130,4 @@ Caso precise eliminar alguma tabela, você pode fazer isso via terminal com o se
 ```
 aws glue delete-table --database-name ecommerce --name pedidos_part
 ```
+
