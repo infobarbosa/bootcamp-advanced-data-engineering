@@ -537,8 +537,12 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr descri
 
 50. Verifique no console do EMR na aba Steps os arquivos de logs gerados `controller`, `stderr` e `stdout`.
 
+51. No console AWS clique no botão **TERMINATE** para destruir o cluster.
+> Atenção! Essa é uma operação irreversível.
+
 # Parabéns!
 Se você chegou até aqui então criou e ativou seu cluster EMR com sucesso e fez testes utilizando linguagem Python. 
+
 
 
 #### [OPCIONAL] Adição de regras de firewall via Console AWS EC2
