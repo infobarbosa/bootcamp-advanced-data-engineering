@@ -16,7 +16,7 @@ spark = SparkSession \
 
 spark.catalog.setCurrentDatabase("ecommerce")
 
-print("Definindo a variavel s3_bucket que vamos utilizar ao longo do codigo")
+print("Definindo a variavel BUCKET_NAME que vamos utilizar ao longo do codigo")
 BUCKET_NAME = ""
 s3_client = boto3.client('s3')
 response = s3_client.list_buckets()
