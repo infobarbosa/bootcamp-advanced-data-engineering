@@ -22,6 +22,10 @@ aws dynamodb create-table \
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
 ```
 
+```
+aws dynamodb list-tables
+```
+
 ### 2. Exportanto a variável de ambiente BUCKET_NAME
 ```
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
