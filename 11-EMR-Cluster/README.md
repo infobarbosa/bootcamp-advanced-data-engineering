@@ -443,6 +443,8 @@ Verifique os arquivos no bucket.
 quit()
 ```
 
+44. Para sair do host master do EMR digite `Control+D`.
+
 ## Parte 5 - Execução de scripts
 Uma doc completa pode ser encontrada [aqui](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-commandrunner.html#emr-commandrunner-other-uses).
 
@@ -455,6 +457,18 @@ pip install boto3
 ```
 aws s3 cp 11-EMR-Cluster/assets/scripts/ecommerce.py s3://${BUCKET_NAME}/scripts/
 ```
+
+```
+aws s3 ls s3://${BUCKET_NAME}/scripts/ecommerce.py
+```
+
+Output experado:
+```
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws s3 ls s3://${BUCKET_NAME}/scripts/ecommerce.py
+2024-02-23 22:37:39       1684 ecommerce.py
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ 
+```
+
 
 47. Obtenha o ID do cluster EMR via terminal **Cloud9**
 ```
