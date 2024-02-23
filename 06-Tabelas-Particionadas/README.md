@@ -123,6 +123,9 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws athena sta
 # Parabéns!
 Neste ponto você criou uma tabela particionada e entendeu o seu benefício para grandes massas de dados.
 
+>## Atenção
+>Propositadamente adicionamos apenas uma partição à tabela. Prossiga para a próxima sessão onde vamos entender o porquê.
+
 ---
 
 # [OPCIONAL] Eliminando tabelas
