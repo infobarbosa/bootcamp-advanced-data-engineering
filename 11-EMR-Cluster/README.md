@@ -97,14 +97,18 @@ export EMR_MASTER_SG=$(aws ec2 describe-security-groups \
 
 O IP público da instância EC2 do Cloud9
 ```
-EC2_PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+export EC2_PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+
+echo $EC2_PUBLIC_IP
 ```
 
 27. Variável de ambiente `EC2_PRIVATE_IP`
 
 O IP privado da instância EC2 do Cloud9
 ```
-EC2_PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+export EC2_PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+
+echo $EC2_PRIVATE_IP
 ```
 
 28. Adição da regra de firewall ao security group
@@ -160,10 +164,10 @@ export CLUSTER_ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
 ```
 
 ```
-echo ${ID}
+echo ${CLUSTER_ID}
 ```
 
-Use o ID para obter o DNS público do cluster
+Use `CLUSTER_ID` para obter o **DNS público** do cluster
 
 32. O DNS público do cluster
 ```
