@@ -33,7 +33,7 @@ O objetivo deste exercício é ativar um cluster EMR e executar algumas operaç�
 >   -rw------- 1 ubuntu ubuntu 1678 Jan 20 13:09 labsuser.pem 
 >```
 
-## Criação do cluster
+## Parte 1 - Criação do cluster
 
 ### Via Console AWS 
 1. Na barra de busca digite **EMR**, clique no link disponibilizado;
@@ -69,99 +69,117 @@ A criação e ativação do cluster leva em torno de 10 minutos.
 
 ---
 
-## Acesso ao cluster
+# Parte 2 - Regra de firewall para acesso ao cluster
 
 Esta sessão tem por objetivo conectar no cluster que acabamos de criar e então executar alguns comandos utilizando Spark shell.
 
-> ## Atenção!
+## Preparação
+24. Variável de ambiente `BUCKET_NAME`
+```
+export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
+
+echo $BUCKET_NAME
+```
+
+> Regra de firewall Cloud9->EMR
 > Será necessário adicionar uma regra ao security group para permitir o acesso via porta ssh (porta 22).<br>
+
 > #### Via terminal **Cloud9**
-> 1. Variável de ambiente com o ID do security group do node master do EMR
+25. Variável de ambiente `EMR_MASTER_SG`
+Vamos criar uma variáve com o ID do security group do node master do EMR
+```
+export EMR_MASTER_SG=$(aws ec2 describe-security-groups \
+    --filter Name=group-name,Values=ElasticMapReduce-master \
+    --query 'SecurityGroups[*].[GroupId]' --output text)
+```
+
+26. Variável de ambiente `EC2_PUBLIC_IP`
+
+O IP público da instância EC2 do Cloud9
+```
+EC2_PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
+```
+
+27. Variável de ambiente `EC2_PRIVATE_IP`
+
+O IP privado da instância EC2 do Cloud9
+```
+EC2_PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
+```
+
+28. Adição da regra de firewall ao security group
+
+```
+aws ec2 authorize-security-group-ingress \
+    --group-id ${EMR_MASTER_SG} \
+    --protocol tcp \
+    --port 22 \
+    --cidr "${EC2_PUBLIC_IP}/32"
+```
+
+```
+aws ec2 authorize-security-group-ingress \
+    --group-id ${EMR_MASTER_SG} \
+    --protocol tcp \
+    --port 22 \
+    --cidr "${EC2_PRIVATE_IP}/20"
+```
+
+> ## Atenção!
+>Caso os comandos acima não funcionem, você pode abrir a regra para a Internet.<br>
+>**Importante**! Nunca use esse método em produção!
 >```
->   export EMR_MASTER_SG=$(aws ec2 describe-security-groups \
->       --filter Name=group-name,Values=ElasticMapReduce-master \
->       --query 'SecurityGroups[*].[GroupId]' --output text)
+>aws ec2 authorize-security-group-ingress \
+>   --group-id ${EMR_MASTER_SG} \
+>   --protocol tcp \
+>   --port 22 \
+>   --cidr "0.0.0.0/0"
 >```
->   2. Variáveis de ambiente com o IP público e privado da instância EC2 do Cloud9
->```
->   EC2_PUBLIC_IP=$(curl http://169.254.169.254/latest/meta-data/public-ipv4)
->```
->```
->   EC2_PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
->```
->
->   3. Adicione a regra ao security group
->```
->   aws ec2 authorize-security-group-ingress \
->    --group-id ${EMR_MASTER_SG} \
->    --protocol tcp \
->    --port 22 \
->    --cidr "${EC2_PUBLIC_IP}/32"
->```
->
->```
->   aws ec2 authorize-security-group-ingress \
->    --group-id ${EMR_MASTER_SG} \
->    --protocol tcp \
->    --port 22 \
->    --cidr "${EC2_PRIVATE_IP}/20"
->```
->
->   Caso os comandos acima não funcionem, você pode abrir a regra para a Internet.<br>
->   **Importante**! Nunca use esse método em produção!
->```
->   aws ec2 authorize-security-group-ingress \
->    --group-id ${EMR_MASTER_SG} \
->    --protocol tcp \
->    --port 22 \
->    --cidr "0.0.0.0/0"
->```
-> #### [OPCIONAL] Via Console AWS
-> 1. Na barra de busca superior digite `security groups` e então clique em **Security groups**.
-> 2. Na tela **Security groups** clique no **Security group ID** referente à linha com **Security group name** igual a `ElasticMapReduce-master`;
-> 3. Na aba **Inbound rules** clique em **Edit inbound rules**;
-> 4. Clique em **Add rule**;
-> 5. No combo **Type** digite e selecione **SSH**;
-> 6. No campo editável **Source** clique e selecione o security group cujo nome se inicia com **aws-cloud9-lab-...**;
-> 7. Clique em **Save rules**.
->
 
 
-### Passo a passo
-1. Abra o terminal (shell) do **Cloud9**;
+## Parte 3 - Acesso ao cluster
+> No terminal (shell) do **Cloud9**;
 
-2. Crie duas pastas no bucket do S3 que usaremos ao final deste laboratório:
+Vamos criar duas pastas no bucket do S3 que usaremos ao final deste laboratório.
+
+29. Pasta `output/pedidos/`
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key output/pedidos/
 ```
 
+30. Pasta `output/top10/`
 ```
 aws s3api put-object --bucket ${BUCKET_NAME} --key output/top10/
 ```
 
-3. Obtenha o ID do cluster EMR via terminal **Cloud9**
+Agora obtenha o ID do cluster EMR via terminal **Cloud9**
+
+31. O ID do cluster EMR
 ```
-export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
+export CLUSTER_ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
 ```
 
 ```
 echo ${ID}
 ```
 
-4. Use o ID para obter o DNS público do cluster
+Use o ID para obter o DNS público do cluster
+
+32. O DNS público do cluster
 ```
-export MASTER_HOST=$(aws emr describe-cluster --cluster-id $ID | jq '.Cluster.MasterPublicDnsName' | tr -d '"')
+export MASTER_HOST=$(aws emr describe-cluster --cluster-id $CLUSTER_ID | jq '.Cluster.MasterPublicDnsName' | tr -d '"')
 ```
 
 ```
 echo $MASTER_HOST
 ```
 
-5. Conecte-se ao cluster via SSH
+33. Conecte-se ao cluster via SSH
 ```
 ssh -i ./labsuser.pem hadoop@$MASTER_HOST
 ```
-Caso apresentado um prompt de confirmação, responda `yes` e ditite **ENTER**.
+
+> Caso apresentado um prompt de confirmação, responda `yes` e digite **ENTER**.
 
 Output esperado:
 ```
@@ -197,15 +215,21 @@ EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
 
 ```
 
-6. Vamos criar uma variável de ambiente `BUCKET_NAME`
+## Parte 4 - Utilizando o PySpark
+
+34. Vamos criar a variável de ambiente `BUCKET_NAME`
+
+> Perceba que está criando essa variável no host master do EMR.
+
 ```
 export BUCKET_NAME=$(aws s3api list-buckets --query "Buckets[].Name" | grep 'lab-data-eng' | tr -d ' ' | tr -d '"' | tr -d ',')
-
-echo $BUCKET_NAME
-
 ```
 
-7. Abra o spark-shell
+```
+echo $BUCKET_NAME
+```
+
+35. Abra o spark-shell
 ```
 pyspark
 ```
@@ -236,23 +260,20 @@ SparkSession available as 'spark'.
 >>>
 ```
 
-8. Criando dataframes
+Agora que estamos no shell do PySpark podemos criar e manusear dados através de **dataframes**
 
-###### Importando bibliotecas
+36. Importação de bibliotecas
 ```
 import os
 import sys
 from datetime import datetime
-```
-
-```
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 
 BUCKET_NAME = os.environ['BUCKET_NAME'] 
 ```
 
-###### Abrindo uma sessão
+37. Criação da sessão Spark
 ```
 spark = SparkSession \
     .builder \
@@ -269,7 +290,7 @@ Output esperado:
 24/01/25 21:58:31 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
 ```
 
-###### Definindo o database do Glue Catalog
+38. Definindo o database do Glue Catalog
 ```
 spark.catalog.setCurrentDatabase("ecommerce")
 ```
@@ -283,7 +304,7 @@ Output esperado:
 24/01/25 22:01:50 WARN CredentialsLegacyConfigLocationProvider: Found the legacy config profiles file at [/home/hadoop/.aws/config]. Please move it to the latest default location [~/.aws/credentials].
 ```
 
-###### Dataframe `clientes_parquet`
+39. Dataframe `clientes_parquet`
 ```
 dfCli = spark.sql("select * from ecommerce.clientes_parquet")
 ```
@@ -325,7 +346,7 @@ root
 >>> 
 ```
 
-###### Dataframe `pedidos_parquet`
+40. Dataframe `pedidos_parquet`
 ```
 dfPed = spark.sql("select * from ecommerce.pedidos_parquet")
 ```
@@ -367,7 +388,7 @@ root
 
 ```
 
-9. Calculando os top 10 clientes
+41. Calculando os top 10 clientes
 ```
 dfTop10 = spark.sql(
  """SELECT cli.nome, cli.email, sum(ped.quantidade * ped.valor_unitario) total
@@ -402,7 +423,7 @@ Output esperado:
 +-----------------+--------------------+-----+
 ```
 
-10. Exportando os resultados
+42. Exportando os resultados
 ```
 dfPed.write.format("json").mode("overwrite").save("s3://"+ BUCKET_NAME +"/output/pedidos/")
 ```
@@ -413,43 +434,44 @@ dfTop10.write.format("json").mode("overwrite").save("s3://"+ BUCKET_NAME +"/outp
 
 Verifique os arquivos no bucket.
 
-11. Para sair do pyspark digite:
+43. Para sair do pyspark digite:
 ```
 quit()
 ```
 
-## Execução de scripts
+## Parte 5 - Execução de scripts
 Uma doc completa pode ser encontrada [aqui](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-commandrunner.html#emr-commandrunner-other-uses).
 
-1. Instale a biblioteca **boto3**
+45. Instale a biblioteca **boto3**
 ```
 pip install boto3
 ```
-2. Faça o upload do script 
+
+46. Faça o upload do script 
 ```
 aws s3 cp 11-EMR-Cluster/assets/scripts/ecommerce.py s3://${BUCKET_NAME}/scripts/
 ```
 
-3. Obtenha o ID do cluster EMR via terminal **Cloud9**
+47. Obtenha o ID do cluster EMR via terminal **Cloud9**
 ```
-export ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
-```
-
-```
-echo ${ID}
+export CLUSTER_ID=$(aws emr list-clusters | jq '.Clusters[0].Id' | tr -d '"')
 ```
 
-4. Adicione um step do EMR
+```
+echo ${CLUSTER_ID}
+```
+
+48. Adicione um step do EMR
 ```
 aws emr add-steps \
---cluster-id ${ID} \
+--cluster-id ${CLUSTER_ID} \
 --steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,s3://${BUCKET_NAME}/scripts/ecommerce.py]
 ```
 
 Output esperado:
 ```
 voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr add-steps \
-> --cluster-id ${ID} \
+> --cluster-id ${CLUSTER_ID} \
 > --steps Type=CUSTOM_JAR,Name="ecommerce command-runner.jar",ActionOnFailure=CONTINUE,Jar=command-runner.jar,Args=[spark-submit,s3://${BUCKET_NAME}/scripts/ecommerce.py]
 {
     "StepIds": [
@@ -458,15 +480,15 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr add-st
 }
 ```
 
-5. Verifique o status do EMR Step
+49. Verifique o status do EMR Step
 > Altere o id do step para o output do comando anterior
 ```
-aws emr describe-step --cluster-id ${ID} --step-id s-04665653O07ZKL7818JO
+aws emr describe-step --cluster-id ${CLUSTER_ID} --step-id s-04665653O07ZKL7818JO
 ```
 
 Output esperado:
 ```
-voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr describe-step --cluster-id ${ID} --step-id s-04665653O07ZKL7818JO
+voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr describe-step --cluster-id ${CLUSTER_ID} --step-id s-04665653O07ZKL7818JO
 {
     "Step": {
         "Id": "s-04665653O07ZKL7818JO",
@@ -492,7 +514,18 @@ voclabs:~/environment/bootcamp-advanced-data-engineering (main) $ aws emr descri
 }
 ```
 
-6. Verifique no console do EMR na aba Steps os arquivos de logs gerados `controller`, `stderr` e `stdout`.
+50. Verifique no console do EMR na aba Steps os arquivos de logs gerados `controller`, `stderr` e `stdout`.
 
-### Parabéns!
+# Parabéns!
 Se você chegou até aqui então criou e ativou seu cluster EMR com sucesso e fez testes utilizando linguagem Python. 
+
+
+#### [OPCIONAL] Adição de regras de firewall via Console AWS EC2
+1. Na barra de busca superior digite `security groups` e então clique em **Security groups**.
+2. Na tela **Security groups** clique no **Security group ID** referente à linha com **Security group name** igual a `ElasticMapReduce-master`;
+3. Na aba **Inbound rules** clique em **Edit inbound rules**;
+4. Clique em **Add rule**;
+5. No combo **Type** digite e selecione **SSH**;
+6. No campo editável **Source** clique e selecione o security group cujo nome se inicia com **aws-cloud9-lab-...**;
+7. Clique em **Save rules**.
+
