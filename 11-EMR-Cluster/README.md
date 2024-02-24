@@ -282,6 +282,8 @@ BUCKET_NAME = os.environ['BUCKET_NAME']
 spark = SparkSession \
     .builder \
     .appName("data-eng-lab") \
+    .config("hive.metastore.client.factory.class", "com.amazonaws.glue.catalog.metastore.AWSGlueDataCatalogHiveClientFactory") \
+    .enableHiveSupport() \
     .getOrCreate()
 ```
 
